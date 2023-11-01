@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyorlib"
+description = "A Python Operations Research Library"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "Isaac Da Pena", email = "dapensoft@gmail.com" },
+    { name = "Manuel Da Pena", email = "dapensoft@gmail.com" },
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development",
+    "Typing :: Typed",
+]
+dependencies = []
+
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/Dapensoft/pyorlib"
+Documentation = "https://github.com/Dapensoft/pyorlib"
+Repository = "https://github.com/Dapensoft/pyorlib"
+
+[project.optional-dependencies]
+all = []
+
+[tool.hatch.version]
+path = "src/pyorlib/__init__.py"
