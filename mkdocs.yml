@@ -54,6 +54,11 @@ markdown_extensions:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
+nav:
+  - PyORlib: index.md
+  - Get Started: install/install.md
+  - API Documentation: api/api.md
+
 copyright: |
   &copy; 2023 <a href="https://github.com/NachoDPP" target="_blank" rel="NachoDPP">Manuel Da Pena</a>,
   <a href="https://github.com/IxDevel" target="_blank" rel="IxDevel">Isaac Da Pena</a>
