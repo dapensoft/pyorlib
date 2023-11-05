@@ -4,14 +4,16 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyorlib"
+dynamic = ["version"]
 description = "A Python Operations Research Library"
 readme = "README.md"
 requires-python = ">=3.8"
-license = "MIT"
+license = { file = "LICENSE" }
 authors = [
     { name = "Isaac Da Pena", email = "dapensoft@gmail.com" },
     { name = "Manuel Da Pena", email = "dapensoft@gmail.com" },
 ]
+keywords = []
 classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
@@ -23,8 +25,6 @@ classifiers = [
 ]
 dependencies = []
 
-dynamic = ["version"]
-
 [project.urls]
 Homepage = "https://github.com/Dapensoft/pyorlib"
 Documentation = "https://github.com/Dapensoft/pyorlib"
@@ -34,4 +34,4 @@ Repository = "https://github.com/Dapensoft/pyorlib"
 all = []
 
 [tool.hatch.version]
-path = "src/pyorlib/__init__.py"
+path = "pyorlib/__init__.py"
