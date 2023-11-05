@@ -1,0 +1,59 @@
+site_name: PyORlib
+site_description: A Python Operation Research library
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: light green
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.path
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.tooltips
+    - content.code.annotate
+
+repo_name: Dapensoft/pyorlib
+repo_url: https://github.com/Dapensoft/pyorlib
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+copyright: |
+  &copy; 2023 <a href="https://github.com/NachoDPP" target="_blank" rel="NachoDPP">Manuel Da Pena</a>,
+  <a href="https://github.com/IxDevel" target="_blank" rel="IxDevel">Isaac Da Pena</a>
