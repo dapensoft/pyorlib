@@ -31,7 +31,16 @@ Documentation = "https://github.com/Dapensoft/pyorlib"
 Repository = "https://github.com/Dapensoft/pyorlib"
 
 [project.optional-dependencies]
-all = []
+cplex = ["docplex"]
+gurobi = ["gurobipy"]
+ortools = ["ortools"]
+pulp = ["PuLP"]
+all = [
+    "docplex",
+    "gurobipy",
+    "ortools",
+    "PuLP"
+]
 
 [tool.hatch.version]
 path = "pyorlib/__init__.py"
