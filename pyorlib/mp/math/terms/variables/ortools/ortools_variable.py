@@ -1,6 +1,6 @@
 from typing import Any, Callable
 
-from ortools.linear_solver import pywraplp
+from ortools.linear_solver.pywraplp import Solver as ORToolsSolver, inf as ORToolsInf, Variable as ORToolsVar
 
 from pyorlib.mp.common.enums import SolutionStatus, ValueType
 from pyorlib.mp.common.exceptions import ORToolsException
@@ -38,7 +38,7 @@ class ORToolsVariable(Variable):
     def __init__(
             self,
             name: str,
-            solver: pywraplp.Solver,
+            solver: ORToolsSolver,
             value_type: ValueType,
             solution_status: Callable[[], SolutionStatus],
             lower_bound: float | None = None,
@@ -62,7 +62,7 @@ class ORToolsVariable(Variable):
             raise ORToolsException("OR-Tool terms must have a name.")
 
         # Creates the OR-Tools variable according to the value type
-        ortools_var: pywraplp.Variable
+        ortools_var: ORToolsVar
 
         if self.value_type == ValueType.BINARY:
             ortools_var = solver.BoolVar(
@@ -72,13 +72,13 @@ class ORToolsVariable(Variable):
             ortools_var = solver.IntVar(
                 name=name,
                 lb=lower_bound if lower_bound is not None else 0,
-                ub=upper_bound if upper_bound is not None else pywraplp.inf,
+                ub=upper_bound if upper_bound is not None else ORToolsInf,
             )
         elif self.value_type == ValueType.CONTINUOUS:
             ortools_var = solver.NumVar(
                 name=name,
                 lb=lower_bound if lower_bound is not None else 0,
-                ub=upper_bound if upper_bound is not None else pywraplp.inf,
+                ub=upper_bound if upper_bound is not None else ORToolsInf,
             )
         else:
             raise ORToolsException("Invalid term value type.")
@@ -87,7 +87,7 @@ class ORToolsVariable(Variable):
         self._solution_status: Callable[[], SolutionStatus] = solution_status
         """ A callable to check the current status of the solution. """
 
-        self._ortools_var: pywraplp.Variable = ortools_var
+        self._ortools_var: ORToolsVar = ortools_var
         """ A pywraplp.Variable object representing the variable in the OR-Tools solver. """
 
         if self._solution_status is None:
