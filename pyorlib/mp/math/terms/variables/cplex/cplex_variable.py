@@ -7,7 +7,7 @@ from docplex.mp.utils import DOcplexException
 
 from pyorlib.mp.common.enums import ValueType
 from pyorlib.mp.common.exceptions import CplexException
-from pyorlib.mp.math.terms.variables import Variable
+from pyorlib.mp.math.terms.variables.variable import Variable
 
 
 class CplexVariable(Variable):
