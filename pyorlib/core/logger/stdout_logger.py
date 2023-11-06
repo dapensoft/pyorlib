@@ -2,25 +2,14 @@ import logging
 import sys
 from abc import ABC
 
+from pyorlib.core.utils import StdOutColors
+
 
 class StdOutLogger(ABC):
     """ The StdOutLogger class provides a simple logging interface for logging operations to the standard output. """
 
     class Handler:
         """ Inner class representing a logger handler. """
-
-        class Colors:
-            """ Inner class that defines color codes for log formatting. """
-
-            DEFAULT: str = '\033[0m'
-            PURPLE: str = '\033[35m'
-            YELLOW: str = '\033[33m'
-            BLUE: str = '\033[34m'
-            RED: str = '\033[31m'
-            CYAN: str = '\033[36m'
-            GREEN: str = '\033[32m'
-            BOLD: str = '\033[1m'
-            UNDERLINE: str = '\033[4m'
 
         @classmethod
         def get_color_by_level(cls, level: int):
@@ -30,14 +19,14 @@ class StdOutLogger(ABC):
             :return: The color code associated with the log level.
             """
             if level == logging.INFO:
-                return cls.Colors.GREEN
+                return StdOutColors.GREEN
             elif level == logging.DEBUG:
-                return cls.Colors.PURPLE
+                return StdOutColors.PURPLE
             elif level == logging.WARNING:
-                return cls.Colors.YELLOW
+                return StdOutColors.YELLOW
             elif level == logging.ERROR:
-                return cls.Colors.RED
-            return cls.Colors.DEFAULT
+                return StdOutColors.RED
+            return StdOutColors.DEFAULT
 
         @classmethod
         def get_stream_handler_by_level(cls, level: int) -> logging.StreamHandler:
@@ -51,7 +40,7 @@ class StdOutLogger(ABC):
 
             # Define the logger format
             logger_format: str = f"{level_color}[Logger]  " + \
-                                 f"{cls.Colors.DEFAULT}%(asctime)s " + \
+                                 f"{StdOutColors.DEFAULT}%(asctime)s " + \
                                  f"{level_color}%(levelname)8s" + \
                                  f"{level_color} %(message)s"
 
@@ -81,9 +70,9 @@ class StdOutLogger(ABC):
             level_color: str = cls.get_color_by_level(level=level)
 
             # Build the log message string
-            log: str = f"{cls.Colors.DEFAULT}[{name if name else 'StdOut'}]" + \
+            log: str = f"{StdOutColors.DEFAULT}[{name if name else 'StdOut'}]" + \
                        f"{level_color} {action if action else 'Message: '}" + \
-                       f"{cls.Colors.DEFAULT}{msg}"
+                       f"{StdOutColors.DEFAULT}{msg}"
             return log
 
     # Configure loggers for each logging level
