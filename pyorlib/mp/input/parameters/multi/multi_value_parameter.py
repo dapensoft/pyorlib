@@ -7,7 +7,7 @@ from pyorlib.mp.input.parameters.parameter import Parameter
 
 
 @dataclass(frozen=True)
-class MultiValueParameterSet(Parameter):
+class MultiValueParameter(Parameter):
     """ A data class for a multi value parameter in a model. """
 
     values: Tuple[float, ...] | None = None
