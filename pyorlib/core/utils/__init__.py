@@ -1,1 +1,1 @@
-from .stdout_colors import StdOutColors
+from .colors import StdOutColors

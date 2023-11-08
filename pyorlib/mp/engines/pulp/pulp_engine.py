@@ -2,7 +2,7 @@ from typing import List, Any
 
 from pulp import LpProblem, LpMaximize, LpMinimize, value, LpSolverDefault
 
-from pyorlib.core.logger import StdOutLogger
+from pyorlib.core.loggers import StdOutLogger
 from pyorlib.mp.common.enums import SolutionStatus, ValueType, OptimizationType
 from pyorlib.mp.common.exceptions import PuLPException
 from pyorlib.mp.engines.engine import Engine

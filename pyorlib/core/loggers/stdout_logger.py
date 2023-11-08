@@ -6,7 +6,11 @@ from pyorlib.core.utils import StdOutColors
 
 
 class StdOutLogger(ABC):
-    """ The StdOutLogger class provides a simple logging interface for logging operations to the standard output. """
+    """
+    StdOutLogger is a simple logging interface for logging operations to the standard output.
+
+    This class provides a straightforward logging interface for writing log messages to the standard output.
+    """
 
     class Handler:
         """ Inner class representing a logger handler. """
@@ -62,15 +66,15 @@ class StdOutLogger(ABC):
             Builds a log message string with the specified log level, message, name, and action.
             :param level: The log level of the message.
             :param msg: The log message.
-            :param name: The name of the logger instance.
-            :param action: The name of the action from which the message was logged.
+            :param name: The name of the logger or class associated with the log. Defaults to None.
+            :param action: The action or method associated with the log. Defaults to None.
             :return: The formatted log message string.
             """
             # Determine the color based on the log level
             level_color: str = cls.get_color_by_level(level=level)
 
             # Build the log message string
-            log: str = f"{StdOutColors.DEFAULT}[{name if name else 'StdOut'}]" + \
+            log: str = f"{StdOutColors.DEFAULT}[{name if name else 'StdOutLogger'}]" + \
                        f"{level_color} {action if action else 'Message: '}" + \
                        f"{StdOutColors.DEFAULT}{msg}"
             return log
@@ -99,8 +103,8 @@ class StdOutLogger(ABC):
         """
         Logs an ERROR level message.
         :param msg: The message to be logged.
-        :param name: The name of the logger instance.
-        :param action: The name of the action from which the message was logged.
+        :param name: The name of the logger or class associated with the log. Defaults to None.
+        :param action: The action or method associated with the log. Defaults to None.
         :return: None
         """
         cls.__error_logger.error(cls.Handler.build_log(level=logging.ERROR, msg=msg, name=name, action=action))
@@ -110,8 +114,8 @@ class StdOutLogger(ABC):
         """
         Logs a WARNING level message.
         :param msg: The message to be logged.
-        :param name: The name of the logger instance.
-        :param action: The name of the action from which the message was logged.
+        :param name: The name of the logger or class associated with the log. Defaults to None.
+        :param action: The action or method associated with the log. Defaults to None.
         :return: None
         """
         cls.__warning_logger.warning(cls.Handler.build_log(level=logging.WARNING, msg=msg, name=name, action=action))
@@ -121,8 +125,8 @@ class StdOutLogger(ABC):
         """
         Logs an INFO level message.
         :param msg: The message to be logged.
-        :param name: The name of the logger instance.
-        :param action: The name of the action from which the message was logged.
+        :param name: The name of the logger or class associated with the log. Defaults to None.
+        :param action: The action or method associated with the log. Defaults to None.
         :return: None
         """
         cls.__info_logger.info(cls.Handler.build_log(level=logging.INFO, msg=msg, name=name, action=action))
@@ -132,8 +136,8 @@ class StdOutLogger(ABC):
         """
         Logs a DEBUG level message.
         :param msg: The message to be logged.
-        :param name: The name of the logger instance.
-        :param action: The name of the action from which the message was logged.
+        :param name: The name of the logger or class associated with the log. Defaults to None.
+        :param action: The action or method associated with the log. Defaults to None.
         :return: None
         """
         cls.__debug_logger.debug(cls.Handler.build_log(level=logging.DEBUG, msg=msg, name=name, action=action))

@@ -1,7 +1,7 @@
 from typing import Dict, Tuple, List, Mapping
 from uuid import uuid4
 
-from pyorlib.core.logger import Logger
+from pyorlib.core.loggers import Logger
 from pyorlib.core.utils import StdOutColors
 from pyorlib.mp.common.enums import SolutionStatus, ValueType, OptimizationType
 from pyorlib.mp.common.exceptions import ModelException

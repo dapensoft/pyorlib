@@ -2,7 +2,7 @@ from typing import List
 
 import gurobipy as gp
 
-from pyorlib.core.logger import StdOutLogger
+from pyorlib.core.loggers import StdOutLogger
 from pyorlib.mp.common.enums import SolutionStatus, ValueType, OptimizationType
 from pyorlib.mp.common.exceptions import GurobiException
 from pyorlib.mp.engines.engine import Engine
