@@ -150,42 +150,42 @@ class Term(Element, ABC):
 
     def __iadd__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr + other.expr)
+            return self._build_expression(expression=self.raw + other.raw)
         else:
-            return self._build_expression(expression=self.expr + other)
+            return self._build_expression(expression=self.raw + other)
 
     def __isub__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr - other.expr)
+            return self._build_expression(expression=self.raw - other.raw)
         else:
-            return self._build_expression(expression=self.expr - other)
+            return self._build_expression(expression=self.raw - other)
 
     def __imul__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr * other.expr)
+            return self._build_expression(expression=self.raw * other.raw)
         else:
-            return self._build_expression(expression=self.expr * other)
+            return self._build_expression(expression=self.raw * other)
 
     def __itruediv__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr / other.expr)
+            return self._build_expression(expression=self.raw / other.raw)
         else:
-            return self._build_expression(expression=self.expr / other)
+            return self._build_expression(expression=self.raw / other)
 
     def __ifloordiv__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr // other.expr)
+            return self._build_expression(expression=self.raw // other.raw)
         else:
-            return self._build_expression(expression=self.expr // other)
+            return self._build_expression(expression=self.raw // other)
 
     def __imod__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr % other.expr)
+            return self._build_expression(expression=self.raw % other.raw)
         else:
-            return self._build_expression(expression=self.expr % other)
+            return self._build_expression(expression=self.raw % other)
 
     def __ipow__(self, other) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr ** other.expr)
+            return self._build_expression(expression=self.raw ** other.raw)
         else:
-            return self._build_expression(expression=self.expr ** other)
+            return self._build_expression(expression=self.raw ** other)

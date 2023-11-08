@@ -89,15 +89,15 @@ class GurobiEngine(Engine):
         )
 
     def add_constraint(self, expression: Element) -> Element:
-        self._solver.addConstr(expression.expr, name="")
+        self._solver.addConstr(expression.raw, name="")
         self._solver.update()
         return expression
 
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
         if opt_type == OptimizationType.MINIMIZE:
-            self._solver.setObjective(expression.expr, gp.GRB.MINIMIZE)
+            self._solver.setObjective(expression.raw, gp.GRB.MINIMIZE)
         elif opt_type == OptimizationType.MAXIMIZE:
-            self._solver.setObjective(expression.expr, gp.GRB.MAXIMIZE)
+            self._solver.setObjective(expression.raw, gp.GRB.MAXIMIZE)
         else:
             raise GurobiException("Invalid optimization type.")
         self._solver.update()

@@ -93,14 +93,14 @@ class ORToolsEngine(Engine):
         )
 
     def add_constraint(self, expression: Element) -> Element:
-        self._solver.Add(constraint=expression.expr)
+        self._solver.Add(constraint=expression.raw)
         return expression
 
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
         if opt_type == OptimizationType.MINIMIZE:
-            self._solver.Minimize(expr=expression.expr)
+            self._solver.Minimize(expr=expression.raw)
         elif opt_type == OptimizationType.MAXIMIZE:
-            self._solver.Maximize(expr=expression.expr)
+            self._solver.Maximize(expr=expression.raw)
         else:
             raise ORToolsException('Invalid optimization type.')
         return expression

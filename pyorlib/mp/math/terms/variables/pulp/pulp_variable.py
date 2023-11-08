@@ -34,7 +34,7 @@ class PuLPVariable(Variable):
         return val if val else -0.0
 
     @property
-    def expr(self) -> Any:
+    def raw(self) -> Any:
         return self._pulp_var
 
     def __init__(

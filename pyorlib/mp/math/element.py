@@ -12,7 +12,7 @@ class Element(ABC):
 
     @property
     @abstractmethod
-    def expr(self) -> Any:
+    def raw(self) -> Any:
         """
         Returns a specific mathematical representation of the element.
         :return: A mathematical expression of the element.
@@ -52,9 +52,9 @@ class Element(ABC):
         :return: A new Element instance representing the addition.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr + other.expr)
+            return self._build_expression(expression=self.raw + other.raw)
         else:
-            return self._build_expression(expression=self.expr + other)
+            return self._build_expression(expression=self.raw + other)
 
     def __radd__(self, other) -> 'Element':
         """
@@ -63,9 +63,9 @@ class Element(ABC):
         :return: A new Element instance representing the addition.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr + self.expr)
+            return self._build_expression(expression=other.raw + self.raw)
         else:
-            return self._build_expression(expression=other + self.expr)
+            return self._build_expression(expression=other + self.raw)
 
     @abstractmethod
     def __iadd__(self, other) -> 'Element':
@@ -84,9 +84,9 @@ class Element(ABC):
         :return: A new Element instance representing the subtraction.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr - other.expr)
+            return self._build_expression(expression=self.raw - other.raw)
         else:
-            return self._build_expression(expression=self.expr - other)
+            return self._build_expression(expression=self.raw - other)
 
     def __rsub__(self, other) -> 'Element':
         """
@@ -95,9 +95,9 @@ class Element(ABC):
         :return: A new Element instance representing the subtraction.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr - self.expr)
+            return self._build_expression(expression=other.raw - self.raw)
         else:
-            return self._build_expression(expression=other - self.expr)
+            return self._build_expression(expression=other - self.raw)
 
     @abstractmethod
     def __isub__(self, other) -> 'Element':
@@ -116,9 +116,9 @@ class Element(ABC):
         :return: A new Element instance representing the multiplication.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr * other.expr)
+            return self._build_expression(expression=self.raw * other.raw)
         else:
-            return self._build_expression(expression=self.expr * other)
+            return self._build_expression(expression=self.raw * other)
 
     def __rmul__(self, other) -> 'Element':
         """
@@ -127,9 +127,9 @@ class Element(ABC):
         :return: A new Element instance representing the multiplication.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr * self.expr)
+            return self._build_expression(expression=other.raw * self.raw)
         else:
-            return self._build_expression(expression=other * self.expr)
+            return self._build_expression(expression=other * self.raw)
 
     @abstractmethod
     def __imul__(self, other) -> 'Element':
@@ -148,9 +148,9 @@ class Element(ABC):
         :return: A new Element instance representing the division.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr / other.expr)
+            return self._build_expression(expression=self.raw / other.raw)
         else:
-            return self._build_expression(expression=self.expr / other)
+            return self._build_expression(expression=self.raw / other)
 
     def __rtruediv__(self, other) -> 'Element':
         """
@@ -159,9 +159,9 @@ class Element(ABC):
         :return: A new Element instance representing the division.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr / self.expr)
+            return self._build_expression(expression=other.raw / self.raw)
         else:
-            return self._build_expression(expression=other / self.expr)
+            return self._build_expression(expression=other / self.raw)
 
     @abstractmethod
     def __itruediv__(self, other) -> 'Element':
@@ -180,9 +180,9 @@ class Element(ABC):
         :return: A new Element instance representing the floor division.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr // other.expr)
+            return self._build_expression(expression=self.raw // other.raw)
         else:
-            return self._build_expression(expression=self.expr // other)
+            return self._build_expression(expression=self.raw // other)
 
     def __rfloordiv__(self, other) -> 'Element':
         """
@@ -191,9 +191,9 @@ class Element(ABC):
         :return: A new Element instance representing the floor division.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr // self.expr)
+            return self._build_expression(expression=other.raw // self.raw)
         else:
-            return self._build_expression(expression=other // self.expr)
+            return self._build_expression(expression=other // self.raw)
 
     @abstractmethod
     def __ifloordiv__(self, other) -> 'Element':
@@ -212,9 +212,9 @@ class Element(ABC):
         :return: A new Element instance representing the modulo operation.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr % other.expr)
+            return self._build_expression(expression=self.raw % other.raw)
         else:
-            return self._build_expression(expression=self.expr % other)
+            return self._build_expression(expression=self.raw % other)
 
     def __rmod__(self, other) -> 'Element':
         """
@@ -223,9 +223,9 @@ class Element(ABC):
         :return: A new Element instance representing the modulo operation.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr % self.expr)
+            return self._build_expression(expression=other.raw % self.raw)
         else:
-            return self._build_expression(expression=other % self.expr)
+            return self._build_expression(expression=other % self.raw)
 
     @abstractmethod
     def __imod__(self, other) -> 'Element':
@@ -244,9 +244,9 @@ class Element(ABC):
         :return: A new Element instance representing the exponentiation.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr ** other.expr)
+            return self._build_expression(expression=self.raw ** other.raw)
         else:
-            return self._build_expression(expression=self.expr ** other)
+            return self._build_expression(expression=self.raw ** other)
 
     def __rpow__(self, other) -> 'Element':
         """
@@ -255,9 +255,9 @@ class Element(ABC):
         :return: A new Element instance representing the exponentiation.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.expr ** self.expr)
+            return self._build_expression(expression=other.raw ** self.raw)
         else:
-            return self._build_expression(expression=other ** self.expr)
+            return self._build_expression(expression=other ** self.raw)
 
     @abstractmethod
     def __ipow__(self, other) -> 'Element':
@@ -274,21 +274,21 @@ class Element(ABC):
         Negation operation.
         :return: A new Element instance representing the negation.
         """
-        return self._build_expression(expression=-self.expr)
+        return self._build_expression(expression=-self.raw)
 
     def __pos__(self) -> 'Element':
         """
         Positive operation.
         :return: A new Element instance representing the positive value.
         """
-        return self._build_expression(expression=+self.expr)
+        return self._build_expression(expression=+self.raw)
 
     def __abs__(self) -> 'Element':
         """
         Absolute value operation.
         :return: A new Element instance representing the absolute value.
         """
-        return self._build_expression(expression=abs(self.expr))
+        return self._build_expression(expression=abs(self.raw))
 
     # Comparison Methods
     def __eq__(self, other) -> 'Element':
@@ -298,9 +298,9 @@ class Element(ABC):
         :return: A new Element instance representing the comparison result.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr == other.expr)
+            return self._build_expression(expression=self.raw == other.raw)
         else:
-            return self._build_expression(expression=self.expr == other)
+            return self._build_expression(expression=self.raw == other)
 
     def __ne__(self, other) -> 'Element':
         """
@@ -309,9 +309,9 @@ class Element(ABC):
         :return: A new Element instance representing the comparison result.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr != other.expr)
+            return self._build_expression(expression=self.raw != other.raw)
         else:
-            return self._build_expression(expression=self.expr != other)
+            return self._build_expression(expression=self.raw != other)
 
     def __lt__(self, other) -> 'Element':
         """
@@ -320,9 +320,9 @@ class Element(ABC):
         :return: A new Element instance representing the comparison result.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr < other.expr)
+            return self._build_expression(expression=self.raw < other.raw)
         else:
-            return self._build_expression(expression=self.expr < other)
+            return self._build_expression(expression=self.raw < other)
 
     def __le__(self, other) -> 'Element':
         """
@@ -331,9 +331,9 @@ class Element(ABC):
         :return: A new Element instance representing the comparison result.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr <= other.expr)
+            return self._build_expression(expression=self.raw <= other.raw)
         else:
-            return self._build_expression(expression=self.expr <= other)
+            return self._build_expression(expression=self.raw <= other)
 
     def __gt__(self, other) -> 'Element':
         """
@@ -342,9 +342,9 @@ class Element(ABC):
         :return: A new Element instance representing the comparison result.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr > other.expr)
+            return self._build_expression(expression=self.raw > other.raw)
         else:
-            return self._build_expression(expression=self.expr > other)
+            return self._build_expression(expression=self.raw > other)
 
     def __ge__(self, other) -> 'Element':
         """
@@ -353,6 +353,6 @@ class Element(ABC):
         :return: A new Element instance representing the comparison result.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.expr >= other.expr)
+            return self._build_expression(expression=self.raw >= other.raw)
         else:
-            return self._build_expression(expression=self.expr >= other)
+            return self._build_expression(expression=self.raw >= other)

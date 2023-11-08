@@ -88,14 +88,14 @@ class CplexEngine(Engine):
         )
 
     def add_constraint(self, expression: Element) -> Element:
-        self._solver.add_constraint(ct=expression.expr)
+        self._solver.add_constraint(ct=expression.raw)
         return expression
 
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
         if opt_type == OptimizationType.MINIMIZE:
-            self._solver.minimize(expr=expression.expr)
+            self._solver.minimize(expr=expression.raw)
         elif opt_type == OptimizationType.MAXIMIZE:
-            self._solver.maximize(expr=expression.expr)
+            self._solver.maximize(expr=expression.raw)
         else:
             raise CplexException("Invalid optimization type.")
         return expression

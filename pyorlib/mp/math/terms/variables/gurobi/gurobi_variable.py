@@ -37,7 +37,7 @@ class GurobiVariable(Variable):
             return -0.0
 
     @property
-    def expr(self) -> Any:
+    def raw(self) -> Any:
         return self._gurobi_var
 
     def __init__(

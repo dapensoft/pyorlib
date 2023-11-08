@@ -10,7 +10,7 @@ class Expression(Element):
     """
 
     @property
-    def expr(self) -> Any:
+    def raw(self) -> Any:
         return self.__expression
 
     def __init__(self, expression: Any):
@@ -30,53 +30,53 @@ class Expression(Element):
         return Expression(expression=expression)
 
     def __str__(self) -> str:
-        return str(self.expr)
+        return str(self.raw)
 
     def __iadd__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression += other.expr
+            self.__expression += other.raw
         else:
             self.__expression += other
         return self
 
     def __isub__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression -= other.expr
+            self.__expression -= other.raw
         else:
             self.__expression -= other
         return self
 
     def __imul__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression *= other.expr
+            self.__expression *= other.raw
         else:
             self.__expression *= other
         return self
 
     def __itruediv__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression /= other.expr
+            self.__expression /= other.raw
         else:
             self.__expression /= other
         return self
 
     def __ifloordiv__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression //= other.expr
+            self.__expression //= other.raw
         else:
             self.__expression //= other
         return self
 
     def __imod__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression %= other.expr
+            self.__expression %= other.raw
         else:
             self.__expression %= other
         return self
 
     def __ipow__(self, other) -> Element:
         if isinstance(other, Element):
-            self.__expression **= other.expr
+            self.__expression **= other.raw
         else:
             self.__expression **= other
         return self

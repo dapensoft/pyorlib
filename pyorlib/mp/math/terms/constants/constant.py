@@ -30,7 +30,7 @@ class Constant(Term):
         return self._value
 
     @property
-    def expr(self) -> Any:
+    def raw(self) -> Any:
         return self.value
 
     def __init__(self, name: str, value_type: ValueType, value: float):

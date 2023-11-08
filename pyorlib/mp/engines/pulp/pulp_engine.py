@@ -85,7 +85,7 @@ class PuLPEngine(Engine):
         )
 
     def add_constraint(self, expression: Element) -> Element:
-        self._solver += expression.expr
+        self._solver += expression.raw
         return expression
 
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
@@ -95,8 +95,8 @@ class PuLPEngine(Engine):
             self._solver.sense = LpMaximize
         else:
             raise PuLPException('Invalid optimization type.')
-        self._solver.setObjective(expression.expr)
-        self._objective = expression.expr
+        self._solver.setObjective(expression.raw)
+        self._objective = expression.raw
         return expression
 
     def solve(self) -> None:
