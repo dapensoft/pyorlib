@@ -55,43 +55,26 @@ class ORToolsEngine(Engine):
 
     def __init__(
             self,
-            solver_backend: str = "SCIP",
-            time_limit: float | None = None,
-            mip_gap: float | None = None,
-            num_threads: int | None = None,
-            presolve: int | None = None,
+            solver: Solver | None = None,
+            solver_params: MPSolverParameters | None = None,
     ):
         """
         Initializes a new instance of the ORToolsSolver class.
-
-        :param solver_backend: It will accept both string names of the OptimizationProblemType enum, and a short version (i.e. "SCIP_MIXED_INTEGER_PROGRAMMING" or "SCIP").
-        :param time_limit: The time limit for the solver in milliseconds. Default is None (no time limit).
-        :param mip_gap: Limit for relative MIP gap. Default is None (no time limit).
-        :param num_threads: The number of solver threads to use. Default is None (use solver default).
-        :param presolve: Controls the presolve level. Default is None (use solver default).
+        :param solver: Specifies a ORTools solver (ortools.linear_solver.pywraplp) to be used by the engine. Default is None (instantiates a default solver with SCIP).
         """
 
         # Instance attributes
-        self._solver: Solver = Solver.CreateSolver(solver_id=solver_backend)
+        self._solver: Solver = solver if solver else Solver.CreateSolver(solver_id='SCIP')
         """ A reference to the OR-Tools solver. """
+
+        # Set or tools configuration
+        self._solver_params: MPSolverParameters = solver_params if solver_params else MPSolverParameters()
 
         self._status: int = 6
         """ Represents the state of the solution. """
 
         if self._solver is None:
             ORToolsException("Failed to create the OR-Tools solver.")
-
-        # Set or tools configuration
-        self._solver_params: MPSolverParameters = MPSolverParameters()
-
-        if time_limit is not None:
-            self._solver.set_time_limit(time_limit_milliseconds=time_limit)
-        if mip_gap is not None:
-            self._solver_params.SetDoubleParam(self._solver_params.RELATIVE_MIP_GAP, mip_gap)
-        if num_threads is not None:
-            self._solver.SetNumThreads(num_theads=num_threads)
-        if presolve is not None:
-            self._solver_params.SetDoubleParam(self._solver_params.PRESOLVE, presolve)
 
     def add_variable(
             self,

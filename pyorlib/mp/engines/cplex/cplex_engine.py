@@ -58,37 +58,19 @@ class CplexEngine(Engine):
 
     def __init__(
             self,
-            time_limit: float | None = None,
-            mip_gap: float | None = None,
-            logging: bool | None = None,
-            num_threads: int | None = None,
-            presolve: bool | None = None,
+            solver: cpx.Model | None = None,
     ):
         """
         Initializes a new instance of the CplexSolver class.
-        :param time_limit: Maximum time limit for the solver to find an optimal solution (in seconds). Default is None (use solver default).
-        :param mip_gap: Relative MIP optimality gap. Default is None (use solver default).
-        :param logging: Enables or disables solver output. Default is None (use solver default).
-        :param num_threads: Number of parallel threads to use. Default is None (use solver default).
-        :param presolve: Controls the presolve of the model to produce more compact formulations and to achieve more domain reduction. Default is None (use solver default).
+        :param solver: Specifies a Cplex solver to be used by the engine. Default is None (instantiates a default solver).
         """
 
         # Instance attributes
-        self._solver: cpx.Model = cpx.Model(log_output=logging)
+        self._solver: cpx.Model = solver if solver else cpx.Model()
         """ A reference to the CPLEX solver. """
 
         if self._solver is None:
             CplexException("Failed to create the cplex solver.")
-
-        # Set solver configuration
-        if time_limit is not None:
-            self._solver.set_time_limit(time_limit)
-        if mip_gap is not None:
-            self._solver.parameters.mip.tolerances.mipgap = mip_gap
-        if num_threads is not None:
-            self._solver.parameters.threads = num_threads
-        if presolve is not None:
-            self._solver.parameters.preprocessing.presolve = presolve
 
     def add_variable(
             self,

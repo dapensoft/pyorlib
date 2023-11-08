@@ -57,41 +57,21 @@ class GurobiEngine(Engine):
 
     def __init__(
             self,
-            time_limit: float | None = None,
-            mip_gap: float | None = None,
-            output_flag: bool | None = None,
-            num_threads: int | None = None,
-            presolve: int | None = None,
+            solver: gp.Model | None = None,
     ):
         """
         Initializes a new instance of the GurobiSolver class.
-        :param time_limit: Maximum time limit for the solver to find an optimal solution (in seconds). Default is None (use solver default).
-        :param mip_gap: Relative MIP optimality gap. Default is None (use solver default).
-        :param output_flag: Enables or disables solver output. Default is None (use solver default).
-        :param num_threads: Number of parallel threads to use. Default is None (use solver default).
-        :param presolve: Controls the presolve level. A value of -1 corresponds to an automatic setting. Other options are off (0), conservative (1), or aggressive (2). Default is None (use solver default).
+        :param solver: Specifies a Gurobi solver to be used by the engine. Default is None (instantiates a default solver).
         """
 
         # Instance attributes
-        self._solver: gp.Model = gp.Model()
+        self._solver: gp.Model = solver if solver else gp.Model()
         """ A reference to the Gurobi solver. """
 
         if self._solver is None:
             GurobiException("Failed to create the gurobi solver.")
 
         self._solver.setParam('OutputFlag', 0)
-
-        # Set solver configuration
-        if time_limit is not None:
-            self._solver.setParam('TimeLimit', time_limit)
-        if mip_gap is not None:
-            self._solver.setParam('MIPGap', mip_gap)
-        if output_flag is not None:
-            self._solver.setParam('OutputFlag', output_flag)
-        if num_threads is not None:
-            self._solver.setParam('Threads', num_threads)
-        if presolve is not None:
-            self._solver.setParam('Presolve', presolve)
 
     def add_variable(
             self,

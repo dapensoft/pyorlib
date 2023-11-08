@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import List, Any
 
 from pulp import LpProblem, LpMaximize, LpMinimize, value, LpSolverDefault
 
@@ -20,7 +20,7 @@ class PuLPEngine(Engine):
 
     @property
     def name(self) -> str:
-        return "PulP Engine"
+        return "PuLP Engine"
 
     @property
     def constraints(self) -> List[Element]:
@@ -50,21 +50,24 @@ class PuLPEngine(Engine):
             StdOutLogger.error(action="Solution status: ", msg=f"{self._status}")
             raise PuLPException('Invalid PuLP status code.')
 
-    def __init__(self):
-        """  Initializes a new instance of the PulpSolver class. """
+    def __init__(self, solver: LpProblem | None = None):
+        """
+        Initializes a new instance of the PulpSolver class.
+        :param solver: Specifies a PuLP solver (LpProblem) to be used by the engine. Default is None (instantiates a default solver).
+        """
 
         # Instance attributes
-        self._solver: LpProblem = LpProblem()
+        self._solver: LpProblem = solver if solver else LpProblem()
         """ A reference to the PuLP solver. """
+
+        if self._solver is None:
+            PuLPException("Failed to create the PuLP solver.")
 
         self._objective: Any = None
         """ An object representing the optimization function of the problem. """
 
         self._status: int = 0
         """ Represents the state of the solution. """
-
-        if self._solver is None:
-            PuLPException("Failed to create the PuLP solver.")
 
     def add_variable(
             self,
