@@ -1,3 +1,3 @@
-from .multi import *
+from .multi_value_parameter import MultiValueParameter
 from .parameter import Parameter
-from .single import *
+from .single_value_parameter import SingleValueParameter
