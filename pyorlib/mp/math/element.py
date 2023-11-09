@@ -14,8 +14,8 @@ class Element(ABC):
     functions, and any other operations defined by the underlying mathematical element.
     """
 
-    @abstractmethod
     @property
+    @abstractmethod
     def raw(self) -> Any:
         """
         Returns the raw representation of the mathematical element.
