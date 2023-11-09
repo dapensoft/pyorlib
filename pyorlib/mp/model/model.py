@@ -403,9 +403,9 @@ class Model:
 
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
         """
-        Sets the optimization objective for the model.
+        Defines the objective function.
         :param opt_type: The type of optimization to be performed.
-        :param expression: The expression to be optimized.
+        :param expression: The objective expression.
         :return: The objective function.
         """
         objective: Element = self._engine.set_objective(opt_type=opt_type, expression=expression)

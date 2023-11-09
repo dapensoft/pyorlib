@@ -2,9 +2,8 @@ from typing import Set
 
 from pyorlib.core.descriptors import FieldValidator
 from pyorlib.mp.common.enums import ParameterType, ValueType
+from pyorlib.mp.input.parameters import MultiValueParameter, SingleValueParameter
 from pyorlib.mp.input.parameters import Parameter
-from pyorlib.mp.input.parameters.multi import MultiValueParameter
-from pyorlib.mp.input.parameters.single import SingleValueParameter
 
 
 class ParameterField(FieldValidator[Parameter]):
