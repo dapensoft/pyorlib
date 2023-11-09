@@ -11,15 +11,20 @@ from pyorlib.mp.math.expressions.expression import Expression
 
 @dataclass
 class Term(Element, ABC):
-    """ A base class for terms in an optimization problem. """
+    """
+    A base class representing a term in an optimization model.
 
-    # Strict class attributes.
+    The `Term` class serves as a base class for representing terms in an optimization model. It is designed to
+    be inherited by subclasses that represent specific types of terms. The `Term` class itself is an abstract
+    base class (ABC) that defines the common behavior and interface for all terms.
+    """
+
     __slots__ = ["_term_type", "_value_type"]
 
     @property
     def term_type(self) -> TermType:
         """
-        Returns the type of the term.
+        Retrieves the type of the term.
         :return: A TermType enumeration.
         """
         return self._term_type
@@ -27,7 +32,7 @@ class Term(Element, ABC):
     @property
     def value_type(self) -> ValueType:
         """
-        Returns the type of the term's value
+        Retrieves the type of the term's value.
         :return: A ValueType enumeration
         """
         return self._value_type
@@ -36,7 +41,7 @@ class Term(Element, ABC):
     @abstractmethod
     def name(self) -> str:
         """
-        Returns the name of the term.
+        Retrieves the name of the term.
         :return: A string with name of the term.
         """
         pass
@@ -45,11 +50,11 @@ class Term(Element, ABC):
     @abstractmethod
     def lower_bound(self) -> float:
         """
-        Returns the lower bound of the term's value.
-        For a variable term, the lower bound is the minimum value that the term can take.
-        For a constant term, the lower bound is equal to its value.
-        :return: A float representing the lower bound of the term's value. If the upper bound is minus infinity,
-        the method returns `-inf` from math module.
+        Retrieves the lower bound of the term's value.
+            For variable terms, the lower bound denotes the minimum value that the term can assume.
+            For constant terms, the lower bound is equivalent to its value.
+        :return: A float representing the lower bound of the term's value. If the upper bound is negative infinity,
+            the method returns `-inf` from the math module.
         """
         pass
 
@@ -57,11 +62,11 @@ class Term(Element, ABC):
     @abstractmethod
     def upper_bound(self) -> float:
         """
-        Returns the upper bound of the term's value. For a variable term, the
-        upper bound is the maximum value that the term can take. For a constant
-        term, the upper bound is equal to its value.
+        Retrieves the upper bound of the term's value.
+            For variable terms, the upper bound denotes the maximum value that the term can assume.
+            For constant terms, the upper bound is equivalent to its value.
         :return: A float representing the upper bound of the term's value. If the upper bound is infinity,
-        the method returns `inf` from the math module.
+            the method returns `inf` from the math module.
         """
         pass
 
@@ -69,9 +74,10 @@ class Term(Element, ABC):
     @abstractmethod
     def value(self) -> float:
         """
-        Returns the value of the term. For a variable term, the value is the current
-        value of the term. If the term has not been solved yet, the value is -0.0.
-        For a constant term, the value is the constant value.
+        Retrieves the value of the term.
+            For variable terms, the value corresponds to the current value of the term.
+            If the term has not been solved yet, the value is `-0.0`.
+            For constant terms, the value remains the constant value.
         :return: A float representing the value of the term.
         """
         pass
@@ -79,24 +85,24 @@ class Term(Element, ABC):
     @property
     def is_variable(self) -> bool:
         """
-        Returns a boolean indicating whether the term is a variable or not.
-        :return: True if the term is a variable, False otherwise.
+        Determines whether the term is a variable or not.
+        :return: `True` if the term is a variable, `False` otherwise.
         """
         return self._term_type == TermType.VARIABLE
 
     @property
     def is_constant(self) -> bool:
         """
-        Returns a boolean indicating whether the term is a constant or not.
-        :return: True if the term is a constant, False otherwise.
+        Determines whether the term is a constant or not.
+        :return: `True` if the term is a constant, `False` otherwise.
         """
         return self._term_type == TermType.CONSTANT
 
     def __init__(self, term_type: TermType, value_type: ValueType):
         """
-        Initializes a new BaseTerm object.
+        Initializes a new Term object.
         :param term_type: An enumeration representing the type of the term.
-        :param value_type: An enumeration representing the type of the term's value
+        :param value_type: An enumeration representing the type of the term's value.
         """
         if not term_type:
             raise TermException("Invalid term type.")
@@ -113,8 +119,11 @@ class Term(Element, ABC):
     @abstractmethod
     def validate(self) -> None:
         """
-        Validates the term to ensure that it is correctly defined.
-        This method checks that the term's attributes are valid and consistent.
+        Validates the term to ensure its correct definition.
+
+        This method checks the validity and consistency of the term's attributes. It verifies that the term is
+        correctly defined and ready to be used in an optimization problem. If any inconsistencies or invalid
+        attributes are found, an `Exception` may be raised to indicate the issue.
         :return: None
         """
         pass

@@ -2,10 +2,15 @@ from enum import IntEnum
 
 
 class ParameterType(IntEnum):
-    """  An enumeration that represents the types of parameters in a model. """
+    """
+    An enumeration class representing the types of parameters in an optimization model.
+
+    Parameters can be categorized as either FIXED, representing parameters under certainty with a single/fixed
+    value, or BOUNDED, representing parameters under uncertainty with a lower and upper limit.
+    """
 
     FIXED = 1
-    """ Parameters that consider a single/fixed value """
+    """ Represents parameters under certainty with a single/fixed value. """
 
     BOUNDED = 2
-    """ Parameters that consider a lower and upper limit """
+    """ Represents parameters under uncertainty with a lower and upper limit. """

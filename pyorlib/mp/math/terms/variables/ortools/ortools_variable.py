@@ -8,7 +8,12 @@ from pyorlib.mp.math.terms.variables.variable import Variable
 
 
 class ORToolsVariable(Variable):
-    """ Represents a variable in a mathematical expression that can be used with the OR-Tools solver. """
+    """
+    Represents a OR-Tools variable in an optimization model.
+
+    The `ORToolsVariable` class is a concrete implementation of the abstract `Variable` class.
+    It represents a variable that is compatible with the OR-Tools solver.
+    """
 
     __slots__ = ["_ortools_var", "_solution_status"]
 
@@ -45,19 +50,20 @@ class ORToolsVariable(Variable):
             upper_bound: float | None = None,
     ):
         """
-        Initializes a new ORToolsVariable object with the specified attributes and creates
-        a corresponding OR-Tools variable.
+        Initializes a new `ORToolsVariable` object with the specified attributes and creates a
+        corresponding OR-Tools variable.
         :param name: The name of the variable.
         :param solver: A reference to the OR-Tools solver.
         :param value_type: An enumeration representing the type of the variable's value.
-        :param lower_bound: The lower bound of the variable, or None. The default is 0.
-        :param upper_bound: The upper bound of the variable, or None, to use the default. The default is infinity.
+        :param solution_status: A callable function that returns the current solution status.
+        :param lower_bound: The lower bound of the variable, or None. Default is 0.
+        :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
         """
         # Calls the super init method with the value type.
         super().__init__(value_type=value_type)
 
         if solver is None:
-            raise ORToolsException("The solver value cannot be none.")
+            raise ORToolsException("The solver reference cannot be None.")
         if not name:
             raise ORToolsException("OR-Tool terms must have a name.")
 
@@ -81,7 +87,7 @@ class ORToolsVariable(Variable):
                 ub=upper_bound if upper_bound is not None else ORToolsInf,
             )
         else:
-            raise ORToolsException("Invalid term value type.")
+            raise ORToolsException("Invalid term ValueType.")
 
         # Instance attributes
         self._solution_status: Callable[[], SolutionStatus] = solution_status

@@ -9,7 +9,12 @@ from pyorlib.mp.math.terms.variables.variable import Variable
 
 
 class PuLPVariable(Variable):
-    """ Represents a variable in a mathematical expression that can be used with the PuLP solver. """
+    """
+    Represents a PuLP variable in an optimization model.
+
+    The `PuLPVariable` class is a concrete implementation of the abstract `Variable` class.
+    It represents a variable that is compatible with the PuLP solver.
+    """
 
     # Strict class attributes.
     __slots__ = ["_pulp_var"]
@@ -46,22 +51,22 @@ class PuLPVariable(Variable):
             upper_bound: float | None = None
     ):
         """
-        Initializes a new PulpVariable object with the specified attributes and creates a corresponding Pulp
-        variable in the Pulp solver.
+        Initializes a new `PuLPVariable` object with the specified attributes and creates a corresponding PuLP
+        variable in the PuLP solver.
         :param name: The name of the variable.
-        :param solver: A reference to the Pulp solver.
+        :param solver: A reference to the PuLP solver.
         :param value_type: An enumeration representing the type of the variable's value.
-        :param lower_bound: The lower bound of the variable, or None. The default is 0.
-        :param upper_bound: The upper bound of the variable, or None, to use the default. The default is infinity.
+        :param lower_bound: The lower bound of the variable, or None. Default is 0.
+        :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
         """
         # Calls the super init method with the value type.
         super().__init__(value_type=value_type)
 
         # Checks for none values
         if solver is None:
-            raise PuLPException("The solver value cannot be none.")
+            raise PuLPException("The solver reference cannot be None.")
         if not name:
-            raise PuLPException("Pulp terms must have a name.")
+            raise PuLPException("PuLP terms must have a name.")
 
         # Creates the PuLP variable according to the value type
         pulp_var: LpVariable
@@ -88,7 +93,7 @@ class PuLPVariable(Variable):
                 upBound=upper_bound
             )
         else:
-            raise PuLPException("Invalid term value type.")
+            raise PuLPException("Invalid term ValueType.")
 
         # Instance attributes
         self._pulp_var: LpVariable = pulp_var
@@ -96,7 +101,7 @@ class PuLPVariable(Variable):
 
         # Checks for none values
         if self._pulp_var is None:
-            raise PuLPException("Failed to create the pulp variable.")
+            raise PuLPException("Failed to create the PuLP variable.")
 
         # Apply validations.
         self.validate()

@@ -7,12 +7,19 @@ from pyorlib.mp.math.terms.term import Term
 
 
 class Variable(Term, ABC):
-    """ Represents a base class for variables terms in a mathematical model. """
+    """
+    Represents a base class for variable terms in an optimization model.
+
+    The `Variable` class is a subclass of `Term` and serves as a foundation for representing variable terms in
+    optimization models. It is designed to be inherited by subclasses that represent specific types of
+    variables. As an abstract base class (ABC), `Variable` defines the common behavior and interface
+    for all variable terms.
+    """
 
     def __init__(self, value_type: ValueType):
         """
-        Initializes a new BaseVariable object with the specified attributes.
-        :param value_type: An enumeration representing the type of the variable
+        Initializes a new `Variable` object with the specified attributes.
+        :param value_type: A `ValueType` enumeration representing the type of the variable.
         """
         # Calls the base init with the term type as Variable.
         super().__init__(term_type=TermType.VARIABLE, value_type=value_type)

@@ -8,16 +8,30 @@ from pyorlib.mp.math.terms.variables import Variable
 
 class Engine(ABC):
     """
-    The Engine class is an abstract class representing an optimization engine
-    for mathematical models.
+    Abstract base class for optimization engines.
+
+    The `Engine` class is a base class that provides a common interface for interacting with different solvers. It
+    serves as a foundation for representing and utilizing various solver implementations, such as Gurobi, CPLEX,
+    and others.
+
+    By inheriting from this base class, specific engine classes can be developed to implement solver-specific
+    functionality while adhering to the common interface defined by the `Engine` class.
+
+    This decoupling from the specific solvers allows for greater flexibility and interchangeability of solver
+    implementations within an optimization model. It promotes code reuse and simplifies the process of integrating
+    different solvers into an application.
+
+    The `Engine` class defines a set of abstract methods that must be implemented by concrete engine classes. These
+    methods include solving the optimization model, adding variables and constraints, setting the objective function,
+    and configuring solver-specific parameters.
     """
 
     @property
     @abstractmethod
     def name(self) -> str:
         """
-        Returns the name of the solver that is currently being used to solve an optimization problem.
-        :return: A string with name of the solver.
+        Get the name of the concrete solver.
+        :return: The name of the concrete solver implementation.
         """
         pass
 
@@ -25,8 +39,8 @@ class Engine(ABC):
     @abstractmethod
     def constraints(self) -> List[Element]:
         """
-        Returns a list of all constraints in the optimization model.
-        :return: A list of constraints in the optimization model.
+        Get the list of constraints in the model.
+        :return: The list of constraint objects.
         """
         pass
 
@@ -34,8 +48,8 @@ class Engine(ABC):
     @abstractmethod
     def objective_value(self) -> float | None:
         """
-        Returns the value of the objective function for the current solution, if available.
-        :return: The value of the objective function, or None if not available.
+        Get the objective value for the current solution.
+        :return: The objective value, or None if no solution exists.
         """
         pass
 
@@ -43,8 +57,8 @@ class Engine(ABC):
     @abstractmethod
     def objective_expr(self) -> Element | None:
         """
-        Returns the expression of the objective function, if available.
-        :return: The objective function, or None if not available.
+        Get the objective expression object.
+        :return: The objective expression, or None if not set.
         """
         pass
 
@@ -52,8 +66,8 @@ class Engine(ABC):
     @abstractmethod
     def solution_status(self) -> SolutionStatus:
         """
-        Returns an enumeration that represents the state of the solution.
-        :return: A SolutionStatus enumeration.
+        Get the solution status.
+        :return: The status of the current solution.
         """
         pass
 
@@ -63,33 +77,33 @@ class Engine(ABC):
             name: str,
             value_type: ValueType,
             lower_bound: float | None = None,
-            upper_bound: float | None = None
+            upper_bound: float | None = None,
     ) -> Variable:
         """
-        Adds a variable to the optimization problem with the specified value type and bounds.
+        Add a new variable to the engine.
         :param name: The name of the variable.
         :param value_type: The value type of the variable.
-        :param lower_bound: The lower bound of the variable value. The default is 0.
-        :param upper_bound: The upper bound of the variable value. The default is infinity.
-        :return: Returns a BaseTerm Variable.
+        :param lower_bound: The lower bound of the variable value. Defaults to 0.
+        :param upper_bound: The upper bound of the variable value. Defaults to infinity.
+        :return: The created variable object.
         """
         pass
 
     @abstractmethod
     def add_constraint(self, expression: Element) -> Element:
         """
-        Adds a constraint to the optimization problem.
+        Add a new constraint expression to the engine.
         :param expression: The constraint expression.
-        :return: An object representing the constraint.
+        :return: The created constraint object.
         """
         pass
 
     @abstractmethod
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
         """
-        Sets the objective function for the optimization problem.
+        Defines the objective function.
         :param opt_type: The type of optimization to be performed.
-        :param expression: The expression of the objective function.
+        :param expression: The objective expression.
         :return: The objective function.
         """
         pass
@@ -97,7 +111,7 @@ class Engine(ABC):
     @abstractmethod
     def solve(self) -> None:
         """
-        Solves the optimization problem using the specified solver.
+        Solve the optimization model.
         :return: None
         """
         pass
@@ -105,8 +119,7 @@ class Engine(ABC):
     @abstractmethod
     def clear(self) -> None:
         """
-        Clears the optimization problem by removing all variables,
-        constraints, and objective function.
+        Clear the engine state by removing all variables, constraints, and objective function.
         :return: None
         """
         pass

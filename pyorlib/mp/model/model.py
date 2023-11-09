@@ -13,74 +13,83 @@ from pyorlib.mp.math.terms.variables import Variable
 
 
 class Model:
-    """ A base class to represent a mathematical programming model. """
+    """
+    Represents a mathematical programming model.
+
+    The `Model` class serves as a versatile tool for creating and managing mathematical programming models.
+
+    As a factory, the `Model` class provides methods to create optimization objects, decision variables,
+    and constraints, allowing users to build their models step by step.
+
+    The class also offers various accessors and iterators to efficiently navigate and manipulate the
+    modeling objects within the model. Additionally, the `Model` class manages solving operations.
+    """
 
     @property
     def name(self) -> str:
         """
-        Returns the name of the model.
-        :return: A string with the name of the model.
+        Retrieves the name of the model.
+        :return: The name assigned to the model.
         """
         return self._name
 
     @property
     def dimensions(self) -> Mapping[str, int]:
         """
-        Returns a dictionary with the dimensions and their sizes of the model.
-        :return: A dictionary where the keys are dimension names and the values are their sizes.
+        Retrieves the dimensions and their sizes of the model.
+        :return: A dictionary with dimension names as keys and their sizes as values.
         """
         return self._dimensions
 
     @property
     def constraints(self) -> List[Element]:
         """
-        Returns a list with the constraints of the model.
-        :return: A list of constraints.
+        Retrieves the constraints defined in the model.
+        :return: A list containing the constraints.
         """
         return self._engine.constraints
 
     @property
     def terms(self) -> Mapping[str, Term]:
         """
-        Returns a dictionary that contains the individual terms used in the model.
-        :return: A dictionary where the keys represent the names of the terms and the values represent the
-        terms themselves. A term may be a constant value or a variable.
+        Retrieves a dictionary of individual terms used in the model.
+        :return: A dictionary where the keys represent the names of the
+            terms and the values represent the terms themselves.
         """
         return self._terms
 
     @property
     def term_sets(self) -> Mapping[str, Mapping[Tuple[int, ...], Term]]:
         """
-        Returns a dictionary that contains the set of terms used in the model.
-        :return: A dictionary where the keys represent the names of the sets and
-        the values represent the sets themselves. Each set of terms is a dictionary
-        with the indices of the terms as keys and the terms themselves as values.
-        A term may be a constant value or a variable.
+        Retrieves a dictionary of term sets used in the model.
+        :return: A dictionary where the keys represent the names of the sets and the values
+            represent the sets themselves. Each set of terms is a dictionary with the indices of
+            the terms as keys and the terms themselves as values.
         """
         return self._term_sets
 
     @property
     def objective_value(self) -> float | None:
         """
-        Returns the value of the objective function in the model.
-        :return: The value of the objective function, or `None` if the model has not
-        been solved or an objective function is not defined.
+        Retrieves the value of the objective function in the model.
+        :return: The value of the objective function, or `None` if the model has
+            not been solved or an objective function is not defined.
         """
         return self._engine.objective_value
 
     @property
     def objective_expr(self) -> Element | None:
         """
-        Returns the expression of the objective function, if available.
-        :return: The objective function, or None if not available.
+        Retrieves the expression of the objective function in the model, if available.
+        :return: The objective function expression, or `None` if not available.
         """
         return self._engine.objective_expr
 
     @property
     def solution_status(self) -> SolutionStatus:
         """
-        Returns an enumeration that represents the state of the solution.
-        :return: A SolutionStatus enumeration.
+        Retrieves an enumeration that represents the state of the solution.
+        :return: An enumeration that represents the state of the solution.
         """
         return self._engine.solution_status
 
@@ -88,7 +97,7 @@ class Model:
     def float_precision(self) -> int:
         """
         This property is used to get or set the float precision of the model.
-        The float precision is an integer number of digits, used in printing the solution and objective.
+        The `float_precision` is an integer number of digits, used in printing the solution and objective.
         :return: The current float precision of the solver.
         """
         return self._float_precision
@@ -108,13 +117,13 @@ class Model:
         """
         Initializes a new instance of the `Model` class.
         :param engine: The engine interface to be used for solving the model.
-        :param name: An optional name for the model.
-        :param debug: A flag indicating whether debug mode is enabled.
-        :param float_precision: It represents the number of digits used in printing the solution and objective.
+        :param name: An optional name for the model. Defaults to None.
+        :param debug: A flag indicating whether debug mode is enabled. Defaults to False.
+        :param float_precision: The number of digits used in printing the solution and objective. Defaults to 6.
         """
         # Instance attributes
         self._name: str = name if name else f"model_{str(uuid4())}"
-        """ A name for the model. """
+        """ The name of the model. """
 
         self._logger: Logger = Logger(self._name, debug)
         """ An object used for logging messages from the model. """
@@ -124,15 +133,15 @@ class Model:
 
         self._dimensions: Dict[str, int] = {}
         """  
-        A dictionary of the model's dimensions, where the keys are the 
-        names of the dimensions and the values are their sizes.
+        Stores the dimensions of the model. Each dimension is represented by a key-value pair, 
+        where the key is the name of the dimension and the value is its size.
         """
 
         self._terms: Dict[str, Term] = {}
         """ 
-        A dictionary of individual terms used in the model, where the keys represent the names 
-        of the terms and the values represent the terms themselves. A term may be a constant value 
-        or a variable.
+        Stores individual terms used in the model. Each term is represented by a key-value pair, where 
+        the key is the name of the term and the value is the term itself. 
+        A term can be a constant value or a variable.
         """
 
         self._term_sets: Dict[
@@ -143,23 +152,21 @@ class Model:
             ]
         ] = {}
         """
-        A dictionary of term sets used in the model, where the keys represent the names 
-        of the sets and the values represent the sets themselves. Each set of terms is a 
-        dictionary with the indices of the terms as keys and the terms themselves as 
-        values. A term may be a constant value or a variable.
-
-        |
+        Stores sets of terms used in the model. Each set of terms is represented by a key-value pair, 
+        where the key is the name of the set and the value is another dictionary. The inner dictionary 
+        represents the set of terms, where the keys are indices that uniquely identify each term, 
+        and the values are the terms themselves. A term can be a constant value or a variable.
 
         Example:
-        Z_r_s_t: {
-            | (1, 1, 1): Variable,
-            | (1, 1, 2): Constant,
-            | (2, 1, 1): Variable,
-        }
+            Z_r_s_t: {
+                (1, 1, 1): Variable,
+                (1, 1, 2): Constant,
+                (2, 1, 1): Variable,
+            }
         """
 
         if self._engine is None:
-            raise ModelException("Engine interface cannot be None.")
+            raise ModelException("The engine interface cannot be None.")
 
         if self._logger.debug_enabled:
             self._logger.debug(
@@ -178,9 +185,9 @@ class Model:
 
     def __save_term_to_set(self, set_name: str, set_index: Tuple[int, ...], term: Term) -> None:
         """
-        Saves a term into a set.
+        Saves a term into a set within the model.
         :param set_name: The name of the set where the term will be saved.
-        :param set_index: The index position of the term within a set in the model.
+        :param set_index: The index position of the term within the set in the model.
         :param term: The term to be saved.
         :return: None
         """
@@ -196,25 +203,25 @@ class Model:
 
     def get_dimension_by_name(self, name: str) -> int:
         """
-        Returns the size of a dimension in the model by name.
+        Retrieves the size of a dimension in the model based on its name.
         :param name: The name of the dimension.
-        :return: The size of the dimension, or 0 if the dimension does not exist.
+        :return: The size of the dimension. Returns 0 if the dimension does not exist.
         """
         return self._dimensions.get(name, 0)
 
     def get_term_by_name(self, name: str) -> Term | None:
         """
-        Returns a term in the model by name.
+        Retrieves a term from the model based on its name.
         :param name: The name of the term.
-        :return: The term, or `None` if the term does not exist.
+        :return: The term with the specified name. Returns `None` if the term does not exist.
         """
         return self._terms.get(name, None)
 
     def get_term_set_by_name(self, name: str) -> Mapping[Tuple[int, ...], Term] | None:
         """
-        Returns a set of terms in the model by name.
+        Retrieves a set of terms from the model based on its name.
         :param name: The name of the set.
-        :return: The set of terms, or `None` if the set does not exist.
+        :return: The set of terms with the specified name. Returns `None` if the set does not exist.
         """
         return self._term_sets.get(name, None)
 
@@ -223,7 +230,7 @@ class Model:
         Adds a new dimension to the model.
         :param name: The name of the dimension to be added.
         :param value: The size of the new dimension.
-        :return: The dimension added to the model.
+        :return: The dimension that was added to the model.
         """
         if not name or value is None or not isinstance(value, int) or value < 1:
             raise ModelException("Invalid dimension values.")
@@ -246,7 +253,7 @@ class Model:
         :param name: The name of the constant to be added.
         :param value_type: The type of the constant value.
         :param value: The constant value.
-        :return: The constant added to the model.
+        :return: The constant that was added to the model.
         """
         if name in self.terms:
             raise ModelException(f"Duplicate term with name: {name}")
@@ -276,7 +283,7 @@ class Model:
         :param value_type: The type of the variable values.
         :param lower_bound: The lower bound of the variable. If not specified, the default value is 0.
         :param upper_bound: The upper bound of the variable. If not specified, the default value is infinity.
-        :return: The variable added to the model.
+        :return: The variable that was added to the model.
         """
         if name in self.terms:
             raise ModelException(f"Duplicate term with name: {name}")
@@ -311,7 +318,7 @@ class Model:
         :param const_name: The name of the constant to be saved.
         :param value_type: The type of the constant value.
         :param value: The constant value.
-        :return: The constant added to the model.
+        :return: The constant that was added to the model.
         """
         if const_name in self.terms:
             raise ModelException(f"Duplicate term with name: {const_name}")
@@ -352,7 +359,7 @@ class Model:
         :param value_type: The type of the variable values.
         :param lower_bound: The lower bound of the variable. If not specified, the default value is 0.
         :param upper_bound: The upper bound of the variable. If not specified, the default value is infinity.
-        :return: The variable added to the model.
+        :return: The variable that was added to the model.
         """
         if var_name in self.terms:
             raise ModelException(f"Duplicate term with name: {var_name}")
@@ -380,9 +387,8 @@ class Model:
 
     def add_constraint(self, expression: Element) -> Element:
         """
-        Adds a new constraint to the model. When working with model's terms in symbolic algebra systems,
-        it is necessary to use the `Term.expr` method to perform mathematical operations with them.
-        :param expression: The expression that the constraint must satisfy.
+        Adds a new constraint to the model.
+        :param expression: The constraint expression
         :return: An object representing the constraint.
         """
         constraint: Element = self._engine.add_constraint(expression=expression)
@@ -397,9 +403,8 @@ class Model:
 
     def set_objective(self, opt_type: OptimizationType, expression: Element) -> Element:
         """
-        Sets the optimization objective for the model. When working with model's terms in symbolic algebra systems,
-        it is necessary to use the `Term.expr` method to perform mathematical operations with them.
-        :param opt_type: The type of optimization to be performed, such as 'maximize' or 'minimize'.
+        Sets the optimization objective for the model.
+        :param opt_type: The type of optimization to be performed.
         :param expression: The expression to be optimized.
         :return: The objective function.
         """
@@ -422,6 +427,8 @@ class Model:
     def clear(self) -> None:
         """
         Clears the contents of the model.
+
+        The `clear` method is used to remove all contents from the model.
         :return: None.
         """
         self._engine.clear()
@@ -446,6 +453,11 @@ class Model:
             self._logger.debug(f"The model has been solved.")
 
     def print_info(self, display_term_sets: bool = False) -> None:
+        """
+        Prints information about the model.
+        :param display_term_sets: Whether to display information about term sets. Defaults to False.
+        :return: None.
+        """
         print(f"\n------ MODEL INFORMATION ------\n")
         print("Model properties:")
         print(f"\tName: {StdOutColors.PURPLE}{self.name}{StdOutColors.DEFAULT}")
@@ -489,6 +501,10 @@ class Model:
         print()
 
     def print_solution(self) -> None:
+        """
+        Prints the solution of the optimization problem.
+        :return: None.
+        """
         print(f"\n------ MODEL SOLUTION ------\n")
         print("Objective function:")
         print(f"\tStatus: {StdOutColors.PURPLE}{self.solution_status.name}{StdOutColors.DEFAULT}")

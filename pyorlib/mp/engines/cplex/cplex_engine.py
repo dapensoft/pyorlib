@@ -14,13 +14,15 @@ from pyorlib.mp.math.terms.variables.cplex import CplexVariable
 
 class CplexEngine(Engine):
     """
-    This class provides a high-level interface for solving mathematical
-    optimization problems using the Cplex solver.
+    Concrete engine implementation using IBM CPLEX optimizer.
+
+    This class provides an interface for formulating and solving linear,
+    integer, and nonlinear optimization models using the CPLEX solver.
     """
 
     @property
     def name(self) -> str:
-        return "Cplex Solver"
+        return "CPLEX Solver"
 
     @property
     def constraints(self) -> List[Element]:
@@ -54,23 +56,22 @@ class CplexEngine(Engine):
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._solver.solve_details.status_code}")
-            raise CplexException('Invalid cplex status code.')
+            raise CplexException('Unhandled CPLEX status code.')
 
-    def __init__(
-            self,
-            solver: cpx.Model | None = None,
-    ):
+    def __init__(self, solver: cpx.Model | None = None):
         """
-        Initializes a new instance of the CplexSolver class.
-        :param solver: Specifies a Cplex solver to be used by the engine. Default is None (instantiates a default solver).
+        Initialize a CPLEX engine instance.
+        :param solver: A CPLEX solver object. If None, a new solver will be
+            instantiated using CPLEX's default settings. Allows custom
+            configuration of the solver before passing to the engine.
         """
 
         # Instance attributes
-        self._solver: cpx.Model = solver if solver else cpx.Model()
+        self._solver: cpx.Model = solver if solver else cpx.Model(log_output=False)
         """ A reference to the CPLEX solver. """
 
         if self._solver is None:
-            CplexException("Failed to create the cplex solver.")
+            raise CplexException("The CPLEX solver cannot be None.")
 
     def add_variable(
             self,
@@ -97,7 +98,7 @@ class CplexEngine(Engine):
         elif opt_type == OptimizationType.MAXIMIZE:
             self._solver.maximize(expr=expression.raw)
         else:
-            raise CplexException("Invalid optimization type.")
+            raise CplexException("Optimization type not supported.")
         return expression
 
     def solve(self) -> None:

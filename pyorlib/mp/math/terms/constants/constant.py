@@ -8,9 +8,14 @@ from pyorlib.mp.math.terms.term import Term
 
 
 class Constant(Term):
-    """  The Constant class represents a constant value in a mathematical model. """
+    """
+    Represents a constant value in an optimization model.
 
-    # Strict class attributes
+    The `Constant` class is a subclass of `Term` and represents a fixed value that remains constant
+    throughout the optimization process. It is typically used to represent known values or
+    parameters in an optimization model.
+    """
+
     __slots__ = ["_name", "_value"]
 
     @property
@@ -36,9 +41,9 @@ class Constant(Term):
     def __init__(self, name: str, value_type: ValueType, value: float):
         """
         Initializes a new instance of the Constant class.
-        :param name: The name of the constant.
-        :param value_type: The type of value, can be either "Binary", "Integer", or "Continuous".
-        :param value: The value of the constant.
+        :param name: A string representing the name of the constant.
+        :param value_type: A ValueType enumeration representing the type of value the constant can assume.
+        :param value: A float representing the value of the constant.
         """
         # Calls the super init method.
         super().__init__(term_type=TermType.CONSTANT, value_type=value_type)
@@ -59,7 +64,7 @@ class Constant(Term):
         if self.value is None:
             raise TermException("Constant terms must have a value.")
         if self.value >= inf or self.value <= -inf:
-            raise TermException("Constant terms value cannot be greater than or equal to (+/-)infinity.")
+            raise TermException("Constant terms value cannot be greater than or equal to [+/-]infinity.")
         if self.lower_bound != self.value or self.upper_bound != self.value:
             raise TermException("Invalid bounds for a constant term.")
         if self.value_type == ValueType.BINARY and not ValueTypeValidator.is_binary(num=self.value):

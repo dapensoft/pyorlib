@@ -3,8 +3,9 @@ from enum import IntEnum
 
 class TermType(IntEnum):
     """
-    The TermType class is an enumeration representing the type of term
-    that a parameter, variable or constant can be.
+    An enumeration class representing the types of terms in the context of an optimization model.
+
+    The TermType class provides a set of predefined types that categorize terms according to their behavior.
     """
 
     CONSTANT = 1

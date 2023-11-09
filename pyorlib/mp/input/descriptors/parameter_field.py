@@ -8,7 +8,16 @@ from pyorlib.mp.input.parameters.single import SingleValueParameter
 
 
 class ParameterField(FieldValidator[Parameter]):
-    """ A descriptor for validating model parameters.  """
+    """
+    A descriptor used to validate parameters in an optimization model.
+
+    The `ParameterField` class is designed specifically for validating parameters in an optimization model. It ensures
+    that the parameter value is of the correct type and format and provides functionality for validating and formatting
+    parameter values based on defined constraints and requirements.
+
+    This class is a subclass of `FieldValidator` and inherits its functionality for validating and formatting field
+    values.
+    """
 
     __slots__ = [
         "_required",
@@ -21,32 +30,32 @@ class ParameterField(FieldValidator[Parameter]):
     @property
     def parameter_types(self) -> Set[ParameterType]:
         """
-        Returns a set of parameter types that are supported by the descriptor.
-        :return: A set of parameter types that are supported by the descriptor.
+        Returns the set of supported parameter types.
+        :return: A set containing the supported parameter types.
         """
         return self._parameter_types
 
     @property
     def value_types(self) -> Set[ValueType]:
         """
-        Returns a set of value types that are supported by the descriptor.
-        :return: A set of value types that are supported by the descriptor.
+        Returns the set of supported value types.
+        :return: A set containing the supported value types.
         """
         return self._value_types
 
     @property
     def min(self) -> float | None:
         """
-        Returns the minimum value that is supported by the descriptor, or None if there is no minimum value.
-        :return: The minimum value supported by the descriptor, or None if there is no minimum value.
+        Returns the minimum supported value of the descriptor.
+        :return: The minimum supported value. If there is no minimum value, it is None.
         """
         return self._min
 
     @property
     def max(self) -> float | None:
         """
-        Returns the maximum value that is supported by the descriptor, or None if there is no maximum value.
-        :return: The maximum value supported by the descriptor, or None if there is no maximum value.
+        Returns the maximum supported value of the descriptor.
+        :return: The maximum supported value. If there is no maximum value, it is None.
         """
         return self._max
 
@@ -54,7 +63,7 @@ class ParameterField(FieldValidator[Parameter]):
     def required(self) -> bool:
         """
         Returns a boolean indicating whether the parameter is required.
-        :return: True if the parameter is required, False otherwise.
+        :return: `True` if the parameter is required, `False` otherwise.
         """
         return self._required
 
@@ -67,33 +76,43 @@ class ParameterField(FieldValidator[Parameter]):
             required: bool = True,
     ):
         """
-        Instantiate a new ParameterField descriptor.
-        :param parameter_types: A set of ParameterType representing the types of parameters that are supported.
-        :param value_types: A set of ValueType representing the types of values that are supported.
-        :param min: An optional parameter specifying the minimum value that is supported.
-        :param max: An optional parameter specifying the maximum value that is supported.
-        :param required: A boolean indicating whether the parameter is required.
+        Initialize a new instance of ParameterField.
+        :param parameter_types: A set that contains the supported parameter types.
+        :param value_types: A set that contains the supported value types.
+        :param min: The minimum value supported by the descriptor. If there is no minimum value, it is None.
+        :param max: The maximum value supported by the descriptor. If there is no maximum value, it is None.
+        :param required: A boolean indicating whether the parameter is required or not.
         """
 
         super().__init__()
+
         self._parameter_types: Set[ParameterType] = parameter_types
+        """ A set of parameter types that are supported by the descriptor. """
+
         self._value_types: Set[ValueType] = value_types
+        """ A set of value types that are supported by the descriptor. """
+
         self._min: float | None = min
+        """ The minimum value supported by the descriptor, or None if there is no minimum value. """
+
         self._max: float | None = max
+        """ The maximum value supported by the descriptor, or None if there is no maximum value. """
+
         self._required: bool = required
+        """ A boolean indicating whether the parameter is required. """
 
         # Validations
         if len(self.parameter_types) == 0:
-            raise ValueError("Parameter field parameter types cannot be emtpy")
+            raise ValueError("The set of parameter types cannot be empty.")
 
         if len(self.value_types) == 0:
-            raise ValueError("Parameter field value types cannot be emtpy")
+            raise ValueError("The set of value types cannot be empty.")
 
         if self.min is not None and self.min < 0:
-            raise ValueError("Parameter field minimum must be greater than or equal to 0")
+            raise ValueError("The minimum value for the parameter field must be greater than or equal to 0.")
 
         if self.max is not None and self.min is not None and self.min > self.max:
-            raise ValueError("Parameter field minimum cannot be greater than maximum")
+            raise ValueError("The minimum value for the parameter field cannot be greater than the maximum value.")
 
     def validate(self, value: Parameter | None) -> None:
         # Checks for None value
@@ -138,8 +157,8 @@ class ParameterField(FieldValidator[Parameter]):
     def _validate_bounds(self, lower_bound: float, upper_bound: float) -> None:
         """
         Validates the specified bounds for the parameter value.
-        :param lower_bound: The lower bound of the parameter value.
-        :param upper_bound: The upper bound of the parameter value.
+        :param lower_bound: The lower bound of the parameter.
+        :param upper_bound: The upper bound of the parameter.
         :return: None
         """
         if self._min is not None and lower_bound < self._min:

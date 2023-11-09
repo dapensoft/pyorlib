@@ -14,8 +14,10 @@ from pyorlib.mp.math.terms.variables.gurobi import GurobiVariable
 
 class GurobiEngine(Engine):
     """
-    This class provides a high-level interface for solving mathematical
-    optimization problems using the Gurobi solver.
+    Concrete engine implementation using Gurobi solver.
+
+    This class provides an interface for formulating and solving linear,
+    integer, and nonlinear optimization models using the Gurobi optimizer.
     """
 
     @property
@@ -53,15 +55,16 @@ class GurobiEngine(Engine):
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._solver.status}")
-            raise GurobiException('Invalid solution status.')
+            raise GurobiException('Unhandled Gurobi status code.')
 
-    def __init__(
-            self,
-            solver: gp.Model | None = None,
-    ):
+    def __init__(self, solver: gp.Model | None = None):
         """
-        Initializes a new instance of the GurobiSolver class.
-        :param solver: Specifies a Gurobi solver to be used by the engine. Default is None (instantiates a default solver).
+        Initializes a new GurobiEngine instance.
+
+        The solver parameter allows customizing the underlying Gurobi solver.
+        :param solver: A Gurobi solver object. If None, a new solver
+            will be instantiated using the Gurobipy default settings.
+            Allows customizing the solver configuration and behavior.
         """
 
         # Instance attributes
@@ -69,7 +72,7 @@ class GurobiEngine(Engine):
         """ A reference to the Gurobi solver. """
 
         if self._solver is None:
-            GurobiException("Failed to create the gurobi solver.")
+            raise GurobiException("The Gurobi solver cannot be None.")
 
         self._solver.setParam('OutputFlag', 0)
 
@@ -99,7 +102,7 @@ class GurobiEngine(Engine):
         elif opt_type == OptimizationType.MAXIMIZE:
             self._solver.setObjective(expression.raw, gp.GRB.MAXIMIZE)
         else:
-            raise GurobiException("Invalid optimization type.")
+            raise GurobiException("Optimization type not supported.")
         self._solver.update()
         return expression
 

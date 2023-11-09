@@ -14,8 +14,10 @@ from pyorlib.mp.math.terms.variables.ortools import ORToolsVariable
 
 class ORToolsEngine(Engine):
     """
-    This class provides a high-level interface for solving
-    optimization problems using the OR-Tools package.
+    Concrete engine implementation using Google's OR-Tools linear programming solver.
+
+    This class provides an interface for formulating and solving linear and
+    integer programming models using the OR-Tools solver.
     """
 
     @property
@@ -51,20 +53,24 @@ class ORToolsEngine(Engine):
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._status}")
-            raise ORToolsException('Invalid OR-Tools status code.')
+            raise ORToolsException('Unhandled OR-Tools status code.')
 
-    def __init__(
-            self,
-            solver: Solver | None = None,
-            solver_params: MPSolverParameters | None = None,
-    ):
+    def __init__(self, solver: Solver | None = None, solver_params: MPSolverParameters | None = None):
         """
-        Initializes a new instance of the ORToolsSolver class.
-        :param solver: Specifies a ORTools solver (ortools.linear_solver.pywraplp) to be used by the engine. Default is None (instantiates a default solver with SCIP).
+        Initializes a new instance of the ORToolsEngine class.
+
+        The solver and solver_params parameters enable customizing the
+        underlying OR-Tools solver and its configuration.
+        :param solver: An OR-Tools Solver object. If None, a new OR-Tools Solver
+            will be instantiated using SCIP as its backend solver.
+            Allows customizing the solver type (e.g. GLOP, SCIP).
+        :param solver_params: OR-Tools solver parameters object. If None,
+            default parameters will be used. Allows customizing the
+            solver configuration.
         """
 
         # Instance attributes
-        self._solver: Solver = solver if solver else Solver.CreateSolver(solver_id='SCIP')
+        self._solver: Solver = solver if solver else Solver.CreateSolver(solver_id="SCIP")
         """ A reference to the OR-Tools solver. """
 
         # Set or tools configuration
@@ -74,7 +80,10 @@ class ORToolsEngine(Engine):
         """ Represents the state of the solution. """
 
         if self._solver is None:
-            ORToolsException("Failed to create the OR-Tools solver.")
+            raise ORToolsException("The OR-Tools solver cannot be None.")
+
+        if self._solver_params is None:
+            raise ORToolsException("The OR-Tools params cannot be None.")
 
     def add_variable(
             self,
@@ -102,7 +111,7 @@ class ORToolsEngine(Engine):
         elif opt_type == OptimizationType.MAXIMIZE:
             self._solver.Maximize(expr=expression.raw)
         else:
-            raise ORToolsException('Invalid optimization type.')
+            raise ORToolsException('Optimization type not supported.')
         return expression
 
     def solve(self) -> None:

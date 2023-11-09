@@ -2,7 +2,13 @@ from enum import IntEnum
 
 
 class SolutionStatus(IntEnum):
-    """ The SolutionStatus class is an enumeration representing the status of the solution. """
+    """
+    Enumerates the possible solution statuses for an optimization model.
+
+    The SolutionStatus class provides a set of predefined statuses that describe the outcome of an
+    optimization model. These statuses can be used to determine the quality and feasibility of
+    the obtained solution.
+    """
 
     OPTIMAL = 1
     """ The model has been solved to optimality. """

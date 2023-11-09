@@ -2,7 +2,12 @@ from enum import IntEnum
 
 
 class OptimizationType(IntEnum):
-    """  The OptimizationType class is an enumeration representing the type of optimization to be performed. """
+    """
+    An enumeration class representing the type of optimization to be performed.
+
+    This class extends the `IntEnum` class and provides two options for
+    optimization types: MINIMIZE and MAXIMIZE.
+    """
 
     MINIMIZE = 1
     """ Represents a minimization problem. """

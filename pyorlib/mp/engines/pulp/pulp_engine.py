@@ -14,8 +14,10 @@ from pyorlib.mp.math.terms.variables.pulp import PuLPVariable
 
 class PuLPEngine(Engine):
     """
-    This class provides a high-level interface for solving mathematical
-    optimization problems using the PuLP solver.
+    Concrete engine implementation using PuLP.
+
+    This class provides a PuLP-based implementation of the abstract Engine interface for formulating
+    and solving linear and integer optimization models.
     """
 
     @property
@@ -48,12 +50,19 @@ class PuLPEngine(Engine):
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._status}")
-            raise PuLPException('Invalid PuLP status code.')
+            raise PuLPException('Unhandled PuLP status code.')
 
     def __init__(self, solver: LpProblem | None = None):
         """
-        Initializes a new instance of the PulpSolver class.
-        :param solver: Specifies a PuLP solver (LpProblem) to be used by the engine. Default is None (instantiates a default solver).
+        Initializes the PuLPEngine instance.
+
+        The solver parameter enables the user to pass a pre-configured PuLP solver with custom parameters
+        instead of using the default solver. This allows greater flexibility in specifying solver options.
+        :param solver: A pre-configured PuLP LpProblem
+            object to use as the solver. This allows custom configuration
+            of the solver before passing to the engine. If None, a default
+            solver will be instantiated with default settings.
+            Defaults to None.
         """
 
         # Instance attributes
@@ -61,7 +70,7 @@ class PuLPEngine(Engine):
         """ A reference to the PuLP solver. """
 
         if self._solver is None:
-            PuLPException("Failed to create the PuLP solver.")
+            raise PuLPException("The PuLP solver cannot be None.")
 
         self._objective: Any = None
         """ An object representing the optimization function of the problem. """
@@ -94,7 +103,7 @@ class PuLPEngine(Engine):
         elif opt_type == OptimizationType.MAXIMIZE:
             self._solver.sense = LpMaximize
         else:
-            raise PuLPException('Invalid optimization type.')
+            raise PuLPException('Optimization type not supported.')
         self._solver.setObjective(expression.raw)
         self._objective = expression.raw
         return expression

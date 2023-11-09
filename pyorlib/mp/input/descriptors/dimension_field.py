@@ -3,31 +3,40 @@ from pyorlib.mp.common.validators import ValueTypeValidator
 
 
 class DimensionField(FieldValidator[int]):
-    """ A descriptor for validating model dimensions. """
+    """
+    A descriptor used to validate dimensions in an optimization model.
+
+    The `DimensionField` class is a field validator specifically designed for model's dimension fields. It ensures that
+    the dimension value is within specified bounds and is an integer number. It allows setting minimum and maximum
+    limits for the dimension.
+
+    This class is a subclass of `FieldValidator` and inherits its functionality for validating and formatting field
+    values.
+    """
 
     __slots__ = ["_min", "_max"]
 
     @property
     def min(self) -> float | None:
         """
-        Returns the minimum value that is supported by the descriptor, or None if there is no minimum value.
-        :return: The minimum value supported by the descriptor, or None if there is no minimum value.
+        Get the minimum value allowed.
+        :return: The minimum value or None if not set.
         """
         return self._min
 
     @property
     def max(self) -> float | None:
         """
-        Returns the maximum value that is supported by the descriptor, or None if there is no maximum value.
-        :return: The maximum value supported by the descriptor, or None if there is no maximum value.
+        Get the maximum value allowed.
+        :return: The maximum value or None if not set.
         """
         return self._max
 
     def __init__(self, min: float | None = None, max: float | None = None):
         """
-        Instantiate a new DimensionField descriptor.
-        :param min: An optional parameter specifying the minimum value that is supported.
-        :param max: An optional parameter specifying the maximum value that is supported.
+        Initialize a new DimensionField instance.
+        :param min: The minimum value allowed for the dimension field. Defaults to None.
+        :param max: The maximum value allowed for the dimension field. Defaults to None.
         """
         super().__init__()
         self._min: float | None = min
@@ -35,10 +44,10 @@ class DimensionField(FieldValidator[int]):
 
         # Validations
         if self.min is not None and self.min < 1:
-            raise ValueError("Dimension field minimum must be greater than or equal to 1")
+            raise ValueError("Dimension field minimum must be greater than or equal to 1.")
 
         if self.max is not None and self.min is not None and self.min > self.max:
-            raise ValueError("Dimension field minimum cannot be greater than maximum")
+            raise ValueError("Dimension field minimum cannot be greater than maximum.")
 
     def validate(self, value: int | None):
         if value is None:

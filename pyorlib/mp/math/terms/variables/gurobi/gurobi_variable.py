@@ -10,7 +10,12 @@ from pyorlib.mp.math.terms.variables.variable import Variable
 
 
 class GurobiVariable(Variable):
-    """ Represents a variable in a mathematical expression that can be used with the Gurobi solver. """
+    """
+    Represents a Gurobi variable in an optimization model.
+
+    The `GurobiVariable` class is a concrete implementation of the abstract `Variable` class.
+    It represents a variable that is compatible with the Gurobi solver.
+    """
 
     __slots__ = ["_gurobi_var"]
 
@@ -49,20 +54,20 @@ class GurobiVariable(Variable):
             upper_bound: float | None = None
     ):
         """
-        Initializes a new GurobiVariable object with the specified attributes and creates a corresponding
-        Gurobi var in the specified GRB model.
+        Initializes a new `GurobiVariable` object with the specified attributes and creates a
+        corresponding Gurobi variable.
         :param name: The name of the variable.
         :param solver: A reference to the Gurobi solver.
         :param value_type: An enumeration representing the type of the variable's value.
-        :param lower_bound: The lower bound of the variable, or None. The default is 0.
-        :param upper_bound: The upper bound of the variable, or None, to use the default.
+        :param lower_bound: The lower bound of the variable, or None. Default is 0.
+        :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
         """
 
         # Calls the super init method with the value type.
         super().__init__(value_type=value_type)
 
         if solver is None:
-            raise GurobiException("The solver value cannot be none.")
+            raise GurobiException("The solver reference cannot be none.")
         if not name:
             raise GurobiException("Gurobi terms must have a name.")
 
@@ -101,7 +106,7 @@ class GurobiVariable(Variable):
                 obj=0
             )
         else:
-            raise GurobiException("Invalid term value type.")
+            raise GurobiException("Invalid term ValueType.")
 
         # Instance attributes
         self._gurobi_var: gp.Var = gurobi_var

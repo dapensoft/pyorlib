@@ -1,12 +1,19 @@
 from typing import Any
 
-from pyorlib.mp.math import Element
+from pyorlib.mp.math.element import Element
 
 
 class Expression(Element):
     """
-    Represents a mathematical expression used to encapsulate expressions in an optimization package.
-    Provides methods for working with mathematical operations.
+    Represents a mathematical expression used to encapsulate expressions in an optimization model.
+
+    The `Expression` class is a subclass of the `Element` class and serves as a representation of a mathematical
+    expression within an optimization model. It is specifically designed to encapsulate expressions and offers
+    methods for performing various mathematical operations on those expressions.
+
+    **Note**: The supported mathematical operations on an `Expression` instance depend on the operations supported
+    in the encapsulated expression. These operations can include arithmetic operations, functions, and
+    any other operations defined by the underlying mathematical expression.
     """
 
     @property
@@ -21,10 +28,10 @@ class Expression(Element):
         """
 
         if expression is None:
-            raise ValueError("Expressions cannot be None")
+            raise ValueError("Expression cannot be None")
 
         self.__expression: Any = expression
-        """ The mathematical statement. """
+        """ The mathematical expression. """
 
     def _build_expression(self, expression: Any) -> Element:
         return Expression(expression=expression)
@@ -32,49 +39,49 @@ class Expression(Element):
     def __str__(self) -> str:
         return str(self.raw)
 
-    def __iadd__(self, other) -> Element:
+    def __iadd__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression += other.raw
         else:
             self.__expression += other
         return self
 
-    def __isub__(self, other) -> Element:
+    def __isub__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression -= other.raw
         else:
             self.__expression -= other
         return self
 
-    def __imul__(self, other) -> Element:
+    def __imul__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression *= other.raw
         else:
             self.__expression *= other
         return self
 
-    def __itruediv__(self, other) -> Element:
+    def __itruediv__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression /= other.raw
         else:
             self.__expression /= other
         return self
 
-    def __ifloordiv__(self, other) -> Element:
+    def __ifloordiv__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression //= other.raw
         else:
             self.__expression //= other
         return self
 
-    def __imod__(self, other) -> Element:
+    def __imod__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression %= other.raw
         else:
             self.__expression %= other
         return self
 
-    def __ipow__(self, other) -> Element:
+    def __ipow__(self, other: Any) -> Element:
         if isinstance(other, Element):
             self.__expression **= other.raw
         else:
