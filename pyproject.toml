@@ -43,4 +43,4 @@ all = [
 ]
 
 [tool.hatch.version]
-path = "pyorlib/__init__.py"
+path = "src/pyorlib/__init__.py"
