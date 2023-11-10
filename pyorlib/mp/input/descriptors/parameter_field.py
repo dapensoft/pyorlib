@@ -1,6 +1,6 @@
 from typing import Set
 
-from pyorlib.core.descriptors import FieldValidator
+from pyorlib.core.validators import FieldValidator
 from pyorlib.mp.common.enums import ParameterType, ValueType
 from pyorlib.mp.input.parameters import MultiValueParameter, SingleValueParameter
 from pyorlib.mp.input.parameters import Parameter

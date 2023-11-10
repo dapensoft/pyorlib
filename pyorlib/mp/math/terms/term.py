@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
-from pyorlib.core.utils import StdOutColors
+from pyorlib.core.constants import StdOutColors
 from pyorlib.mp.common.enums import TermType, ValueType
 from pyorlib.mp.common.exceptions import TermException
 from pyorlib.mp.math.element import Element

@@ -1,4 +1,4 @@
-from pyorlib.core.descriptors import FieldValidator
+from pyorlib.core.validators import FieldValidator
 from pyorlib.mp.common.validators import ValueTypeValidator
 
 

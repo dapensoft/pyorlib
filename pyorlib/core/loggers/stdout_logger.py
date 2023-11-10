@@ -2,7 +2,7 @@ import logging
 import sys
 from abc import ABC
 
-from pyorlib.core.utils import StdOutColors
+from pyorlib.core.constants import StdOutColors
 
 
 class StdOutLogger(ABC):
