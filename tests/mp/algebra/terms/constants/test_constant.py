@@ -2,9 +2,9 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from pyorlib.mp.enums import ValueType, TermType
-from pyorlib.mp.algebra.terms import Term
-from pyorlib.mp.algebra.terms.constants import Constant
+from src.pyorlib.mp.enums import ValueType, TermType
+from src.pyorlib.mp.algebra.terms import Term
+from src.pyorlib.mp.algebra.terms.constants import Constant
 
 
 class TestConstant:

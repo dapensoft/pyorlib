@@ -1,7 +1,7 @@
-from pyorlib.mp.engines.cplex import CplexEngine
-from pyorlib.mp.engines.gurobi import GurobiEngine
-from pyorlib.mp.engines.ortools import ORToolsEngine
-from pyorlib.mp.engines.pulp import PuLPEngine
+from src.pyorlib.mp.engines.cplex import CplexEngine
+from src.pyorlib.mp.engines.gurobi import GurobiEngine
+from src.pyorlib.mp.engines.ortools import ORToolsEngine
+from src.pyorlib.mp.engines.pulp import PuLPEngine
 
 
 class EngineFixtures:

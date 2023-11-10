@@ -2,10 +2,10 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from pyorlib.mp.enums import ValueType, TermType
-from pyorlib.mp.engines import Engine
-from pyorlib.mp.algebra.terms import Term
-from pyorlib.mp.algebra.terms.variables import Variable
+from src.pyorlib.mp.enums import ValueType, TermType
+from src.pyorlib.mp.engines import Engine
+from src.pyorlib.mp.algebra.terms import Term
+from src.pyorlib.mp.algebra.terms.variables import Variable
 from tests.mp.fixtures import EngineFixtures
 
 

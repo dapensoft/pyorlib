@@ -2,11 +2,11 @@ from typing import List
 
 from _pytest.python_api import raises
 
-from pyorlib.mp.enums import ValueType, TermType, OptimizationType, SolutionStatus
-from pyorlib.mp.engines import Engine
-from pyorlib.mp.algebra import Element
-from pyorlib.mp.algebra.terms import Term
-from pyorlib.mp.model import Model
+from src.pyorlib.mp.enums import ValueType, TermType, OptimizationType, SolutionStatus
+from src.pyorlib.mp.engines import Engine
+from src.pyorlib.mp.algebra import Element
+from src.pyorlib.mp.algebra.terms import Term
+from src.pyorlib.mp.model import Model
 from tests.mp.fixtures import EngineFixtures
 
 

@@ -2,8 +2,8 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from pyorlib.mp.enums import ParameterType, ValueType
-from pyorlib.mp.structures.parameters import SingleValueParameter, Parameter
+from src.pyorlib.mp.enums import ParameterType, ValueType
+from src.pyorlib.mp.structures.parameters import SingleValueParameter, Parameter
 
 
 class TestSingleValueParameter:

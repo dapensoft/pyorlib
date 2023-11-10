@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from _pytest.python_api import raises
 
-from pyorlib.mp.validators.fields import DimensionField
+from src.pyorlib.mp.validators.fields import DimensionField
 
 
 class TestDimensionField:
