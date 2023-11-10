@@ -3,9 +3,9 @@ from typing import Any
 
 from pulp import LpVariable, LpProblem, LpBinary, LpInteger, LpContinuous
 
+from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 from src.pyorlib.mp.enums import ValueType
 from src.pyorlib.mp.exceptions import PuLPException
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 
 
 class PuLPVariable(Variable):

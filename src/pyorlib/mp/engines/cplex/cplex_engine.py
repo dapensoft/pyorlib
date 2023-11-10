@@ -3,13 +3,13 @@ from typing import List
 import docplex.mp.model as cpx
 
 from src.pyorlib.core.loggers import StdOutLogger
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
-from src.pyorlib.mp.exceptions import CplexException
-from src.pyorlib.mp.engines.engine import Engine
 from src.pyorlib.mp.algebra import Element
 from src.pyorlib.mp.algebra.expressions import Expression
 from src.pyorlib.mp.algebra.terms.variables import Variable
 from src.pyorlib.mp.algebra.terms.variables.cplex import CplexVariable
+from src.pyorlib.mp.engines.engine import Engine
+from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
+from src.pyorlib.mp.exceptions import CplexException
 
 
 class CplexEngine(Engine):

@@ -5,9 +5,9 @@ import docplex.mp.model as cpx
 from docplex.mp.dvar import Var
 from docplex.mp.utils import DOcplexException
 
+from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 from src.pyorlib.mp.enums import ValueType
 from src.pyorlib.mp.exceptions import CplexException
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 
 
 class CplexVariable(Variable):

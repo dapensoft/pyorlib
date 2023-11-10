@@ -3,10 +3,10 @@ from typing import Any
 
 import gurobipy as gp
 
+from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 from src.pyorlib.mp.enums import ValueType
 from src.pyorlib.mp.exceptions import GurobiException
 from src.pyorlib.mp.validators import ValueTypeValidator
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 
 
 class GurobiVariable(Variable):

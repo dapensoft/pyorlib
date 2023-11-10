@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from typing import Tuple
 
 from src.pyorlib.mp.enums import ParameterType, ValueType
-from src.pyorlib.mp.validators import ValueTypeValidator
 from src.pyorlib.mp.structures.parameters.parameter import Parameter
+from src.pyorlib.mp.validators import ValueTypeValidator
 
 
 @dataclass(frozen=True)

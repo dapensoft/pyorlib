@@ -1,9 +1,9 @@
 from abc import ABC
 from math import inf
 
+from src.pyorlib.mp.algebra.terms.term import Term
 from src.pyorlib.mp.enums import ValueType, TermType
 from src.pyorlib.mp.exceptions import TermException
-from src.pyorlib.mp.algebra.terms.term import Term
 
 
 class Variable(Term, ABC):

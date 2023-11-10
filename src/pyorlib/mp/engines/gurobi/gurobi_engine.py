@@ -3,13 +3,13 @@ from typing import List
 import gurobipy as gp
 
 from src.pyorlib.core.loggers import StdOutLogger
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
-from src.pyorlib.mp.exceptions import GurobiException
-from src.pyorlib.mp.engines.engine import Engine
 from src.pyorlib.mp.algebra import Element
 from src.pyorlib.mp.algebra.expressions import Expression
 from src.pyorlib.mp.algebra.terms.variables import Variable
 from src.pyorlib.mp.algebra.terms.variables.gurobi import GurobiVariable
+from src.pyorlib.mp.engines.engine import Engine
+from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
+from src.pyorlib.mp.exceptions import GurobiException
 
 
 class GurobiEngine(Engine):

@@ -2,9 +2,9 @@ from typing import Any, Callable
 
 from ortools.linear_solver.pywraplp import Solver as ORToolsSolver, inf as ORToolsInf, Variable as ORToolsVar
 
+from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 from src.pyorlib.mp.enums import SolutionStatus, ValueType
 from src.pyorlib.mp.exceptions import ORToolsException
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
 
 
 class ORToolsVariable(Variable):
