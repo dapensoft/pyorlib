@@ -3,13 +3,13 @@ from uuid import uuid4
 
 from pyorlib.core.loggers import Logger
 from pyorlib.core.constants import StdOutColors
-from pyorlib.mp.common.enums import SolutionStatus, ValueType, OptimizationType
-from pyorlib.mp.common.exceptions import ModelException
+from pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
+from pyorlib.mp.exceptions import ModelException
 from pyorlib.mp.engines import Engine
-from pyorlib.mp.math import Element
-from pyorlib.mp.math.terms import Term
-from pyorlib.mp.math.terms.constants import Constant
-from pyorlib.mp.math.terms.variables import Variable
+from pyorlib.mp.algebra import Element
+from pyorlib.mp.algebra.terms import Term
+from pyorlib.mp.algebra.terms.constants import Constant
+from pyorlib.mp.algebra.terms.variables import Variable
 
 
 class Model:

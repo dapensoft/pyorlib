@@ -3,13 +3,13 @@ from typing import List, Any
 from pulp import LpProblem, LpMaximize, LpMinimize, value, LpSolverDefault
 
 from pyorlib.core.loggers import StdOutLogger
-from pyorlib.mp.common.enums import SolutionStatus, ValueType, OptimizationType
-from pyorlib.mp.common.exceptions import PuLPException
+from pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
+from pyorlib.mp.exceptions import PuLPException
 from pyorlib.mp.engines.engine import Engine
-from pyorlib.mp.math import Element
-from pyorlib.mp.math.expressions import Expression
-from pyorlib.mp.math.terms.variables import Variable
-from pyorlib.mp.math.terms.variables.pulp import PuLPVariable
+from pyorlib.mp.algebra import Element
+from pyorlib.mp.algebra.expressions import Expression
+from pyorlib.mp.algebra.terms.variables import Variable
+from pyorlib.mp.algebra.terms.variables.pulp import PuLPVariable
 
 
 class PuLPEngine(Engine):
