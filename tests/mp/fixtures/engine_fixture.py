@@ -6,17 +6,33 @@ from src.pyorlib.mp.engines.pulp import PuLPEngine
 
 class EngineFixtures:
     @staticmethod
-    def get_cplex_engine():
+    def get_cplex_engine() -> CplexEngine:
+        """
+        Returns an instance of the CplexEngine.
+        :return: An instance of the CplexEngine.
+        """
         return CplexEngine()
 
     @staticmethod
-    def get_gurobi_engine():
+    def get_gurobi_engine() -> GurobiEngine:
+        """
+        Returns an instance of the GurobiEngine.
+        :return: An instance of the GurobiEngine.
+        """
         return GurobiEngine()
 
     @staticmethod
-    def get_pulp_engine():
+    def get_pulp_engine() -> PuLPEngine:
+        """
+        Returns an instance of the PuLPEngine.
+        :return: An instance of the PuLPEngine.
+        """
         return PuLPEngine()
 
     @staticmethod
-    def get_or_tools_engine():
+    def get_or_tools_engine() -> ORToolsEngine:
+        """
+        Returns an instance of the ORToolsEngine.
+        :return: An instance of the ORToolsEngine.
+        """
         return ORToolsEngine()
