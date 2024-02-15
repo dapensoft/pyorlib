@@ -5,7 +5,7 @@ T = TypeVar('T')
 """ The type of the field value. """
 
 
-class FieldValidator(ABC, Generic[T]):
+class FieldValidator(Generic[T], ABC):
     """
     A generic abstract base class that represents a validator for a field in a data class.
 

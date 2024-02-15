@@ -10,7 +10,7 @@ from src.pyorlib.mp.exceptions import TermException
 
 
 @dataclass
-class Term(ABC, Element):
+class Term(Element, ABC):
     """
     A base class representing a term in an optimization model.
 

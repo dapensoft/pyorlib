@@ -6,7 +6,7 @@ from src.pyorlib.mp.enums import ValueType, TermType
 from src.pyorlib.mp.exceptions import TermException
 
 
-class Variable(ABC, Term):
+class Variable(Term, ABC):
     """
     Represents a base class for variable terms in an optimization model.
 
