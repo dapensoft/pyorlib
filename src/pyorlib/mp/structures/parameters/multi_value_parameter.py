@@ -25,7 +25,7 @@ class MultiValueParameter(Parameter):
     upper_bounds: Tuple[float, ...] | None = None
     """ A tuple containing the upper bounds for each parameter value, or None if no upper bounds are specified. """
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         # Parameter Validations
         if self.value_type is None:
             raise ValueError("Parameter value type is required.")
@@ -44,9 +44,11 @@ class MultiValueParameter(Parameter):
                     raise ValueError("Parameter set values must be valid integer numbers.")
                 elif self.value_type == ValueType.INTEGER and not ValueTypeValidator.is_integer(val):
                     raise ValueError("Parameter set values must be valid integer numbers.")
-        elif (self.parameter_type == ParameterType.BOUNDED and
-              self.lower_bounds is not None and
-              self.upper_bounds is not None):
+        elif (
+                self.parameter_type == ParameterType.BOUNDED and
+                self.lower_bounds is not None and
+                self.upper_bounds is not None
+        ):
             if self.values is not None:
                 raise ValueError("Parameters with bounds cannot have a value.")
             if len(self.lower_bounds) != len(self.upper_bounds):
@@ -63,13 +65,17 @@ class MultiValueParameter(Parameter):
                     raise ValueError("Parameter upper and lower bounds cannot be [+/-]infinity.")
 
                 # lb and ub values and value type validation
-                if (self.value_type == ValueType.BINARY and (
-                        not ValueTypeValidator.is_binary(lb) or
-                        not ValueTypeValidator.is_binary(ub))):
+                if (
+                        self.value_type == ValueType.BINARY and
+                        (not ValueTypeValidator.is_binary(lb) or
+                         not ValueTypeValidator.is_binary(ub))
+                ):
                     raise ValueError("Parameter lower and upper bound values must be valid binary numbers.")
-                elif (self.value_type == ValueType.INTEGER and (
-                        not ValueTypeValidator.is_integer(lb) or
-                        not ValueTypeValidator.is_integer(ub))):
+                elif (
+                        self.value_type == ValueType.INTEGER and
+                        (not ValueTypeValidator.is_integer(lb) or
+                         not ValueTypeValidator.is_integer(ub))
+                ):
                     raise ValueError("Parameter lower and upper bound values must be valid integer numbers.")
         else:
             raise ValueError("Invalid parameter")

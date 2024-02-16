@@ -27,22 +27,22 @@ class PuLPVariable(Variable):
 
     @property
     def name(self) -> str:
-        return self._pulp_var.name
+        return str(self._pulp_var.name)
 
     @property
     def lower_bound(self) -> float:
         lb = self._pulp_var.lowBound
-        return lb if lb is not None else -inf
+        return float(lb) if lb is not None else -inf
 
     @property
     def upper_bound(self) -> float:
         ub = self._pulp_var.upBound
-        return ub if ub is not None else inf
+        return float(ub) if ub is not None else inf
 
     @property
     def value(self) -> float:
         val = self._pulp_var.value()
-        return val if val else -0.0
+        return float(val) if val else -0.0
 
     @property
     def raw(self) -> Any:

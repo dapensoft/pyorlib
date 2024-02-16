@@ -37,7 +37,7 @@ class CplexEngine(Engine):
     @property
     def objective_value(self) -> float | None:
         if self.solution_status in [SolutionStatus.OPTIMAL, SolutionStatus.FEASIBLE]:
-            return self._solver.objective_value
+            return float(self._solver.objective_value)
         return None
 
     @property

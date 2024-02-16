@@ -135,21 +135,21 @@ class ParameterField(FieldValidator[Parameter]):
         if isinstance(value, MultiValueParameter):
             if value.is_bounded:
                 if self._min is not None or self._max is not None:
-                    for i in range(0, len(value.lower_bounds)):
-                        lb = value.lower_bounds[i]
-                        ub = value.upper_bounds[i]
+                    for i in range(0, len(value.lower_bounds)):  # type: ignore[arg-type]
+                        lb = value.lower_bounds[i]  # type: ignore[index]
+                        ub = value.upper_bounds[i]  # type: ignore[index]
                         self._validate_bounds(lb, ub)
             else:
                 if self._min is not None or self._max is not None:
-                    for val in value.values:
+                    for val in value.values:  # type: ignore[union-attr]
                         self._validate_value(val)
         elif isinstance(value, SingleValueParameter):
             if value.is_bounded:
                 if self._min is not None or self._max is not None:
-                    self._validate_bounds(value.lower_bound, value.upper_bound)
+                    self._validate_bounds(value.lower_bound, value.upper_bound)  # type: ignore[arg-type]
             else:
                 if self._min is not None or self._max is not None:
-                    self._validate_value(value.value)
+                    self._validate_value(value.value)  # type: ignore[arg-type]
         else:
             raise TypeError(f"{self._public_name} invalid parameter type")
 

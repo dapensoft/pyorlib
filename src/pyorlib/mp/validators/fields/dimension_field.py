@@ -49,7 +49,7 @@ class DimensionField(FieldValidator[int]):
         if self.max is not None and self.min is not None and self.min > self.max:
             raise ValueError("Dimension field minimum cannot be greater than maximum.")
 
-    def validate(self, value: int | None):
+    def validate(self, value: int | None) -> None:
         if value is None:
             raise ValueError(f"{self._public_name} cannot be None")
 

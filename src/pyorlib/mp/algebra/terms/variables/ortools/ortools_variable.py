@@ -25,20 +25,20 @@ class ORToolsVariable(Variable):
 
     @property
     def name(self) -> str:
-        return self._ortools_var.name()
+        return str(self._ortools_var.name())
 
     @property
     def lower_bound(self) -> float:
-        return self._ortools_var.lb()
+        return float(self._ortools_var.lb())
 
     @property
     def upper_bound(self) -> float:
-        return self._ortools_var.ub()
+        return float(self._ortools_var.ub())
 
     @property
     def value(self) -> float:
         if self._solution_status() in [SolutionStatus.OPTIMAL, SolutionStatus.FEASIBLE]:
-            return round(self._ortools_var.solution_value(), 6)
+            return float(round(self._ortools_var.solution_value(), 6))
         else:
             return -0.0
 

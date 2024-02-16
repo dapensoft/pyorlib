@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar
+from typing import Generic, TypeVar, cast
 
 T = TypeVar('T')
 """The type of the field value."""
@@ -39,7 +39,7 @@ class FieldValidator(Generic[T], ABC):
         :param objtype: The type of the object.
         :return: The value of the field.
         """
-        return getattr(obj, self._private_name)
+        return cast(T, getattr(obj, self._private_name))
 
     def __set__(self, obj: object, value: T) -> None:
         """

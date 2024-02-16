@@ -27,23 +27,23 @@ class GurobiVariable(Variable):
 
     @property
     def name(self) -> str:
-        return self._gurobi_var.varName
+        return str(self._gurobi_var.varName)
 
     @property
     def lower_bound(self) -> float:
         lb = self._gurobi_var.getAttr('lb')
-        return -inf if lb == gp.GRB.INFINITY else lb if lb != -0.0 else 0.0
+        return -inf if lb == gp.GRB.INFINITY else float(lb) if lb != -0.0 else 0.0
 
     @property
     def upper_bound(self) -> float:
         ub = self._gurobi_var.getAttr('ub')
-        return inf if ub == gp.GRB.INFINITY else ub if ub != -0.0 else 0.0
+        return inf if ub == gp.GRB.INFINITY else float(ub) if ub != -0.0 else 0.0
 
     @property
     def value(self) -> float:
         try:
-            value: float = self._gurobi_var.getAttr('x')
-            return value if value != -0.0 else 0.0
+            value = self._gurobi_var.getAttr('x')
+            return float(value) if value != -0.0 else 0.0
         except AttributeError:
             return -0.0
 

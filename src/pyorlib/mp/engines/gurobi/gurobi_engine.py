@@ -37,10 +37,9 @@ class GurobiEngine(Engine):
     @property
     def objective_value(self) -> float | None:
         if self.solution_status in [SolutionStatus.OPTIMAL, SolutionStatus.FEASIBLE]:
-            return self._solver.getObjective().getValue()
-        else:
-            return None
-
+            return float(self._solver.getObjective().getValue())
+        return None
+            
     @property
     def objective_expr(self) -> Element | None:
         objective = self._solver.getObjective()

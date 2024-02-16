@@ -299,7 +299,7 @@ class Element(ABC):
         return self._build_expression(expression=abs(self.raw))
 
     # Comparison Methods
-    def __eq__(self, other: Any) -> 'Element':
+    def __eq__(self, other: Any) -> 'Element':  # type: ignore[override]
         """
         Equal to comparison.
         :param other: The `number` or `Element` instance to be compared.
@@ -310,7 +310,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw == other)
 
-    def __ne__(self, other: Any) -> 'Element':
+    def __ne__(self, other: Any) -> 'Element':  # type: ignore[override]
         """
         Not equal to comparison.
         :param other: The `number` or `Element` instance to be compared.

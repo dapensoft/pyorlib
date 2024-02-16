@@ -147,7 +147,7 @@ class Term(Element, ABC):
             f"val:{debug} ", '{0:.{prec}g} '.format(self.value, prec=float_precision), f"{default}",
         ])
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "".join([
             f"Name: {self.name} | ",
             f"Type: {self.term_type.name} | ",
@@ -157,43 +157,43 @@ class Term(Element, ABC):
             f"val: {self.value}",
         ])
 
-    def __iadd__(self, other) -> Element:
+    def __iadd__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw + other.raw)
         else:
             return self._build_expression(expression=self.raw + other)
 
-    def __isub__(self, other) -> Element:
+    def __isub__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw - other.raw)
         else:
             return self._build_expression(expression=self.raw - other)
 
-    def __imul__(self, other) -> Element:
+    def __imul__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw * other.raw)
         else:
             return self._build_expression(expression=self.raw * other)
 
-    def __itruediv__(self, other) -> Element:
+    def __itruediv__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw / other.raw)
         else:
             return self._build_expression(expression=self.raw / other)
 
-    def __ifloordiv__(self, other) -> Element:
+    def __ifloordiv__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw // other.raw)
         else:
             return self._build_expression(expression=self.raw // other)
 
-    def __imod__(self, other) -> Element:
+    def __imod__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw % other.raw)
         else:
             return self._build_expression(expression=self.raw % other)
 
-    def __ipow__(self, other) -> Element:
+    def __ipow__(self, other: Any) -> Element:
         if isinstance(other, Element):
             return self._build_expression(expression=self.raw ** other.raw)
         else:

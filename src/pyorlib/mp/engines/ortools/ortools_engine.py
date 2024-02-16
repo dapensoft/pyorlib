@@ -37,7 +37,7 @@ class ORToolsEngine(Engine):
     @property
     def objective_value(self) -> float | None:
         if self.solution_status in [SolutionStatus.OPTIMAL, SolutionStatus.FEASIBLE]:
-            return self._solver.Objective().Value()
+            return float(self._solver.Objective().Value())
         return None
 
     @property

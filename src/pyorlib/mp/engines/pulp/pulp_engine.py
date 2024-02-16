@@ -37,7 +37,7 @@ class PuLPEngine(Engine):
     @property
     def objective_value(self) -> float | None:
         if self.solution_status in [SolutionStatus.OPTIMAL, SolutionStatus.FEASIBLE]:
-            return value(self._solver.objective)
+            return float(value(self._solver.objective))
         return None
 
     @property

@@ -29,22 +29,22 @@ class CplexVariable(Variable):
 
     @property
     def name(self) -> str:
-        return self._cplex_var.name
+        return str(self._cplex_var.name)
 
     @property
     def lower_bound(self) -> float:
         lb = self._cplex_var.lb
-        return -inf if lb <= -1e20 else lb
+        return -inf if lb <= -1e20 else float(lb)
 
     @property
     def upper_bound(self) -> float:
         ub = self._cplex_var.ub
-        return inf if ub >= 1e20 else ub
+        return inf if ub >= 1e20 else float(ub)
 
     @property
     def value(self) -> float:
         try:
-            return self._cplex_var.solution_value
+            return float(self._cplex_var.solution_value)
         except DOcplexException:
             return -0.0
 

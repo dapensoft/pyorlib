@@ -103,7 +103,7 @@ class Model:
         return self._float_precision
 
     @float_precision.setter
-    def float_precision(self, float_precision: int):
+    def float_precision(self, float_precision: int) -> None:
         num_digits: int = float_precision
 
         if float_precision < 0:
