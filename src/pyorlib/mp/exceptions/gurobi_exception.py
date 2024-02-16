@@ -1,7 +1,7 @@
-from src.pyorlib.core.exceptions import CoreException
+from src.pyorlib.core.exceptions import PyORlibException
 
 
-class GurobiException(CoreException):
+class GurobiException(PyORlibException):
     """
     An exception class for handling errors related to the Gurobi Optimization library.
 

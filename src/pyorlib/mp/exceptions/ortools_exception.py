@@ -1,7 +1,7 @@
-from src.pyorlib.core.exceptions import CoreException
+from src.pyorlib.core.exceptions import PyORlibException
 
 
-class ORToolsException(CoreException):
+class ORToolsException(PyORlibException):
     """
     An exception class for handling errors related to the OR-Tools library.
 

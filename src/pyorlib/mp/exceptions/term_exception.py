@@ -1,7 +1,7 @@
-from src.pyorlib.core.exceptions import CoreException
+from src.pyorlib.core.exceptions import PyORlibException
 
 
-class TermException(CoreException):
+class TermException(PyORlibException):
     """
     An exception class for handling errors related to terms in an optimization model.
 

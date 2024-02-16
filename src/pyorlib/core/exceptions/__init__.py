@@ -1,1 +1,1 @@
-from .core_exception import CoreException
+from .pyorlib_exception import PyORlibException

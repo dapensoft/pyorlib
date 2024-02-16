@@ -1,7 +1,7 @@
-from src.pyorlib.core.exceptions import CoreException
+from src.pyorlib.core.exceptions import PyORlibException
 
 
-class CplexException(CoreException):
+class CplexException(PyORlibException):
     """
     An exception class for handling errors related to the IBM ILOG CPLEX optimization library.
 

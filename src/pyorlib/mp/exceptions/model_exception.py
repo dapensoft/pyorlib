@@ -1,7 +1,7 @@
-from src.pyorlib.core.exceptions import CoreException
+from src.pyorlib.core.exceptions import PyORlibException
 
 
-class ModelException(CoreException):
+class ModelException(PyORlibException):
     """
     An exception class for handling errors related to the execution
     or handling of an optimization model.
