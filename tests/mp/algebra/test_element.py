@@ -1,7 +1,6 @@
 from math import isclose
 
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.expressions import Expression
+from pyorlib.mp.algebra import Element, Expression
 
 
 class TestElement:

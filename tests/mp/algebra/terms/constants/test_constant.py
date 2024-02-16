@@ -2,7 +2,8 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from pyorlib import ValueType, TermType, Term, Constant
+from pyorlib.mp import ValueType, TermType
+from pyorlib.mp.algebra import Term, Constant
 
 
 class TestConstant:

@@ -2,7 +2,7 @@ from math import isclose
 
 from _pytest.python_api import raises
 
-from pyorlib import Element, Expression
+from pyorlib.mp.algebra import Element, Expression
 
 
 class TestExpression:

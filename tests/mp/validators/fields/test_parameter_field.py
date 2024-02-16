@@ -2,7 +2,9 @@ from dataclasses import dataclass
 
 from _pytest.python_api import raises
 
-from pyorlib import ParameterType, ValueType, SingleValueParameter, MultiValueParameter, ParameterField
+from pyorlib.mp import ParameterType, ValueType
+from pyorlib.mp.structures import SingleValueParameter, MultiValueParameter
+from pyorlib.mp.validators import ParameterField
 
 
 class TestParameterField:

@@ -2,7 +2,8 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from pyorlib import ParameterType, ValueType, Parameter, MultiValueParameter
+from pyorlib.mp import ParameterType, ValueType
+from pyorlib.mp.structures import MultiValueParameter, Parameter
 
 
 class TestMultiValueParameter:

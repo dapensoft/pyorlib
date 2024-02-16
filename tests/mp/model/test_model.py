@@ -2,7 +2,9 @@ from typing import List
 
 from _pytest.python_api import raises
 
-from pyorlib import ValueType, TermType, OptimizationType, SolutionStatus, Engine, Element, Term, Model
+from pyorlib.mp import ValueType, TermType, OptimizationType, SolutionStatus, Model
+from pyorlib.mp.algebra import Term, Element
+from pyorlib.mp.engines import Engine
 from tests.mp.fixtures import EngineFixtures
 
 

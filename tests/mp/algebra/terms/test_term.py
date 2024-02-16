@@ -1,6 +1,7 @@
 from math import isclose
 
-from pyorlib import ValueType, Element, Expression, Term, Constant
+from pyorlib.mp import ValueType
+from pyorlib.mp.algebra import Element, Expression, Term, Constant
 
 
 class TestTerm:

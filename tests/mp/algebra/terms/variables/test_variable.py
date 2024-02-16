@@ -2,7 +2,9 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from pyorlib import ValueType, TermType, Engine, Term, Variable
+from pyorlib.mp import ValueType, TermType
+from pyorlib.mp.algebra import Term, Variable
+from pyorlib.mp.engines import Engine
 from tests.mp.fixtures import EngineFixtures
 
 
