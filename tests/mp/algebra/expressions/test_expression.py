@@ -2,8 +2,7 @@ from math import isclose
 
 from _pytest.python_api import raises
 
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.expressions import Expression
+from pyorlib import Element, Expression
 
 
 class TestExpression:

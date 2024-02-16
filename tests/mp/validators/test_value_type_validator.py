@@ -1,6 +1,6 @@
 from math import inf
 
-from src.pyorlib.mp.validators import ValueTypeValidator
+from pyorlib import ValueTypeValidator
 
 
 class TestValueTypeValidator:

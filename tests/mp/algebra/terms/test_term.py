@@ -1,10 +1,6 @@
 from math import isclose
 
-from src.pyorlib.mp.enums import ValueType
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.expressions import Expression
-from src.pyorlib.mp.algebra.terms import Term
-from src.pyorlib.mp.algebra.terms.constants import Constant
+from pyorlib import ValueType, Element, Expression, Term, Constant
 
 
 class TestTerm:

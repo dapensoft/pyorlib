@@ -2,15 +2,12 @@ from math import inf
 
 from _pytest.python_api import raises
 
-from src.pyorlib.mp.enums import ValueType, TermType
-from src.pyorlib.mp.engines import Engine
-from src.pyorlib.mp.algebra.terms import Term
-from src.pyorlib.mp.algebra.terms.variables import Variable
+from pyorlib import ValueType, TermType, Engine, Term, Variable
 from tests.mp.fixtures import EngineFixtures
 
 
 class TestVariable:
-    
+
     def test_inheritance(self):
         assert issubclass(Variable, Term)
 
