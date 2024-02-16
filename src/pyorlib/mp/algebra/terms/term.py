@@ -2,11 +2,11 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
-from src.pyorlib.core.constants import StdOutColors
-from src.pyorlib.mp.algebra.element import Element
-from src.pyorlib.mp.algebra.expressions.expression import Expression
-from src.pyorlib.mp.enums import TermType, ValueType
-from src.pyorlib.mp.exceptions import TermException
+from ..element import Element
+from ..expressions import Expression
+from ...enums import TermType, ValueType
+from ...exceptions import TermException
+from ....core.constants import StdOutColors
 
 
 @dataclass

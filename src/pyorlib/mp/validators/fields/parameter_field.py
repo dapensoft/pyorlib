@@ -1,9 +1,9 @@
 from typing import Set
 
-from src.pyorlib.core.validators.fields import FieldValidator
-from src.pyorlib.mp.enums import ParameterType, ValueType
-from src.pyorlib.mp.structures.parameters import MultiValueParameter, SingleValueParameter
-from src.pyorlib.mp.structures.parameters import Parameter
+from ...enums import ParameterType, ValueType
+from ...structures.parameters import MultiValueParameter, SingleValueParameter
+from ...structures.parameters import Parameter
+from ....core.validators.fields import FieldValidator
 
 
 class ParameterField(FieldValidator[Parameter]):

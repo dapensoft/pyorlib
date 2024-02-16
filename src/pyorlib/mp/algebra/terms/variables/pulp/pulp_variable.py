@@ -1,11 +1,17 @@
 from math import inf
 from typing import Any
 
-from pulp import LpVariable, LpProblem, LpBinary, LpInteger, LpContinuous
+from ..variable import Variable
+from .....enums import ValueType
+from .....exceptions import PuLPException
 
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
-from src.pyorlib.mp.enums import ValueType
-from src.pyorlib.mp.exceptions import PuLPException
+try:  # pragma: no cover
+    from pulp import LpVariable, LpProblem, LpBinary, LpInteger, LpContinuous
+except ImportError:  # pragma: no cover
+    raise PuLPException(
+        "Optional dependency 'PuLP' not found."
+        "\nPlease install it using 'pip install pyorlib[pulp]'."
+    )
 
 
 class PuLPVariable(Variable):

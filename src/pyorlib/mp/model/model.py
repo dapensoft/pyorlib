@@ -1,15 +1,15 @@
 from typing import Dict, Tuple, List, Mapping
 from uuid import uuid4
 
-from src.pyorlib.core.constants import StdOutColors
-from src.pyorlib.core.loggers import Logger
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.terms import Term
-from src.pyorlib.mp.algebra.terms.constants import Constant
-from src.pyorlib.mp.algebra.terms.variables import Variable
-from src.pyorlib.mp.engines import Engine
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
-from src.pyorlib.mp.exceptions import ModelException
+from ..algebra import Element
+from ..algebra.terms import Term
+from ..algebra.terms.constants import Constant
+from ..algebra.terms.variables import Variable
+from ..engines import Engine
+from ..enums import SolutionStatus, ValueType, OptimizationType
+from ..exceptions import ModelException
+from ...core.constants import StdOutColors
+from ...core.loggers import Logger
 
 
 class Model:

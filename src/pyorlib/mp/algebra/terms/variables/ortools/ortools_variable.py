@@ -1,10 +1,16 @@
 from typing import Any, Callable
 
-from ortools.linear_solver.pywraplp import Solver as ORToolsSolver, inf as ORToolsInf, Variable as ORToolsVar
+from ..variable import Variable
+from .....enums import SolutionStatus, ValueType
+from .....exceptions import ORToolsException
 
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
-from src.pyorlib.mp.enums import SolutionStatus, ValueType
-from src.pyorlib.mp.exceptions import ORToolsException
+try:  # pragma: no cover
+    from ortools.linear_solver.pywraplp import Solver as ORToolsSolver, inf as ORToolsInf, Variable as ORToolsVar
+except ImportError:  # pragma: no cover
+    raise ORToolsException(
+        "Optional dependency 'OR-Tools' not found."
+        "\nPlease install it using 'pip install pyorlib[ortools]'."
+    )
 
 
 class ORToolsVariable(Variable):

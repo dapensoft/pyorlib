@@ -1,7 +1,7 @@
 from abc import ABC
 from dataclasses import dataclass
 
-from src.pyorlib.mp.enums import ValueType, ParameterType
+from ...enums import ValueType, ParameterType
 
 
 @dataclass(frozen=True)

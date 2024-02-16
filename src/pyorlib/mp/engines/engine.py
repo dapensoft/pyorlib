@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.terms.variables import Variable
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
+from ..algebra import Element
+from ..algebra.terms.variables import Variable
+from ..enums import SolutionStatus, ValueType, OptimizationType
 
 
 class Engine(ABC):

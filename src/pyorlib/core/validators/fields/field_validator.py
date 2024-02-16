@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Generic, TypeVar
 
 T = TypeVar('T')
-""" The type of the field value. """
+"""The type of the field value."""
 
 
 class FieldValidator(Generic[T], ABC):

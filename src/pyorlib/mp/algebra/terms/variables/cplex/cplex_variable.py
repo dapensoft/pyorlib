@@ -1,13 +1,19 @@
 from math import inf
 from typing import Any
 
-import docplex.mp.model as cpx
-from docplex.mp.dvar import Var
-from docplex.mp.utils import DOcplexException
+from ..variable import Variable
+from .....enums import ValueType
+from .....exceptions import CplexException
 
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
-from src.pyorlib.mp.enums import ValueType
-from src.pyorlib.mp.exceptions import CplexException
+try:  # pragma: no cover
+    import docplex.mp.model as cpx
+    from docplex.mp.dvar import Var
+    from docplex.mp.utils import DOcplexException
+except ImportError:  # pragma: no cover
+    raise CplexException(
+        "Optional dependency 'CPLEX' not found."
+        "\nPlease install it using 'pip install pyorlib[cplex]'."
+    )
 
 
 class CplexVariable(Variable):

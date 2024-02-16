@@ -1,4 +1,4 @@
-from src.pyorlib.core.exceptions import PyORlibException
+from ...core.exceptions import PyORlibException
 
 
 class ORToolsException(PyORlibException):

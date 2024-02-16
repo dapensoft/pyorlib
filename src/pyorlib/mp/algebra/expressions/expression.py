@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.pyorlib.mp.algebra.element import Element
+from ..element import Element
 
 
 class Expression(Element):

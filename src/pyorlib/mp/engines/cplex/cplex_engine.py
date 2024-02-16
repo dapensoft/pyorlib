@@ -1,15 +1,21 @@
 from typing import List
 
-import docplex.mp.model as cpx
+from ..engine import Engine
+from ...algebra import Element
+from ...algebra.expressions import Expression
+from ...algebra.terms.variables import Variable
+from ...algebra.terms.variables.cplex import CplexVariable
+from ...enums import SolutionStatus, ValueType, OptimizationType
+from ...exceptions import CplexException
+from ....core.loggers import StdOutLogger
 
-from src.pyorlib.core.loggers import StdOutLogger
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.expressions import Expression
-from src.pyorlib.mp.algebra.terms.variables import Variable
-from src.pyorlib.mp.algebra.terms.variables.cplex import CplexVariable
-from src.pyorlib.mp.engines.engine import Engine
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
-from src.pyorlib.mp.exceptions import CplexException
+try:  # pragma: no cover
+    import docplex.mp.model as cpx
+except ImportError:  # pragma: no cover
+    raise CplexException(
+        "Optional dependency 'CPLEX' not found."
+        "\nPlease install it using 'pip install pyorlib[cplex]'."
+    )
 
 
 class CplexEngine(Engine):

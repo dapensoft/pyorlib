@@ -1,12 +1,18 @@
 from math import inf
 from typing import Any
 
-import gurobipy as gp
+from ..variable import Variable
+from .....enums import ValueType
+from .....exceptions import GurobiException
+from .....validators import ValueTypeValidator
 
-from src.pyorlib.mp.algebra.terms.variables.variable import Variable
-from src.pyorlib.mp.enums import ValueType
-from src.pyorlib.mp.exceptions import GurobiException
-from src.pyorlib.mp.validators import ValueTypeValidator
+try:  # pragma: no cover
+    import gurobipy as gp
+except ImportError:  # pragma: no cover
+    raise GurobiException(
+        "Optional dependency 'Gurobi' not found."
+        "\nPlease install it using 'pip install pyorlib[gurobi]'."
+    )
 
 
 class GurobiVariable(Variable):

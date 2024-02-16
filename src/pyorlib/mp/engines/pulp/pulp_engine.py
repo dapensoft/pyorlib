@@ -1,15 +1,21 @@
 from typing import List, Any
 
-from pulp import LpProblem, LpMaximize, LpMinimize, value, LpSolverDefault
+from ..engine import Engine
+from ...algebra import Element
+from ...algebra.expressions import Expression
+from ...algebra.terms.variables import Variable
+from ...algebra.terms.variables.pulp import PuLPVariable
+from ...enums import SolutionStatus, ValueType, OptimizationType
+from ...exceptions import PuLPException
+from ....core.loggers import StdOutLogger
 
-from src.pyorlib.core.loggers import StdOutLogger
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.expressions import Expression
-from src.pyorlib.mp.algebra.terms.variables import Variable
-from src.pyorlib.mp.algebra.terms.variables.pulp import PuLPVariable
-from src.pyorlib.mp.engines.engine import Engine
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
-from src.pyorlib.mp.exceptions import PuLPException
+try:  # pragma: no cover
+    from pulp import LpProblem, LpMaximize, LpMinimize, value, LpSolverDefault
+except ImportError:  # pragma: no cover
+    raise PuLPException(
+        "Optional dependency 'PuLP' not found."
+        "\nPlease install it using 'pip install pyorlib[pulp]'."
+    )
 
 
 class PuLPEngine(Engine):

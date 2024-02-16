@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Set, Callable
 
-from src.pyorlib.mp.enums import ValueType, ParameterType
+from ...enums import ValueType, ParameterType
 
 
 @dataclass(frozen=True)

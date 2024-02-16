@@ -1,5 +1,5 @@
-from src.pyorlib.core.validators.fields import FieldValidator
-from src.pyorlib.mp.validators.value_type_validator import ValueTypeValidator
+from ...validators.value_type_validator import ValueTypeValidator
+from ....core.validators.fields import FieldValidator
 
 
 class DimensionField(FieldValidator[int]):

@@ -1,15 +1,21 @@
 from typing import List
 
-import gurobipy as gp
+from ..engine import Engine
+from ...algebra import Element
+from ...algebra.expressions import Expression
+from ...algebra.terms.variables import Variable
+from ...algebra.terms.variables.gurobi import GurobiVariable
+from ...enums import SolutionStatus, ValueType, OptimizationType
+from ...exceptions import GurobiException
+from ....core.loggers import StdOutLogger
 
-from src.pyorlib.core.loggers import StdOutLogger
-from src.pyorlib.mp.algebra import Element
-from src.pyorlib.mp.algebra.expressions import Expression
-from src.pyorlib.mp.algebra.terms.variables import Variable
-from src.pyorlib.mp.algebra.terms.variables.gurobi import GurobiVariable
-from src.pyorlib.mp.engines.engine import Engine
-from src.pyorlib.mp.enums import SolutionStatus, ValueType, OptimizationType
-from src.pyorlib.mp.exceptions import GurobiException
+try:  # pragma: no cover
+    import gurobipy as gp
+except ImportError:  # pragma: no cover
+    raise GurobiException(
+        "Optional dependency 'Gurobi' not found."
+        "\nPlease install it using 'pip install pyorlib[gurobi]'."
+    )
 
 
 class GurobiEngine(Engine):
