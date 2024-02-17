@@ -9,5 +9,5 @@ class GurobiException(PyORlibException):
     exceptions specific to the Gurobi library.
     """
 
-    def __init__(self, message: str = ""):
-        super().__init__(message if message else "Gurobi exception")
+    def __init__(self, message: str = "Gurobi exception"):
+        super().__init__(message)

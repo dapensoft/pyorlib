@@ -9,5 +9,5 @@ class ORToolsException(PyORlibException):
     exceptions specific to the OR-Tools library.
     """
 
-    def __init__(self, message: str = ""):
-        super().__init__(message if message else "OR-Tools exception")
+    def __init__(self, message: str = "OR-Tools exception"):
+        super().__init__(message)

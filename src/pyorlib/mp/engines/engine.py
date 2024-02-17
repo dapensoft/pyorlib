@@ -116,11 +116,3 @@ class Engine(ABC):
         :return: None
         """
         pass
-
-    @abstractmethod
-    def clear(self) -> None:
-        """
-        Clear the engine state by removing all variables, constraints, and objective function.
-        :return: None
-        """
-        pass

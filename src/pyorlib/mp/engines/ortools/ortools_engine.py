@@ -207,6 +207,3 @@ class ORToolsEngine(Engine):
 
     def solve(self) -> None:
         self._status = self._solver.Solve(self._solver_params)
-
-    def clear(self) -> None:
-        self._solver.Clear()

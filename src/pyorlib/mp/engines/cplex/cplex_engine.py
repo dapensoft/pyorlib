@@ -191,6 +191,3 @@ class CplexEngine(Engine):
 
     def solve(self) -> None:
         self._solver.solve()
-
-    def clear(self) -> None:
-        self._solver.clear()

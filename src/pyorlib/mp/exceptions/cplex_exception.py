@@ -9,5 +9,5 @@ class CplexException(PyORlibException):
     exceptions specific to the CPLEX library.
     """
 
-    def __init__(self, message: str = ""):
-        super().__init__(message if message else "Cplex exception")
+    def __init__(self, message: str = "CPLEX Exception"):
+        super().__init__(message)

@@ -196,6 +196,3 @@ class PuLPEngine(Engine):
     def solve(self) -> None:
         solve_param = LpSolverDefault.msg = False
         self._status = self._solver.solve(solve_param)
-
-    def clear(self) -> None:
-        raise PuLPException('This method is not implemented.')
