@@ -26,10 +26,11 @@ class Expression(Element):
         :param expression: The expression value to be encapsulated.
         :raises ValueError: If the expression is None.
         """
-
+        # Applies validations
         if expression is None:
             raise ValueError("Expression cannot be None")
 
+        # Instance attributes
         self.__expression: Any = expression
         """ The mathematical expression. """
 

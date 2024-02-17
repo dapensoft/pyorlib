@@ -48,26 +48,21 @@ class Constant(Term):
         # Calls the super init method.
         super().__init__(term_type=TermType.CONSTANT, value_type=value_type)
 
+        # Applies validations
+        if not name:
+            raise TermException("Constant terms must have a name.")
+        if value is None:
+            raise TermException("Constant terms must have a value.")
+        if value >= inf or value <= -inf:
+            raise TermException("Constant terms value cannot be greater than or equal to [+/-]infinity.")
+        if value_type == ValueType.BINARY and not ValueTypeValidator.is_binary(num=value):
+            raise TermException("The value of a binary constant must be 0 or 1.")
+        if value_type == ValueType.INTEGER and not ValueTypeValidator.is_integer(num=value):
+            raise TermException("The value of an integer constant must be a valid integer.")
+
+        # Instance attributes
         self._name: str = name
         """ The name of the constant. """
 
         self._value: float = value
         """ The internal value of the constant. """
-
-        # Applies validation
-        self.validate()
-
-    def validate(self) -> None:
-        # Validates the value
-        if not self.name:
-            raise TermException("Constant terms must have a name.")
-        if self.value is None:
-            raise TermException("Constant terms must have a value.")
-        if self.value >= inf or self.value <= -inf:
-            raise TermException("Constant terms value cannot be greater than or equal to [+/-]infinity.")
-        if self.lower_bound != self.value or self.upper_bound != self.value:
-            raise TermException("Invalid bounds for a constant term.")
-        if self.value_type == ValueType.BINARY and not ValueTypeValidator.is_binary(num=self.value):
-            raise TermException("The value of a binary constant must be 0 or 1.")
-        if self.value_type == ValueType.INTEGER and not ValueTypeValidator.is_integer(num=self.value):
-            raise TermException("The value of an integer constant must be a valid integer.")

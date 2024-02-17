@@ -1,3 +1,4 @@
+from math import inf
 from typing import List, Any, Callable
 
 from ..engine import Engine
@@ -9,7 +10,7 @@ from ...exceptions import ORToolsException
 from ....core.loggers import StdOutLogger
 
 try:  # pragma: no cover
-    from ortools.linear_solver.pywraplp import Solver, MPSolverParameters, inf as ORToolsInf, Variable as ORToolsVar
+    from ortools.linear_solver.pywraplp import Solver, MPSolverParameters, Variable as ORToolsVar
 except ImportError:  # pragma: no cover
     raise ORToolsException(
         "Optional dependency 'OR-Tools' not found."
@@ -64,8 +65,8 @@ class ORToolsEngine(Engine):
                 solver: Solver,
                 value_type: ValueType,
                 solution_status: Callable[[], SolutionStatus],
-                lower_bound: float | None = None,
-                upper_bound: float | None = None,
+                lower_bound: float = 0,
+                upper_bound: float = inf,
         ):
             """
             Initializes a new `ORToolsVariable` object with the specified attributes and creates a
@@ -74,38 +75,34 @@ class ORToolsEngine(Engine):
             :param solver: A reference to the OR-Tools solver.
             :param value_type: An enumeration representing the type of the variable's value.
             :param solution_status: A callable function that returns the current solution status.
-            :param lower_bound: The lower bound of the variable, or None. Default is 0.
-            :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
+            :param lower_bound: The lower bound of the variable. Default is 0.
+            :param upper_bound: The upper bound of the variable. Default is infinity.
             """
-            # Calls the super init method with the value type.
-            super().__init__(value_type=value_type)
+            # Calls the super init method and its validations
+            super().__init__(name=name, value_type=value_type, lower_bound=lower_bound, upper_bound=upper_bound)
 
+            # Applies new validations
             if solver is None:
-                raise ORToolsException("The solver reference cannot be None.")
-            if not name:
-                raise ORToolsException("OR-Tool terms must have a name.")
+                raise ORToolsException("The 'solver' argument cannot be None.")
 
             # Creates the OR-Tools variable according to the value type
-            ortools_var: ORToolsVar
+            ortools_var: ORToolsVar | None
 
             if self.value_type == ValueType.BINARY:
-                ortools_var = solver.BoolVar(
-                    name=name
-                )
+                ortools_var = solver.BoolVar(name=name)
             elif self.value_type == ValueType.INTEGER:
-                ortools_var = solver.IntVar(
-                    name=name,
-                    lb=lower_bound if lower_bound is not None else 0,
-                    ub=upper_bound if upper_bound is not None else ORToolsInf,
-                )
+                ortools_var = solver.IntVar(name=name, lb=lower_bound, ub=upper_bound)
             elif self.value_type == ValueType.CONTINUOUS:
-                ortools_var = solver.NumVar(
-                    name=name,
-                    lb=lower_bound if lower_bound is not None else 0,
-                    ub=upper_bound if upper_bound is not None else ORToolsInf,
-                )
+                ortools_var = solver.NumVar(name=name, lb=lower_bound, ub=upper_bound)
             else:
-                raise ORToolsException("Invalid term ValueType.")
+                raise ORToolsException("Unknown ValueType.")
+
+            # Applies new validations
+            if solution_status is None:
+                raise ORToolsException("The 'solution_status' argument cannot be None.")
+
+            if ortools_var is None:
+                raise ORToolsException("Failed to create the OR-Tools variable.")
 
             # Instance attributes
             self._solution_status: Callable[[], SolutionStatus] = solution_status
@@ -113,15 +110,6 @@ class ORToolsEngine(Engine):
 
             self._ortools_var: ORToolsVar = ortools_var
             """ A pywraplp.Variable object representing the variable in the OR-Tools solver. """
-
-            if self._solution_status is None:
-                raise ORToolsException("The solution status callable cannot be none.")
-
-            if self._ortools_var is None:
-                raise ORToolsException("Failed to create the OR-Tools variable.")
-
-            # Apply validations.
-            self.validate()
 
     @property
     def name(self) -> str:
@@ -192,8 +180,8 @@ class ORToolsEngine(Engine):
             self,
             name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         return ORToolsEngine._Variable(
             name=name,

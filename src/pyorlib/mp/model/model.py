@@ -1,3 +1,4 @@
+from math import inf
 from typing import Dict, Tuple, List, Mapping
 from uuid import uuid4
 
@@ -274,15 +275,15 @@ class Model:
             self,
             name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None,
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         """
         Adds a new variable to the model.
         :param name: The name of the variable to be added.
         :param value_type: The type of the variable values.
-        :param lower_bound: The lower bound of the variable. If not specified, the default value is 0.
-        :param upper_bound: The upper bound of the variable. If not specified, the default value is infinity.
+        :param lower_bound: The lower bound of the variable. Default is 0.
+        :param upper_bound: The upper bound of the variable. Default is infinity.
         :return: The variable that was added to the model.
         """
         if name in self.terms:
@@ -348,8 +349,8 @@ class Model:
             set_index: Tuple[int, ...],
             var_name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None,
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         """
         Adds a new variable to the model within a set.
@@ -357,8 +358,8 @@ class Model:
         :param set_index: The position of a term within a set that represents its indices.
         :param var_name: The name of the variable to be added.
         :param value_type: The type of the variable values.
-        :param lower_bound: The lower bound of the variable. If not specified, the default value is 0.
-        :param upper_bound: The upper bound of the variable. If not specified, the default value is infinity.
+        :param lower_bound: The lower bound of the variable. Default is 0.
+        :param upper_bound: The upper bound of the variable. Default is infinity.
         :return: The variable that was added to the model.
         """
         if var_name in self.terms:
