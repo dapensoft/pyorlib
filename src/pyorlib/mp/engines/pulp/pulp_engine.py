@@ -66,8 +66,8 @@ class PuLPEngine(Engine):
                 name: str,
                 solver: LpProblem,
                 value_type: ValueType,
-                lower_bound: float | None = None,
-                upper_bound: float | None = None
+                lower_bound: float = 0,
+                upper_bound: float = inf,
         ):
             """
             Initializes a new `PuLPVariable` object with the specified attributes and creates a corresponding PuLP
@@ -75,55 +75,35 @@ class PuLPEngine(Engine):
             :param name: The name of the variable.
             :param solver: A reference to the PuLP solver.
             :param value_type: An enumeration representing the type of the variable's value.
-            :param lower_bound: The lower bound of the variable, or None. Default is 0.
-            :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
+            :param lower_bound: The lower bound of the variable. Default is 0.
+            :param upper_bound: The upper bound of the variable. Default is infinity.
             """
-            # Calls the super init method with the value type.
-            super().__init__(value_type=value_type)
+            # Calls the super init method and its validations
+            super().__init__(name=name, value_type=value_type, lower_bound=lower_bound, upper_bound=upper_bound)
 
-            # Checks for none values
+            # Applies new validations
             if solver is None:
-                raise PuLPException("The solver reference cannot be None.")
-            if not name:
-                raise PuLPException("PuLP terms must have a name.")
+                raise PuLPException("The 'solver' argument cannot be None.")
 
             # Creates the PuLP variable according to the value type
-            pulp_var: LpVariable
+            pulp_var: LpVariable | None
 
             if self.value_type == ValueType.BINARY:
-                pulp_var = LpVariable(
-                    name=name,
-                    cat=LpBinary,
-                    lowBound=0,
-                    upBound=1
-                )
+                pulp_var = LpVariable(name=name, cat=LpBinary, lowBound=0, upBound=1)
             elif self.value_type == ValueType.INTEGER:
-                pulp_var = LpVariable(
-                    name=name,
-                    cat=LpInteger,
-                    lowBound=lower_bound if lower_bound else 0.0,
-                    upBound=upper_bound
-                )
+                pulp_var = LpVariable(name=name, cat=LpInteger, lowBound=lower_bound, upBound=upper_bound)
             elif self.value_type == ValueType.CONTINUOUS:
-                pulp_var = LpVariable(
-                    name=name,
-                    cat=LpContinuous,
-                    lowBound=lower_bound if lower_bound else 0.0,
-                    upBound=upper_bound
-                )
+                pulp_var = LpVariable(name=name, cat=LpContinuous, lowBound=lower_bound, upBound=upper_bound)
             else:
-                raise PuLPException("Invalid term ValueType.")
+                raise PuLPException("Unknown ValueType.")
+
+            # Applies new validations
+            if pulp_var is None:
+                raise PuLPException("Failed to create the PuLP variable.")
 
             # Instance attributes
             self._pulp_var: LpVariable = pulp_var
             """ A LpVariable object representing the variable in the PuLP solver. """
-
-            # Checks for none values
-            if self._pulp_var is None:
-                raise PuLPException("Failed to create the PuLP variable.")
-
-            # Apply validations.
-            self.validate()
 
     @property
     def name(self) -> str:
@@ -187,8 +167,8 @@ class PuLPEngine(Engine):
             self,
             name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         return PuLPEngine._Variable(
             name=name,

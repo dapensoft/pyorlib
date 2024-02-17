@@ -104,9 +104,11 @@ class Term(Element, ABC):
         :param term_type: An enumeration representing the type of the term.
         :param value_type: An enumeration representing the type of the term's value.
         """
-        if not term_type:
+        # Applies validations
+        if term_type is None:
             raise TermException("Invalid term type.")
-        if not value_type:
+
+        if value_type is None:
             raise TermException("Invalid term value type.")
 
         # Instance attributes
@@ -116,22 +118,10 @@ class Term(Element, ABC):
         self._value_type: ValueType = value_type
         """ An enumeration representing the type of the term's value. """
 
-    @abstractmethod
-    def validate(self) -> None:
-        """
-        Validates the term to ensure its correct definition.
-
-        This method checks the validity and consistency of the term's attributes. It verifies that the term is
-        correctly defined and ready to be used in an optimization problem. If any inconsistencies or invalid
-        attributes are found, an `Exception` may be raised to indicate the issue.
-        :return: None
-        """
-        pass
-
     def _build_expression(self, expression: Any) -> Element:
         return Expression(expression=expression)
 
-    def get_pretty_string(self, float_precision: int = 6) -> str:
+    def get_pretty_string(self, float_precision: int = 6) -> str:  # pragma: no cover
         """
         Returns a formatted string representation of the term.
         :param float_precision: It represents the number of digits used in printing the solution and objective.
@@ -147,7 +137,7 @@ class Term(Element, ABC):
             f"val:{debug} ", '{0:.{prec}g} '.format(self.value, prec=float_precision), f"{default}",
         ])
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         return "".join([
             f"Name: {self.name} | ",
             f"Type: {self.term_type.name} | ",
@@ -195,6 +185,6 @@ class Term(Element, ABC):
 
     def __ipow__(self, other: Any) -> Element:
         if isinstance(other, Element):
-            return self._build_expression(expression=self.raw ** other.raw)
+            return self._build_expression(expression=self.raw**other.raw)
         else:
-            return self._build_expression(expression=self.raw ** other)
+            return self._build_expression(expression=self.raw**other)

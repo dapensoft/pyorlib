@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from math import inf
 from typing import List
 
 from ..algebra import Element
@@ -76,15 +77,15 @@ class Engine(ABC):
             self,
             name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None,
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         """
         Add a new variable to the engine.
         :param name: The name of the variable.
         :param value_type: The value type of the variable.
-        :param lower_bound: The lower bound of the variable value. Defaults to 0.
-        :param upper_bound: The upper bound of the variable value. Defaults to infinity.
+        :param lower_bound: The lower bound of the variable. Default is 0.
+        :param upper_bound: The upper bound of the variable. Default is infinity.
         :return: The created variable object.
         """
         pass

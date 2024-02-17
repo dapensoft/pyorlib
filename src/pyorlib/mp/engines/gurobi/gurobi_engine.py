@@ -7,7 +7,6 @@ from ...algebra.expressions import Expression
 from ...algebra.terms.variables import Variable
 from ...enums import SolutionStatus, ValueType, OptimizationType
 from ...exceptions import GurobiException
-from ...validators import ValueTypeValidator
 from ....core.loggers import StdOutLogger
 
 try:  # pragma: no cover
@@ -68,8 +67,8 @@ class GurobiEngine(Engine):
                 name: str,
                 solver: gp.Model,
                 value_type: ValueType,
-                lower_bound: float | None = None,
-                upper_bound: float | None = None
+                lower_bound: float = 0,
+                upper_bound: float = inf,
         ):
             """
             Initializes a new `GurobiVariable` object with the specified attributes and creates a
@@ -77,69 +76,54 @@ class GurobiEngine(Engine):
             :param name: The name of the variable.
             :param solver: A reference to the Gurobi solver.
             :param value_type: An enumeration representing the type of the variable's value.
-            :param lower_bound: The lower bound of the variable, or None. Default is 0.
-            :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
+            :param lower_bound: The lower bound of the variable. Default is 0.
+            :param upper_bound: The upper bound of the variable. Default is infinity.
             """
+            # Calls the super init method and its validations
+            super().__init__(name=name, value_type=value_type, lower_bound=lower_bound, upper_bound=upper_bound)
 
-            # Calls the super init method with the value type.
-            super().__init__(value_type=value_type)
-
+            # Applies new validations
             if solver is None:
-                raise GurobiException("The solver reference cannot be none.")
-            if not name:
-                raise GurobiException("Gurobi terms must have a name.")
+                raise GurobiException("The 'solver' argument cannot be None.")
 
             # Creates the Gurobi variable according to the value type
-            gurobi_var: gp.Var
+            gurobi_var: gp.Var | None
 
             if self.value_type == ValueType.BINARY:
-                gurobi_var = solver.addVar(
-                    lb=0,
-                    ub=1,
-                    vtype=gp.GRB.BINARY,
-                    name=name,
-                    column=None,
-                    obj=0
-                )
+                gurobi_var = solver.addVar(lb=0, ub=1, vtype=gp.GRB.BINARY, name=name, column=None, obj=0)
             elif self.value_type == ValueType.INTEGER:
-                if lower_bound and not ValueTypeValidator.is_integer(lower_bound):
-                    raise GurobiException("Invalid lower bound value for a Gurobi integer variable.")
-                if upper_bound and not ValueTypeValidator.is_integer(upper_bound):
-                    raise GurobiException("Invalid upper bound value for a Gurobi integer variable.")
                 gurobi_var = solver.addVar(
-                    lb=lower_bound if lower_bound else 0,
-                    ub=upper_bound if upper_bound else gp.GRB.INFINITY,
+                    lb=lower_bound,
+                    ub=upper_bound,
                     vtype=gp.GRB.INTEGER,
                     name=name,
                     column=None,
-                    obj=0
+                    obj=0,
                 )
             elif self.value_type == ValueType.CONTINUOUS:
                 gurobi_var = solver.addVar(
-                    lb=lower_bound if lower_bound else 0,
-                    ub=upper_bound if upper_bound else gp.GRB.INFINITY,
+                    lb=lower_bound,
+                    ub=upper_bound,
                     vtype=gp.GRB.CONTINUOUS,
                     name=name,
                     column=None,
-                    obj=0
+                    obj=0,
                 )
             else:
-                raise GurobiException("Invalid term ValueType.")
+                raise GurobiException("Unknown ValueType.")
+
+            # Applies new validations
+            if gurobi_var is None:
+                raise GurobiException("Failed to create the Gurobi variable.")
 
             # Instance attributes
             self._gurobi_var: gp.Var = gurobi_var
             """ A gp.Var object representing the variable in the Gurobi solver. """
 
-            if self._gurobi_var is None:
-                raise GurobiException("Failed to create the gurobi variable.")
-
             # After creating the variable, we need to update the model in order
             # to gain access to the newly created variable. This is necessary
             # because Gurobi employs a lazy update approach.
             solver.update()
-
-            # Apply validations.
-            self.validate()
 
     @property
     def name(self) -> str:
@@ -200,8 +184,8 @@ class GurobiEngine(Engine):
             self,
             name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         return GurobiEngine._Variable(
             name=name,

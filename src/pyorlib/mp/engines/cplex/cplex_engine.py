@@ -69,8 +69,8 @@ class CplexEngine(Engine):
                 name: str,
                 solver: cpx.Model,
                 value_type: ValueType,
-                lower_bound: float | None = None,
-                upper_bound: float | None = None
+                lower_bound: float = 0,
+                upper_bound: float = inf,
         ):
             """
             Initializes a new `CplexVariable` object with the specified attributes and creates a corresponding CPLEX
@@ -78,19 +78,18 @@ class CplexEngine(Engine):
             :param name: The name of the variable.
             :param solver: A reference to the CPLEX solver.
             :param value_type: An enumeration representing the type of the variable's value.
-            :param lower_bound: The lower bound of the variable, or None. Default is 0.
-            :param upper_bound: The upper bound of the variable, or None, to use the default. Default is infinity.
+            :param lower_bound: The lower bound of the variable. Default is 0.
+            :param upper_bound: The upper bound of the variable. Default is infinity.
             """
-            # Calls the super init method with the value type.
-            super().__init__(value_type=value_type)
+            # Calls the super init method and its validations
+            super().__init__(name=name, value_type=value_type, lower_bound=lower_bound, upper_bound=upper_bound)
 
+            # Applies new validations
             if solver is None:
-                raise CplexException("The solver reference cannot be None.")
-            if not name:
-                raise CplexException("CPLEX terms must have a name.")
+                raise CplexException("The 'solver' argument cannot be None.")
 
             # Creates the CPLEX variable according to the value type
-            cplex_var: Var
+            cplex_var: Var | None
 
             if self.value_type == ValueType.BINARY:
                 cplex_var = solver.binary_var(name=name)
@@ -99,17 +98,15 @@ class CplexEngine(Engine):
             elif self.value_type == ValueType.CONTINUOUS:
                 cplex_var = solver.continuous_var(name=name, lb=lower_bound, ub=upper_bound)
             else:
-                raise CplexException("Invalid term ValueType.")
+                raise CplexException("Unknown ValueType.")
+
+            # Applies new validations
+            if cplex_var is None:
+                raise CplexException("Failed to create the CPLEX variable.")
 
             # Instance attributes
             self._cplex_var: Var = cplex_var
             """ A Cplex.Var object representing the variable in the CPLEX solver. """
-
-            if self._cplex_var is None:
-                raise CplexException("Failed to create the CPLEX variable.")
-
-            # Apply validations.
-            self.validate()
 
     @property
     def name(self) -> str:
@@ -168,8 +165,8 @@ class CplexEngine(Engine):
             self,
             name: str,
             value_type: ValueType,
-            lower_bound: float | None = None,
-            upper_bound: float | None = None
+            lower_bound: float = 0,
+            upper_bound: float = inf,
     ) -> Variable:
         return CplexEngine._Variable(
             name=name,
