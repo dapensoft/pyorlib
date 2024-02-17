@@ -1,6 +1,9 @@
 from math import isclose
+from typing import Any
 
-from pyorlib.mp import ValueType
+from _pytest.python_api import raises
+
+from pyorlib.mp import ValueType, TermException
 from pyorlib.mp.algebra import Element, Expression, Term, Constant
 
 
@@ -9,10 +12,41 @@ class TestTerm:
     def test_inheritance(self):
         assert issubclass(Term, Element)
 
+        with raises(TermException):
+
+            class InvalidTerm(Term):
+                @property
+                def name(self) -> str:
+                    pass
+
+                @property
+                def lower_bound(self) -> float:
+                    pass
+
+                @property
+                def upper_bound(self) -> float:
+                    pass
+
+                @property
+                def value(self) -> float:
+                    pass
+
+                @property
+                def raw(self) -> Any:
+                    pass
+
+                def validate(self) -> None:
+                    pass
+
+                def __init__(self):
+                    super().__init__(term_type=None, value_type=ValueType.BINARY)
+
+            InvalidTerm()
+
     def test_iadd_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=3)
-        term2: Term = Constant(name='c_2', value_type=ValueType.CONTINUOUS, value=9)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=3)
+        term2: Term = Constant(name="c_2", value_type=ValueType.CONTINUOUS, value=9)
 
         # Test __iadd__ method
         term1 += term1
@@ -25,8 +59,8 @@ class TestTerm:
 
     def test_isub_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=2)
-        term2: Term = Constant(name='c_2', value_type=ValueType.CONTINUOUS, value=-11)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=2)
+        term2: Term = Constant(name="c_2", value_type=ValueType.CONTINUOUS, value=-11)
 
         # Test __isub__ method
         term1 -= term1
@@ -39,8 +73,8 @@ class TestTerm:
 
     def test_imul_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=-4)
-        term2: Term = Constant(name='c_2', value_type=ValueType.CONTINUOUS, value=-3)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=-4)
+        term2: Term = Constant(name="c_2", value_type=ValueType.CONTINUOUS, value=-3)
 
         # Test __imul__ method
         term1 *= term1
@@ -53,8 +87,8 @@ class TestTerm:
 
     def test_itruediv_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=2)
-        term2: Term = Constant(name='c_2', value_type=ValueType.CONTINUOUS, value=1)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=2)
+        term2: Term = Constant(name="c_2", value_type=ValueType.CONTINUOUS, value=1)
 
         # Test __itruediv__ method
         term1 /= term1
@@ -67,8 +101,8 @@ class TestTerm:
 
     def test_ifloordiv_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=4.5)
-        term2: Term = Constant(name='c_2', value_type=ValueType.CONTINUOUS, value=-8)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=4.5)
+        term2: Term = Constant(name="c_2", value_type=ValueType.CONTINUOUS, value=-8)
 
         # Test __ifloordiv__ method
         term1 //= term1
@@ -81,8 +115,8 @@ class TestTerm:
 
     def test_imod_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=9.8)
-        term2: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=6.2)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=9.8)
+        term2: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=6.2)
 
         # Test __imod__ method
         term1 %= term1
@@ -95,8 +129,8 @@ class TestTerm:
 
     def test_ipow_operation(self):
         # Test creation
-        term1: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=3)
-        term2: Term = Constant(name='c_1', value_type=ValueType.CONTINUOUS, value=2)
+        term1: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=3)
+        term2: Term = Constant(name="c_1", value_type=ValueType.CONTINUOUS, value=2)
 
         # Test __ipow__ method
         term1 **= term1

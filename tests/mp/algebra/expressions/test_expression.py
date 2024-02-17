@@ -19,6 +19,7 @@ class TestExpression:
 
         assert isinstance(expr1, Element)
         assert expr1.raw == 7
+        assert str(expr1) == str(expr1.raw)
 
     def test_iadd_operation(self):
         # Test creation

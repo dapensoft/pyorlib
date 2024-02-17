@@ -26,13 +26,17 @@ class TestElement:
         # Test __add__ & __radd__ method between number and expressions
         expr5 = expr2 + 2
         expr6 = 1 + expr1
+        expr7 = expr5.__radd__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert expr5.raw == 11
         assert expr6.raw == 4
+        assert expr7.raw == 15
 
         # Test __iadd__ method
         expr1 += expr1
@@ -62,13 +66,17 @@ class TestElement:
         # Test __sub__ & __rsub__ method between number and expressions
         expr5 = expr1 - 3
         expr6 = 2 - expr2
+        expr7 = expr5.__rsub__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert expr5.raw == -1
         assert expr6.raw == 13
+        assert expr7.raw == 14
 
     def test_mul_and_rmul_operation(self):
         # Test creation
@@ -91,13 +99,17 @@ class TestElement:
         # Test __mul__ & __rmul__ method between number and expressions
         expr5 = expr1 * 2
         expr6 = -2 * expr2
+        expr7 = expr5.__rmul__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert expr5.raw == -8
         assert expr6.raw == 6
+        assert expr7.raw == -48
 
     def test_truediv_and_rtruediv_operation(self):
         # Test creation
@@ -120,13 +132,17 @@ class TestElement:
         # Test __truediv__ & __rtruediv__ method between number and expressions
         expr5 = expr1 / -2
         expr6 = 2 / expr2
+        expr7 = expr5.__rtruediv__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert expr5.raw == -1
         assert expr6.raw == 2
+        assert expr7.raw == -2
 
     def test_floordiv_and_rfloordiv_operation(self):
         # Test creation
@@ -149,13 +165,17 @@ class TestElement:
         # Test __floordiv__ & __rfloordiv__ method between number and expressions
         expr5 = expr1 // -2
         expr6 = 2 // expr2
+        expr7 = expr5.__rfloordiv__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert expr5.raw == -3
         assert expr6.raw == -1
+        assert expr7.raw == 0
 
     def test_mod_and_rmod_operation(self):
         # Test creation
@@ -178,13 +198,17 @@ class TestElement:
         # Test __mod__ & __rmod__ method between number and expressions
         expr5 = expr1 % 2
         expr6 = 2 % expr2
+        expr7 = expr5.__rmod__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert isclose(expr5.raw, 1.8)
         assert isclose(expr6.raw, 2)
+        assert isclose(expr7.raw, 0.2)
 
     def test_pow_and_rpow_operation(self):
         # Test creation
@@ -194,8 +218,8 @@ class TestElement:
         assert expr1.raw == 3 and expr2.raw == 2
 
         # Test __pow__ method between expressions
-        expr3 = expr1 ** expr2
-        expr4 = expr2 ** expr1
+        expr3 = expr1**expr2
+        expr4 = expr2**expr1
 
         assert isinstance(expr3, Element)
         assert isinstance(expr4, Element)
@@ -205,15 +229,19 @@ class TestElement:
         assert expr4.raw == 8
 
         # Test __pow__ & __rpow__ method between number and expressions
-        expr5 = expr1 ** 2
-        expr6 = 2 ** expr2
+        expr5 = expr1**2
+        expr6 = 2**expr2
+        expr7 = expr5.__rpow__(expr6)
 
         assert isinstance(expr5, Element)
         assert isinstance(expr6, Element)
+        assert isinstance(expr7, Element)
         assert id(expr1) != id(expr5)
         assert id(expr2) != id(expr6)
+        assert id(expr5) != id(expr7)
         assert expr5.raw == 9
         assert expr6.raw == 4
+        assert expr7.raw == 262144
 
     def test_ne_operation(self):
         # Test creation
