@@ -112,7 +112,7 @@ class ORToolsEngine(Engine):
             """ A pywraplp.Variable object representing the variable in the OR-Tools solver. """
 
     @property
-    def name(self) -> str:
+    def name(self) -> str: # pragma: no cover
         return "OR-Tools Engine"
 
     @property
@@ -131,7 +131,7 @@ class ORToolsEngine(Engine):
         return Expression(expression=objective) if objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus:
+    def solution_status(self) -> SolutionStatus: # pragma: no cover
         if self._status == Solver.NOT_SOLVED:
             return SolutionStatus.NOT_SOLVED
         elif self._status == Solver.OPTIMAL:
@@ -170,7 +170,7 @@ class ORToolsEngine(Engine):
         self._status: int = 6
         """ Represents the state of the solution. """
 
-        if self._solver is None:
+        if self._solver is None or not isinstance(self._solver, Solver):
             raise ORToolsException("The OR-Tools solver cannot be None.")
 
         if self._solver_params is None:

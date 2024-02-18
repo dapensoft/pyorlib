@@ -2,7 +2,7 @@ from typing import List
 
 from _pytest.python_api import raises
 
-from pyorlib.mp import ValueType, TermType, OptimizationType, SolutionStatus, Model
+from pyorlib.mp import ValueType, TermType, OptimizationType, SolutionStatus, Model, CplexException
 from pyorlib.mp.algebra import Term, Element
 from pyorlib.mp.engines import Engine
 from tests.mp.fixtures import EngineFixtures
@@ -244,7 +244,7 @@ class TestModel:
         assert isinstance(model.constraints[0], Element)
 
     @staticmethod
-    def objective_assertions(engine: Engine):
+    def objective_assertions(engine: Engine, opt_type: OptimizationType):
         model: Model = Model(engine=engine)
 
         variable_name_1 = "x_1"
@@ -252,9 +252,9 @@ class TestModel:
 
         with raises(Exception):
             none_variable = model.get_term_by_name(name="None")
-            model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=none_variable * 2 + 2)
+            model.set_objective(opt_type=opt_type, expression=none_variable * 2 + 2)
 
-        model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=variable1 * 2 + 2)
+        model.set_objective(opt_type=opt_type, expression=variable1 * 2 + 2)
 
         assert model.objective_value is None
         assert isinstance(model.objective_expr, Element)
@@ -284,6 +284,8 @@ class TestModel:
         assert model.objective_value is not None
         assert model.objective_value == 1
         assert model.solution_status == SolutionStatus.OPTIMAL
+        assert variable1.value == 0.0
+        assert variable2.value == 1.0
 
     @staticmethod
     def infeasible_resolution_assertions(engine: Engine):
@@ -335,8 +337,11 @@ class TestModel:
         def test_constraints(self):
             TestModel.constraint_assertions(engine=EngineFixtures.get_cplex_engine())
 
-        def test_set_objetive(self):
-            TestModel.objective_assertions(engine=EngineFixtures.get_cplex_engine())
+        def test_set_objetive_minimize(self):
+            TestModel.objective_assertions(engine=EngineFixtures.get_cplex_engine(), opt_type=OptimizationType.MINIMIZE)
+
+        def test_set_objetive_maximize(self):
+            TestModel.objective_assertions(engine=EngineFixtures.get_cplex_engine(), opt_type=OptimizationType.MAXIMIZE)
 
         def test_optimal_resolution(self):
             TestModel.optimal_resolution_assertions(engine=EngineFixtures.get_cplex_engine())
@@ -366,8 +371,15 @@ class TestModel:
         def test_constraints(self):
             TestModel.constraint_assertions(engine=EngineFixtures.get_gurobi_engine())
 
-        def test_set_objetive(self):
-            TestModel.objective_assertions(engine=EngineFixtures.get_gurobi_engine())
+        def test_set_objetive_minimize(self):
+            TestModel.objective_assertions(
+                engine=EngineFixtures.get_gurobi_engine(), opt_type=OptimizationType.MINIMIZE
+            )
+
+        def test_set_objetive_maximize(self):
+            TestModel.objective_assertions(
+                engine=EngineFixtures.get_gurobi_engine(), opt_type=OptimizationType.MAXIMIZE
+            )
 
         def test_optimal_resolution(self):
             TestModel.optimal_resolution_assertions(engine=EngineFixtures.get_gurobi_engine())
@@ -397,8 +409,15 @@ class TestModel:
         def test_constraints(self):
             TestModel.constraint_assertions(engine=EngineFixtures.get_or_tools_engine())
 
-        def test_set_objetive(self):
-            TestModel.objective_assertions(engine=EngineFixtures.get_or_tools_engine())
+        def test_set_objetive_minimize(self):
+            TestModel.objective_assertions(
+                engine=EngineFixtures.get_or_tools_engine(), opt_type=OptimizationType.MINIMIZE
+            )
+
+        def test_set_objetive_maximize(self):
+            TestModel.objective_assertions(
+                engine=EngineFixtures.get_or_tools_engine(), opt_type=OptimizationType.MAXIMIZE
+            )
 
         def test_optimal_resolution(self):
             TestModel.optimal_resolution_assertions(engine=EngineFixtures.get_or_tools_engine())
@@ -428,8 +447,11 @@ class TestModel:
         def test_constraints(self):
             TestModel.constraint_assertions(engine=EngineFixtures.get_pulp_engine())
 
-        def test_set_objetive(self):
-            TestModel.objective_assertions(engine=EngineFixtures.get_pulp_engine())
+        def test_set_objetive_minimize(self):
+            TestModel.objective_assertions(engine=EngineFixtures.get_pulp_engine(), opt_type=OptimizationType.MINIMIZE)
+
+        def test_set_objective_maximize(self):
+            TestModel.objective_assertions(engine=EngineFixtures.get_pulp_engine(), opt_type=OptimizationType.MAXIMIZE)
 
         def test_optimal_resolution(self):
             TestModel.optimal_resolution_assertions(engine=EngineFixtures.get_pulp_engine())
