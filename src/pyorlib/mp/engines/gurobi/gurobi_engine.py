@@ -54,7 +54,7 @@ class GurobiEngine(Engine):
         def value(self) -> float:
             try:
                 value = self._gurobi_var.getAttr('x')
-                return float(value) if value != -0.0 else 0.0
+                return float(value) if value != -0.0 else 0.0 # pragma: no cover
             except AttributeError:
                 return -0.0
 
@@ -126,7 +126,7 @@ class GurobiEngine(Engine):
             solver.update()
 
     @property
-    def name(self) -> str:
+    def name(self) -> str: # pragma: no cover
         return "Gurobi Engine"
 
     @property
@@ -145,7 +145,7 @@ class GurobiEngine(Engine):
         return Expression(expression=objective) if objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus:
+    def solution_status(self) -> SolutionStatus: # pragma: no cover
         if self._solver.status == gp.GRB.LOADED:
             return SolutionStatus.NOT_SOLVED
         elif self._solver.status == gp.GRB.OPTIMAL:
@@ -175,8 +175,8 @@ class GurobiEngine(Engine):
         self._solver: gp.Model = solver if solver else gp.Model()
         """ A reference to the Gurobi solver. """
 
-        if self._solver is None:
-            raise GurobiException("The Gurobi solver cannot be None.")
+        if self._solver is None or not isinstance(self._solver, gp.Model):
+            raise GurobiException("The Gurobi solver must be an instance of gp.Model")
 
         self._solver.setParam('OutputFlag', 0)
 

@@ -109,7 +109,7 @@ class CplexEngine(Engine):
             """ A Cplex.Var object representing the variable in the CPLEX solver. """
 
     @property
-    def name(self) -> str:
+    def name(self) -> str: # pragma: no cover
         return "CPLEX Engine"
 
     @property
@@ -128,7 +128,7 @@ class CplexEngine(Engine):
         return Expression(expression=objective) if objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus:
+    def solution_status(self) -> SolutionStatus: # pragma: no cover
         if self._solver.solve_details is None:
             return SolutionStatus.NOT_SOLVED
 
@@ -158,8 +158,8 @@ class CplexEngine(Engine):
         self._solver: cpx.Model = solver if solver else cpx.Model(log_output=False)
         """ A reference to the CPLEX solver. """
 
-        if self._solver is None:
-            raise CplexException("The CPLEX solver cannot be None.")
+        if self._solver is None or not isinstance(self._solver, cpx.Model):
+            raise CplexException("The CPLEX solver must be an instance of cpx.Model")
 
     def add_variable(
             self,

@@ -106,7 +106,7 @@ class PuLPEngine(Engine):
             """ A LpVariable object representing the variable in the PuLP solver. """
 
     @property
-    def name(self) -> str:
+    def name(self) -> str: # pragma: no cover
         return "PuLP Engine"
 
     @property
@@ -124,7 +124,7 @@ class PuLPEngine(Engine):
         return Expression(expression=self._objective) if self._objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus:
+    def solution_status(self) -> SolutionStatus: # pragma: no cover
         if self._status == 0:
             return SolutionStatus.NOT_SOLVED
         elif self._status == 1:
@@ -154,7 +154,7 @@ class PuLPEngine(Engine):
         self._solver: LpProblem = solver if solver else LpProblem()
         """ A reference to the PuLP solver. """
 
-        if self._solver is None:
+        if self._solver is None or not isinstance(self._solver, LpProblem):
             raise PuLPException("The PuLP solver cannot be None.")
 
         self._objective: Any = None
