@@ -14,6 +14,17 @@ class TestModel:
         with raises(Exception):
             Model(engine=None)
 
+    def test_float_precision_property(self):
+        # Create Model
+        model = Model(engine=EngineFixtures.get_cplex_engine(), float_precision=3)
+
+        # Validate float precision getter
+        assert model.float_precision == 3
+
+        # Validate float precision setter
+        model.float_precision = -5
+        assert model.float_precision == 0
+
     @staticmethod
     def name_assertions(engine: Engine):
         model_name: str = "ModelName"
@@ -23,7 +34,7 @@ class TestModel:
     @staticmethod
     def dimension_assertions(engine: Engine):
         model: Model = Model(engine=engine)
-        dimension_name: str = 'r'
+        dimension_name: str = "r"
 
         # Validates negative values
         with raises(Exception):
@@ -36,7 +47,7 @@ class TestModel:
         # Validate with empty name
         dimension_value: int = 2
         with raises(Exception):
-            model.add_dimension(name='', value=dimension_value)
+            model.add_dimension(name="", value=dimension_value)
 
         # Validates creation and value
         model.add_dimension(name=dimension_name, value=dimension_value)
@@ -52,14 +63,14 @@ class TestModel:
         assert len(model.dimensions.items()) == 1
 
         # Multi dimension validation
-        model.add_dimension(name='s', value=1)
-        model.add_dimension(name='t', value=6)
-        model.add_dimension(name='d', value=8)
+        model.add_dimension(name="s", value=1)
+        model.add_dimension(name="t", value=6)
+        model.add_dimension(name="d", value=8)
         assert len(model.dimensions.items()) == 4
         assert model.get_dimension_by_name(name=dimension_name) == dimension_value
-        assert model.get_dimension_by_name(name='s') == 1
-        assert model.get_dimension_by_name(name='t') == 6
-        assert model.get_dimension_by_name(name='d') == 8
+        assert model.get_dimension_by_name(name="s") == 1
+        assert model.get_dimension_by_name(name="t") == 6
+        assert model.get_dimension_by_name(name="d") == 8
 
         # Validates dimension dictionary overriding
         with raises(Exception):
@@ -68,7 +79,7 @@ class TestModel:
     @staticmethod
     def constant_terms_assertions(engine: Engine):
         model: Model = Model(engine=engine)
-        constant_name: str = 'c_1'
+        constant_name: str = "c_1"
 
         # Validates constant creation
         const1 = model.add_constant(name=constant_name, value_type=ValueType.INTEGER, value=8)
@@ -90,7 +101,7 @@ class TestModel:
     @staticmethod
     def variable_terms_assertions(engine: Engine):
         model: Model = Model(engine=engine)
-        variable_name: str = 'x_1'
+        variable_name: str = "x_1"
 
         # Validates variables creation
         var1 = model.add_variable(name=variable_name, value_type=ValueType.BINARY)
@@ -115,7 +126,7 @@ class TestModel:
     @staticmethod
     def constant_term_sets_assertions(engine: Engine):
         model: Model = Model(engine=engine)
-        constants_set_name: str = 'c_i_j'
+        constants_set_name: str = "c_i_j"
         i_max: int = 4
         j_max: int = 2
 
@@ -126,7 +137,7 @@ class TestModel:
                     set_index=(i, j),
                     const_name=f"c_{i}_{j}",
                     value_type=ValueType.INTEGER,
-                    value=i * j
+                    value=i * j,
                 )
 
                 constant: Term = model.get_term_set_by_name(name=constants_set_name)[i, j]
@@ -141,11 +152,19 @@ class TestModel:
         # Validates empty set name
         with raises(Exception):
             model.add_constant_to_set(
-                set_name='',
-                set_index=(1, 1),
-                const_name="g_1_1",
-                value_type=ValueType.BINARY,
-                value=1
+                set_name="", set_index=(5, 1), const_name="c_5_1", value_type=ValueType.BINARY, value=1
+            )
+
+        # Validates duplicate name
+        with raises(Exception):
+            model.add_constant_to_set(
+                set_name=constants_set_name, set_index=(5, 1), const_name="c_1_1", value_type=ValueType.BINARY, value=1
+            )
+
+        # Validates duplicate index
+        with raises(Exception):
+            model.add_constant_to_set(
+                set_name=constants_set_name, set_index=(1, 1), const_name="c_5_1", value_type=ValueType.BINARY, value=1
             )
 
         assert len(model.terms.items()) == len(model.get_term_set_by_name(name=constants_set_name)) == i_max * j_max
@@ -155,7 +174,7 @@ class TestModel:
     @staticmethod
     def variable_term_sets_assertions(engine: Engine):
         model: Model = Model(engine=engine)
-        variables_set_name: str = 'x_i_j'
+        variables_set_name: str = "x_i_j"
         i_max: int = 3
         j_max: int = 2
 
@@ -181,9 +200,27 @@ class TestModel:
         # Validates empty names
         with raises(Exception):
             model.add_variable_to_set(
-                set_name='',
-                set_index=(1, 2),
-                var_name="z_1_2",
+                set_name="",
+                set_index=(4, 1),
+                var_name="x_4_1",
+                value_type=ValueType.BINARY,
+            )
+
+        # Validates duplicate name
+        with raises(Exception):
+            model.add_variable_to_set(
+                set_name=variables_set_name,
+                set_index=(4, 1),
+                var_name="x_1_1",
+                value_type=ValueType.BINARY,
+            )
+
+        # Validates duplicate index
+        with raises(Exception):
+            model.add_variable_to_set(
+                set_name=variables_set_name,
+                set_index=(1, 1),
+                var_name="x_4_1",
                 value_type=ValueType.BINARY,
             )
 
@@ -195,7 +232,7 @@ class TestModel:
     def constraint_assertions(engine: Engine):
         model: Model = Model(engine=engine)
 
-        variable_name = 'x'
+        variable_name = "x"
         variable = model.add_variable(name=variable_name, value_type=ValueType.BINARY, lower_bound=0, upper_bound=1)
 
         model.add_constraint(expression=variable * 10 <= 800)
@@ -210,20 +247,14 @@ class TestModel:
     def objective_assertions(engine: Engine):
         model: Model = Model(engine=engine)
 
-        variable_name_1 = 'x_1'
+        variable_name_1 = "x_1"
         variable1 = model.add_variable(name=variable_name_1, value_type=ValueType.BINARY)
 
         with raises(Exception):
-            none_variable = model.get_term_by_name(name='None')
-            model.set_objective(
-                opt_type=OptimizationType.MINIMIZE,
-                expression=none_variable * 2 + 2
-            )
+            none_variable = model.get_term_by_name(name="None")
+            model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=none_variable * 2 + 2)
 
-        model.set_objective(
-            opt_type=OptimizationType.MINIMIZE,
-            expression=variable1 * 2 + 2
-        )
+        model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=variable1 * 2 + 2)
 
         assert model.objective_value is None
         assert isinstance(model.objective_expr, Element)
@@ -233,17 +264,14 @@ class TestModel:
         model: Model = Model(engine=engine)
 
         # Crates the variables
-        variable_name_1 = 'x_1'
+        variable_name_1 = "x_1"
         variable1 = model.add_variable(name=variable_name_1, value_type=ValueType.BINARY)
 
-        variable_name_2 = 'x_2'
+        variable_name_2 = "x_2"
         variable2 = model.add_variable(name=variable_name_2, value_type=ValueType.BINARY)
 
         # Sets the objective expression
-        model.set_objective(
-            opt_type=OptimizationType.MINIMIZE,
-            expression=variable1 * 2 + variable2 * -1 + 2
-        )
+        model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=variable1 * 2 + variable2 * -1 + 2)
 
         # Checks empty objective value
         assert model.objective_value is None
@@ -263,22 +291,17 @@ class TestModel:
         model: Model = Model(engine=engine)
 
         # Crates the variables
-        variable_name_3 = 'x_3'
+        variable_name_3 = "x_3"
         variable3 = model.add_variable(name=variable_name_3, value_type=ValueType.BINARY)
 
-        variable_name_4 = 'x_4'
+        variable_name_4 = "x_4"
         variable4 = model.add_variable(name=variable_name_4, value_type=ValueType.BINARY)
 
         # Sets the objective expression
-        model.set_objective(
-            opt_type=OptimizationType.MINIMIZE,
-            expression=variable3 * 2 + variable4 * -1 + 2
-        )
+        model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=variable3 * 2 + variable4 * -1 + 2)
 
         # Infeasible constraint
-        model.add_constraint(
-            expression=variable3 * 2 >= 5
-        )
+        model.add_constraint(expression=variable3 * 2 >= 5)
 
         # Checks empty objective value
         assert model.objective_value is None

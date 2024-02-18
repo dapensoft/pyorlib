@@ -169,7 +169,7 @@ class Model:
         if self._engine is None:
             raise ModelException("The engine interface cannot be None.")
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 f"The '{StdOutColors.PURPLE}{self.name.capitalize()}{StdOutColors.DEFAULT}' has been created."
             )
@@ -237,7 +237,7 @@ class Model:
             raise ModelException("Invalid dimension values.")
         self._dimensions[name] = value
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Dimension added: ",
                 msg="".join([
@@ -263,7 +263,7 @@ class Model:
 
         self.__save_term(term=constant)
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Constant added: ",
                 msg=constant.get_pretty_string(float_precision=self.float_precision),
@@ -295,7 +295,7 @@ class Model:
 
         self.__save_term(term=variable)
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Variable added: ",
                 msg=variable.get_pretty_string(float_precision=self.float_precision),
@@ -331,7 +331,7 @@ class Model:
 
         self.__save_term_to_set(set_name=set_name, set_index=set_index, term=constant)
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Constant added to set: ",
                 msg="".join([
@@ -374,7 +374,7 @@ class Model:
 
         self.__save_term_to_set(set_name=set_name, set_index=set_index, term=variable)
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Variable added to set: ",
                 msg="".join([
@@ -394,7 +394,7 @@ class Model:
         """
         constraint: Element = self._engine.add_constraint(expression=expression)
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             try:
                 self._logger.debug(action="Constraint added: ", msg=f"Expr: {expression}")
             except RecursionError:
@@ -411,7 +411,7 @@ class Model:
         """
         objective: Element = self._engine.set_objective(opt_type=opt_type, expression=expression)
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             try:
                 self._logger.debug(
                     action="Objective function added: ",
@@ -425,35 +425,20 @@ class Model:
 
         return objective
 
-    def clear(self) -> None:
-        """
-        Clears the contents of the model.
-
-        The `clear` method is used to remove all contents from the model.
-        :return: None.
-        """
-        self._engine.clear()
-        self._dimensions = {}
-        self._terms = {}
-        self._term_sets = {}
-
-        if self._logger.debug_enabled:
-            self._logger.debug(f"The model data has been cleared.")
-
     def solve(self) -> None:
         """
         Solves the optimization problem represented by the model.
         :return: None.
         """
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(f"Solving the model...")
 
         self._engine.solve()
 
-        if self._logger.debug_enabled:
+        if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(f"The model has been solved.")
 
-    def print_info(self, display_term_sets: bool = False) -> None:
+    def print_info(self, display_term_sets: bool = False) -> None:  # pragma: no cover
         """
         Prints information about the model.
         :param display_term_sets: Whether to display information about term sets. Defaults to False.
@@ -501,7 +486,7 @@ class Model:
                 print("\tExpression: Unprintable expression")
         print()
 
-    def print_solution(self) -> None:
+    def print_solution(self) -> None:  # pragma: no cover
         """
         Prints the solution of the optimization problem.
         :return: None.

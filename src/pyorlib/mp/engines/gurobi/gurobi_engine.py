@@ -212,6 +212,3 @@ class GurobiEngine(Engine):
 
     def solve(self) -> None:
         self._solver.optimize()
-
-    def clear(self) -> None:
-        self._solver.dispose()

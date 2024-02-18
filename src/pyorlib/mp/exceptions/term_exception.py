@@ -9,5 +9,5 @@ class TermException(PyORlibException):
     exceptions specific to terms in a mathematical model, such as validations.
     """
 
-    def __init__(self, message: str = ""):
-        super().__init__(message if message else "Term exception")
+    def __init__(self, message: str = "Term exception"):
+        super().__init__(message)

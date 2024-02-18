@@ -7,5 +7,5 @@ class ModelException(PyORlibException):
     or handling of an optimization model.
     """
 
-    def __init__(self, message: str = ""):
-        super().__init__(message if message else "Model exception")
+    def __init__(self, message: str = "Model exception"):
+        super().__init__(message)

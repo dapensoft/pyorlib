@@ -9,5 +9,5 @@ class PuLPException(PyORlibException):
     exceptions specific to the PuLP library.
     """
 
-    def __init__(self, message: str = ""):
-        super().__init__(message if message else "PuLP exception")
+    def __init__(self, message: str = "PuLP exception"):
+        super().__init__(message)

@@ -14,7 +14,7 @@ class TestTerm:
 
         with raises(TermException):
 
-            class InvalidTerm(Term):
+            class InvalidTerm(Term):  # pragma: no cover
                 @property
                 def name(self) -> str:
                     pass
