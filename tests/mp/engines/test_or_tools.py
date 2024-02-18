@@ -46,6 +46,14 @@ class TestORToolsEngine:
                 solution_status=lambda *args, **kwargs: SolutionStatus.FEASIBLE,
                 value_type=ValueType.CONTINUOUS,
             )
+        # Test solution status assertion
+        with pytest.raises(expected_exception):
+            variable_cls(
+                name="Test value type assertions",
+                solver=solver,
+                solution_status=None,
+                value_type=ValueType.CONTINUOUS,
+            )
 
     def test_variable_value_assertions(self):
         TestEngineVariable.variable_value_assertions(engine=EngineFixtures.get_or_tools_engine())
@@ -55,6 +63,7 @@ class TestORToolsEngine:
             engine_cls=EngineFixtures.get_or_tools_engine_cls(),
             expected_exception=EngineFixtures.get_or_tools_exception_cls(),
         )
+        EngineFixtures.get_or_tools_engine_cls()
 
     def test_objetive_function_assertions(self):
         TestEngine.objective_function_assertions(

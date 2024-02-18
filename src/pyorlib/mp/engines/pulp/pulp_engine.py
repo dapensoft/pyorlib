@@ -98,7 +98,7 @@ class PuLPEngine(Engine):
                 raise PuLPException("Unknown ValueType.")
 
             # Applies new validations
-            if pulp_var is None:
+            if pulp_var is None: # pragma: no cover
                 raise PuLPException("Failed to create the PuLP variable.")
 
             # Instance attributes
