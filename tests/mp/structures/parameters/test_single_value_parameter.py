@@ -13,7 +13,7 @@ class TestSingleValueParameter:
 
     def test_parameter_type(self):
         # Validates FIXED parameters
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.INTEGER,
@@ -21,7 +21,7 @@ class TestSingleValueParameter:
                 upper_bound=4,
                 value=2,
             )
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.INTEGER,
@@ -30,7 +30,7 @@ class TestSingleValueParameter:
             )
 
         # Validates FIXED parameters
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
@@ -38,10 +38,24 @@ class TestSingleValueParameter:
                 upper_bound=4,
                 value=2,
             )
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
+                value=2,
+            )
+
+        # Validates None values
+        with raises(ValueError):
+            SingleValueParameter(
+                parameter_type=None,
+                value_type=ValueType.INTEGER,
+                value=2,
+            )
+        with raises(ValueError):
+            SingleValueParameter(
+                parameter_type=ParameterType.FIXED,
+                value_type=None,
                 value=2,
             )
 
@@ -72,15 +86,22 @@ class TestSingleValueParameter:
         assert param2.lower_bound == 0 and param2.upper_bound == 1
 
         # Validates integer numbers
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(parameter_type=ParameterType.FIXED, value_type=ValueType.BINARY, value=5)
+        with raises(ValueError):
+            SingleValueParameter(
+                parameter_type=ParameterType.BOUNDED,
+                value_type=ValueType.BINARY,
+                lower_bound=0,
+                upper_bound=2,
+            )
 
         # Validates continuous numbers
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(parameter_type=ParameterType.FIXED, value_type=ValueType.BINARY, value=5.2)
 
         # Validates lower and upper bounds
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.BINARY,
@@ -115,11 +136,18 @@ class TestSingleValueParameter:
         assert param2.lower_bound == -1 and param2.upper_bound == 10
 
         # Validates continuous numbers
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(parameter_type=ParameterType.FIXED, value_type=ValueType.INTEGER, value=5.2)
+        with raises(ValueError):
+            SingleValueParameter(
+                parameter_type=ParameterType.BOUNDED,
+                value_type=ValueType.INTEGER,
+                lower_bound=0,
+                upper_bound=2.1,
+            )
 
         # Validates lower and upper bounds
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.BINARY,
@@ -154,11 +182,11 @@ class TestSingleValueParameter:
         assert param2.lower_bound == 5.6 and param2.upper_bound == 5.7
 
         # Validates infinities
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(parameter_type=ParameterType.FIXED, value_type=ValueType.INTEGER, value=inf)
 
         # Validates infinities
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
@@ -167,7 +195,7 @@ class TestSingleValueParameter:
             )
 
         # Validates lower and upper bounds
-        with raises(Exception):
+        with raises(ValueError):
             SingleValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.BINARY,
