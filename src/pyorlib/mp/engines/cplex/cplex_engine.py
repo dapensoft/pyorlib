@@ -15,8 +15,7 @@ try:  # pragma: no cover
     from docplex.mp.utils import DOcplexException
 except ImportError:  # pragma: no cover
     raise CplexException(
-        "Optional dependency 'CPLEX' not found."
-        "\nPlease install it using 'pip install pyorlib[cplex]'."
+        "Optional dependency 'CPLEX' not found." "\nPlease install it using 'pip install pyorlib[cplex]'."
     )
 
 
@@ -65,12 +64,12 @@ class CplexEngine(Engine):
             return self._cplex_var
 
         def __init__(
-                self,
-                name: str,
-                solver: cpx.Model,
-                value_type: ValueType,
-                lower_bound: float = 0,
-                upper_bound: float = inf,
+            self,
+            name: str,
+            solver: cpx.Model,
+            value_type: ValueType,
+            lower_bound: float = 0,
+            upper_bound: float = inf,
         ):
             """
             Initializes a new `CplexVariable` object with the specified attributes and creates a corresponding CPLEX
@@ -109,7 +108,7 @@ class CplexEngine(Engine):
             """ A Cplex.Var object representing the variable in the CPLEX solver. """
 
     @property
-    def name(self) -> str: # pragma: no cover
+    def name(self) -> str:  # pragma: no cover
         return "CPLEX Engine"
 
     @property
@@ -128,23 +127,24 @@ class CplexEngine(Engine):
         return Expression(expression=objective) if objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus: # pragma: no cover
+    def solution_status(self) -> SolutionStatus:  # pragma: no cover
         if self._solver.solve_details is None:
             return SolutionStatus.NOT_SOLVED
 
-        if self._solver.solve_details.status_code in [1, 5, 15, 17, 19, 20, 101, 102, 115, 121, 123, 125, 129, 130,
-                                                      301]:
+        # Status Codes
+        optimal_codes = [1, 5, 15, 17, 19, 20, 101, 102, 115, 121, 123, 125, 129, 130, 301]
+        feasible_codes = [14, 16, 18, 23, 30, 120, 124, 127]
+        infeasible_codes = [3, 103]
+
+        if self._solver.solve_details.status_code in optimal_codes:
             return SolutionStatus.OPTIMAL
-        elif self._solver.solve_details.status_code in [14, 16, 18, 23, 30, 120, 124, 127]:
+        elif self._solver.solve_details.status_code in feasible_codes:
             return SolutionStatus.FEASIBLE
-        elif self._solver.solve_details.status_code in [3, 103]:
+        elif self._solver.solve_details.status_code in infeasible_codes:
             return SolutionStatus.INFEASIBLE
-        elif self._solver.solve_details.status_code in [10, 11, 12, 13, 21, 22, 25, 32, 33, 34, 35, 36, 37, 38, 39, 113,
-                                                        114, 126, 133, 2, 118, 133, 304]:
-            return SolutionStatus.ERROR
         else:
-            StdOutLogger.error(action="Solution status: ", msg=f"{self._solver.solve_details.status_code}")
-            raise CplexException('Unhandled CPLEX status code.')
+            StdOutLogger.error(action="Error code: ", msg=f"{self._solver.solve_details.status_code}")
+            return SolutionStatus.ERROR
 
     def __init__(self, solver: cpx.Model | None = None):
         """
@@ -162,11 +162,11 @@ class CplexEngine(Engine):
             raise CplexException("The CPLEX solver must be an instance of cpx.Model")
 
     def add_variable(
-            self,
-            name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         return CplexEngine._Variable(
             name=name,

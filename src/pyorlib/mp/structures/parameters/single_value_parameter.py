@@ -40,9 +40,9 @@ class SingleValueParameter(Parameter):
             elif self.value_type == ValueType.INTEGER and not ValueTypeValidator.is_integer(self.value):
                 raise ValueError("Parameter value must be a valid integer number.")
         elif (
-                self.parameter_type == ParameterType.BOUNDED and
-                self.lower_bound is not None and
-                self.upper_bound is not None
+            self.parameter_type == ParameterType.BOUNDED
+            and self.lower_bound is not None
+            and self.upper_bound is not None
         ):
             if self.value is not None:
                 raise ValueError("Parameters with bounds cannot has a value.")
@@ -52,16 +52,13 @@ class SingleValueParameter(Parameter):
                 raise ValueError("The upper bound of the parameter must be greater than or equal to the lower bound.")
 
             # Validate lower and upper bound values and value type
-            if (
-                    self.value_type == ValueType.BINARY and
-                    (not ValueTypeValidator.is_binary(self.lower_bound) or
-                     not ValueTypeValidator.is_binary(self.upper_bound))
+            if self.value_type == ValueType.BINARY and (
+                not ValueTypeValidator.is_binary(self.lower_bound) or not ValueTypeValidator.is_binary(self.upper_bound)
             ):
                 raise ValueError("Parameter lower and upper bound values must be valid binary numbers.")
-            elif (
-                    self.value_type == ValueType.INTEGER and
-                    (not ValueTypeValidator.is_integer(self.lower_bound) or
-                     not ValueTypeValidator.is_integer(self.upper_bound))
+            elif self.value_type == ValueType.INTEGER and (
+                not ValueTypeValidator.is_integer(self.lower_bound)
+                or not ValueTypeValidator.is_integer(self.upper_bound)
             ):
                 raise ValueError("Parameter lower and upper bound values must be valid integer numbers.")
         else:

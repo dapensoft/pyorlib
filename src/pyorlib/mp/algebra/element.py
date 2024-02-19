@@ -28,7 +28,7 @@ class Element(ABC):
         pass
 
     @abstractmethod
-    def _build_expression(self, expression: Any) -> 'Element':
+    def _build_expression(self, expression: Any) -> "Element":
         """
         Abstract method to build an Element object based on the given expression.
 
@@ -53,7 +53,7 @@ class Element(ABC):
         pass
 
     # Addition
-    def __add__(self, other: Any) -> 'Element':
+    def __add__(self, other: Any) -> "Element":
         """
         Addition operation.
         :param other: The `number` or `Element` instance to be added.
@@ -64,7 +64,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw + other)
 
-    def __radd__(self, other: Any) -> 'Element':
+    def __radd__(self, other: Any) -> "Element":
         """
         Right addition operation.
         :param other: The `number` or `Element` instance to be added.
@@ -76,7 +76,7 @@ class Element(ABC):
             return self._build_expression(expression=other + self.raw)
 
     @abstractmethod
-    def __iadd__(self, other: Any) -> 'Element':
+    def __iadd__(self, other: Any) -> "Element":
         """
         In-place addition operation.
         :param other: The `number` or `Element` instance to be added.
@@ -85,7 +85,7 @@ class Element(ABC):
         pass
 
     # Subtraction
-    def __sub__(self, other: Any) -> 'Element':
+    def __sub__(self, other: Any) -> "Element":
         """
         Subtraction operation.
         :param other: The `number` or `Element` instance to be subtracted.
@@ -96,7 +96,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw - other)
 
-    def __rsub__(self, other: Any) -> 'Element':
+    def __rsub__(self, other: Any) -> "Element":
         """
         Right subtraction operation.
         :param other: The `number` or `Element` instance to be subtracted.
@@ -108,7 +108,7 @@ class Element(ABC):
             return self._build_expression(expression=other - self.raw)
 
     @abstractmethod
-    def __isub__(self, other: Any) -> 'Element':
+    def __isub__(self, other: Any) -> "Element":
         """
         In-place subtraction operation.
         :param other: The `number` or `Element` instance to be subtracted.
@@ -117,7 +117,7 @@ class Element(ABC):
         pass
 
     # Multiplication
-    def __mul__(self, other: Any) -> 'Element':
+    def __mul__(self, other: Any) -> "Element":
         """
         Multiplication operation.
         :param other: The `number` or `Element` instance to be multiplied.
@@ -128,7 +128,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw * other)
 
-    def __rmul__(self, other: Any) -> 'Element':
+    def __rmul__(self, other: Any) -> "Element":
         """
         Right multiplication operation.
         :param other: The `number` or `Element` instance to be multiplied.
@@ -140,7 +140,7 @@ class Element(ABC):
             return self._build_expression(expression=other * self.raw)
 
     @abstractmethod
-    def __imul__(self, other: Any) -> 'Element':
+    def __imul__(self, other: Any) -> "Element":
         """
         In-place multiplication operation.
         :param other: The `number` or `Element` instance to be multiplied.
@@ -149,7 +149,7 @@ class Element(ABC):
         pass
 
     # Division
-    def __truediv__(self, other: Any) -> 'Element':
+    def __truediv__(self, other: Any) -> "Element":
         """
         Division operation.
         :param other: The `number` or `Element` instance to be divided.
@@ -160,7 +160,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw / other)
 
-    def __rtruediv__(self, other: Any) -> 'Element':
+    def __rtruediv__(self, other: Any) -> "Element":
         """
         Right division operation.
         :param other: The `number` or `Element` instance to be divided.
@@ -172,7 +172,7 @@ class Element(ABC):
             return self._build_expression(expression=other / self.raw)
 
     @abstractmethod
-    def __itruediv__(self, other: Any) -> 'Element':
+    def __itruediv__(self, other: Any) -> "Element":
         """
         In-place division operation.
         :param other: The `number` or `Element` instance to be divided.
@@ -181,7 +181,7 @@ class Element(ABC):
         pass
 
     # Floor Division
-    def __floordiv__(self, other: Any) -> 'Element':
+    def __floordiv__(self, other: Any) -> "Element":
         """
         Floor division operation.
         :param other: The `number` or `Element` instance to be floor divided.
@@ -192,7 +192,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw // other)
 
-    def __rfloordiv__(self, other: Any) -> 'Element':
+    def __rfloordiv__(self, other: Any) -> "Element":
         """
         Right floor division operation.
         :param other: The `number` or `Element` instance to be floor divided.
@@ -204,7 +204,7 @@ class Element(ABC):
             return self._build_expression(expression=other // self.raw)
 
     @abstractmethod
-    def __ifloordiv__(self, other: Any) -> 'Element':
+    def __ifloordiv__(self, other: Any) -> "Element":
         """
         In-place floor division operation.
         :param other: The `number` or `Element` instance to be floor divided.
@@ -213,7 +213,7 @@ class Element(ABC):
         pass
 
     # Modulo
-    def __mod__(self, other: Any) -> 'Element':
+    def __mod__(self, other: Any) -> "Element":
         """
         Modulo operation.
         :param other: The `number` or `Element` instance to be used for modulo.
@@ -224,7 +224,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw % other)
 
-    def __rmod__(self, other: Any) -> 'Element':
+    def __rmod__(self, other: Any) -> "Element":
         """
         Right modulo operation.
         :param other: The `number` or `Element` instance to be used for modulo.
@@ -236,7 +236,7 @@ class Element(ABC):
             return self._build_expression(expression=other % self.raw)
 
     @abstractmethod
-    def __imod__(self, other: Any) -> 'Element':
+    def __imod__(self, other: Any) -> "Element":
         """
         In-place modulo operation.
         :param other: The `number` or `Element` instance to be used for modulo.
@@ -245,30 +245,30 @@ class Element(ABC):
         pass
 
     # Exponentiation
-    def __pow__(self, other: Any) -> 'Element':
+    def __pow__(self, other: Any) -> "Element":
         """
         Exponentiation operation.
         :param other: The `number` or `Element` instance to be used as the exponent.
         :return: A new `Element` instance representing the exponentiation.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=self.raw ** other.raw)
+            return self._build_expression(expression=self.raw**other.raw)
         else:
-            return self._build_expression(expression=self.raw ** other)
+            return self._build_expression(expression=self.raw**other)
 
-    def __rpow__(self, other: Any) -> 'Element':
+    def __rpow__(self, other: Any) -> "Element":
         """
         Right exponentiation operation.
         :param other: The `number` or `Element` instance to be used as the base.
         :return: A new `Element` instance representing the exponentiation.
         """
         if isinstance(other, Element):
-            return self._build_expression(expression=other.raw ** self.raw)
+            return self._build_expression(expression=other.raw**self.raw)
         else:
-            return self._build_expression(expression=other ** self.raw)
+            return self._build_expression(expression=other**self.raw)
 
     @abstractmethod
-    def __ipow__(self, other: Any) -> 'Element':
+    def __ipow__(self, other: Any) -> "Element":
         """
         In-place exponentiation operation.
         :param other: The `number` or `Element` instance to be used as the exponent.
@@ -277,21 +277,21 @@ class Element(ABC):
         pass
 
     # Unary Operators
-    def __neg__(self) -> 'Element':
+    def __neg__(self) -> "Element":
         """
         Negation operation.
         :return: A new `Element` instance representing the negation.
         """
         return self._build_expression(expression=-self.raw)
 
-    def __pos__(self) -> 'Element':
+    def __pos__(self) -> "Element":
         """
         Positive operation.
         :return: A new `Element` instance representing the positive value.
         """
         return self._build_expression(expression=+self.raw)
 
-    def __abs__(self) -> 'Element':
+    def __abs__(self) -> "Element":
         """
         Absolute value operation.
         :return: A new `Element` instance representing the absolute value.
@@ -299,7 +299,7 @@ class Element(ABC):
         return self._build_expression(expression=abs(self.raw))
 
     # Comparison Methods
-    def __eq__(self, other: Any) -> 'Element':  # type: ignore[override]
+    def __eq__(self, other: Any) -> "Element":  # type: ignore[override]
         """
         Equal to comparison.
         :param other: The `number` or `Element` instance to be compared.
@@ -310,7 +310,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw == other)
 
-    def __ne__(self, other: Any) -> 'Element':  # type: ignore[override]
+    def __ne__(self, other: Any) -> "Element":  # type: ignore[override]
         """
         Not equal to comparison.
         :param other: The `number` or `Element` instance to be compared.
@@ -321,7 +321,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw != other)
 
-    def __lt__(self, other: Any) -> 'Element':
+    def __lt__(self, other: Any) -> "Element":
         """
         Less than comparison.
         :param other: The `number` or `Element` instance to be compared.
@@ -332,7 +332,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw < other)
 
-    def __le__(self, other: Any) -> 'Element':
+    def __le__(self, other: Any) -> "Element":
         """
         Less than or equal to comparison.
         :param other: The `number` or `Element` instance to be compared.
@@ -343,7 +343,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw <= other)
 
-    def __gt__(self, other: Any) -> 'Element':
+    def __gt__(self, other: Any) -> "Element":
         """
         Greater than comparison.
         :param other: The `number` or `Element` instance to be compared.
@@ -354,7 +354,7 @@ class Element(ABC):
         else:
             return self._build_expression(expression=self.raw > other)
 
-    def __ge__(self, other: Any) -> 'Element':
+    def __ge__(self, other: Any) -> "Element":
         """
         Greater than or equal to comparison.
         :param other: The `number` or `Element` instance to be compared.

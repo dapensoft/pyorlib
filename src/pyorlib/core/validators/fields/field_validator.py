@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, cast
 
-T = TypeVar('T')
+T = TypeVar("T")
 """The type of the field value."""
 
 
@@ -29,7 +29,7 @@ class FieldValidator(Generic[T], ABC):
         :param name: The name of the attribute.
         :return: None.
         """
-        self._private_name: str = '_' + name
+        self._private_name: str = "_" + name
         self._public_name: str = name
 
     def __get__(self, obj: object, objtype: type[object] | None = None) -> T:

@@ -145,13 +145,7 @@ class Model:
         A term can be a constant value or a variable.
         """
 
-        self._term_sets: Dict[
-            str,
-            Dict[
-                Tuple[int, ...],
-                Term
-            ]
-        ] = {}
+        self._term_sets: Dict[str, Dict[Tuple[int, ...], Term]] = {}
         """
         Stores sets of terms used in the model. Each set of terms is represented by a key-value pair, 
         where the key is the name of the set and the value is another dictionary. The inner dictionary 
@@ -240,10 +234,12 @@ class Model:
         if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Dimension added: ",
-                msg="".join([
-                    f"Name: {StdOutColors.PURPLE}{name}{StdOutColors.DEFAULT} | ",
-                    f"val: {StdOutColors.PURPLE}{value}{StdOutColors.DEFAULT}",
-                ]),
+                msg="".join(
+                    [
+                        f"Name: {StdOutColors.PURPLE}{name}{StdOutColors.DEFAULT} | ",
+                        f"val: {StdOutColors.PURPLE}{value}{StdOutColors.DEFAULT}",
+                    ]
+                ),
             )
 
         return value
@@ -272,11 +268,11 @@ class Model:
         return constant
 
     def add_variable(
-            self,
-            name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         """
         Adds a new variable to the model.
@@ -304,13 +300,12 @@ class Model:
         return variable
 
     def add_constant_to_set(
-            self,
-            set_name: str,
-            set_index: Tuple[int, ...],
-            const_name: str,
-            value_type:
-            ValueType,
-            value: float,
+        self,
+        set_name: str,
+        set_index: Tuple[int, ...],
+        const_name: str,
+        value_type: ValueType,
+        value: float,
     ) -> Constant:
         """
         Adds a new constant to the model within a set.
@@ -334,23 +329,25 @@ class Model:
         if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Constant added to set: ",
-                msg="".join([
-                    f"Set name: {StdOutColors.PURPLE}{set_name}{StdOutColors.DEFAULT} | ",
-                    f"Set index: {StdOutColors.PURPLE}{set_index}{StdOutColors.DEFAULT} | ",
-                    constant.get_pretty_string(float_precision=self.float_precision)
-                ]),
+                msg="".join(
+                    [
+                        f"Set name: {StdOutColors.PURPLE}{set_name}{StdOutColors.DEFAULT} | ",
+                        f"Set index: {StdOutColors.PURPLE}{set_index}{StdOutColors.DEFAULT} | ",
+                        constant.get_pretty_string(float_precision=self.float_precision),
+                    ]
+                ),
             )
 
         return constant
 
     def add_variable_to_set(
-            self,
-            set_name: str,
-            set_index: Tuple[int, ...],
-            var_name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        set_name: str,
+        set_index: Tuple[int, ...],
+        var_name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         """
         Adds a new variable to the model within a set.
@@ -377,11 +374,13 @@ class Model:
         if self._logger.debug_enabled:  # pragma: no cover
             self._logger.debug(
                 action="Variable added to set: ",
-                msg="".join([
-                    f"Set name: {StdOutColors.PURPLE}{set_name}{StdOutColors.DEFAULT} | ",
-                    f"Set index: {StdOutColors.PURPLE}{set_index}{StdOutColors.DEFAULT} | ",
-                    variable.get_pretty_string(float_precision=self.float_precision)
-                ]),
+                msg="".join(
+                    [
+                        f"Set name: {StdOutColors.PURPLE}{set_name}{StdOutColors.DEFAULT} | ",
+                        f"Set index: {StdOutColors.PURPLE}{set_index}{StdOutColors.DEFAULT} | ",
+                        variable.get_pretty_string(float_precision=self.float_precision),
+                    ]
+                ),
             )
 
         return variable
@@ -415,10 +414,12 @@ class Model:
             try:
                 self._logger.debug(
                     action="Objective function added: ",
-                    msg="".join([
-                        f"Opt Type: {StdOutColors.PURPLE}{opt_type.name.capitalize()}{StdOutColors.DEFAULT} | ",
-                        f"Expr: {objective}"
-                    ])
+                    msg="".join(
+                        [
+                            f"Opt Type: {StdOutColors.PURPLE}{opt_type.name.capitalize()}{StdOutColors.DEFAULT} | ",
+                            f"Expr: {objective}",
+                        ]
+                    ),
                 )
             except RecursionError:
                 self._logger.debug(action="Objective function added: ", msg="Expr: Unprintable expression")
@@ -452,16 +453,19 @@ class Model:
         print(f"\tStatus: {StdOutColors.PURPLE}{self.solution_status.name}{StdOutColors.DEFAULT}")
         print(
             f"\tValue: {StdOutColors.PURPLE}",
-            '{0:.{prec}g}'.format(self.objective_value,
-                                  prec=self.float_precision) if self.objective_value is not None else "--",
-            f"{StdOutColors.DEFAULT}"
+            (
+                "{0:.{prec}g}".format(self.objective_value, prec=self.float_precision)
+                if self.objective_value is not None
+                else "--"
+            ),
+            f"{StdOutColors.DEFAULT}",
         )
 
         print("Dimensions:")
         for name, size in self.dimensions.items():
             print(
                 f"\tName: {StdOutColors.PURPLE}{name}{StdOutColors.DEFAULT} | ",
-                f"Val: {StdOutColors.PURPLE}{size}{StdOutColors.DEFAULT}"
+                f"Val: {StdOutColors.PURPLE}{size}{StdOutColors.DEFAULT}",
             )
 
         print("Terms:")
@@ -474,7 +478,7 @@ class Model:
                 for index, term in terms.items():
                     print(
                         f"\t\tIndex: {StdOutColors.PURPLE}{index}{StdOutColors.DEFAULT} | ",
-                        f"{term.get_pretty_string(float_precision=self.float_precision)}"
+                        f"{term.get_pretty_string(float_precision=self.float_precision)}",
                     )
 
         print("Constraints:")
@@ -496,9 +500,12 @@ class Model:
         print(f"\tStatus: {StdOutColors.PURPLE}{self.solution_status.name}{StdOutColors.DEFAULT}")
         print(
             f"\tValue: {StdOutColors.PURPLE}",
-            '{0:.{prec}g}'.format(self.objective_value,
-                                  prec=self.float_precision) if self.objective_value is not None else "--",
-            f"{StdOutColors.DEFAULT}"
+            (
+                "{0:.{prec}g}".format(self.objective_value, prec=self.float_precision)
+                if self.objective_value is not None
+                else "--"
+            ),
+            f"{StdOutColors.DEFAULT}",
         )
 
         solution_variables: Dict[str, Term] = {

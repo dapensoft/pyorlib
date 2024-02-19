@@ -13,8 +13,7 @@ try:  # pragma: no cover
     from ortools.linear_solver.pywraplp import Solver, MPSolverParameters, Variable as ORToolsVar
 except ImportError:  # pragma: no cover
     raise ORToolsException(
-        "Optional dependency 'OR-Tools' not found."
-        "\nPlease install it using 'pip install pyorlib[ortools]'."
+        "Optional dependency 'OR-Tools' not found." "\nPlease install it using 'pip install pyorlib[ortools]'."
     )
 
 
@@ -60,13 +59,13 @@ class ORToolsEngine(Engine):
             return self._ortools_var
 
         def __init__(
-                self,
-                name: str,
-                solver: Solver,
-                value_type: ValueType,
-                solution_status: Callable[[], SolutionStatus],
-                lower_bound: float = 0,
-                upper_bound: float = inf,
+            self,
+            name: str,
+            solver: Solver,
+            value_type: ValueType,
+            solution_status: Callable[[], SolutionStatus],
+            lower_bound: float = 0,
+            upper_bound: float = inf,
         ):
             """
             Initializes a new `ORToolsVariable` object with the specified attributes and creates a
@@ -112,7 +111,7 @@ class ORToolsEngine(Engine):
             """ A pywraplp.Variable object representing the variable in the OR-Tools solver. """
 
     @property
-    def name(self) -> str: # pragma: no cover
+    def name(self) -> str:  # pragma: no cover
         return "OR-Tools Engine"
 
     @property
@@ -131,7 +130,7 @@ class ORToolsEngine(Engine):
         return Expression(expression=objective) if objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus: # pragma: no cover
+    def solution_status(self) -> SolutionStatus:  # pragma: no cover
         if self._status == Solver.NOT_SOLVED:
             return SolutionStatus.NOT_SOLVED
         elif self._status == Solver.OPTIMAL:
@@ -144,7 +143,7 @@ class ORToolsEngine(Engine):
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._status}")
-            raise ORToolsException('Unhandled OR-Tools status code.')
+            raise ORToolsException("Unhandled OR-Tools status code.")
 
     def __init__(self, solver: Solver | None = None, solver_params: MPSolverParameters | None = None):
         """
@@ -173,15 +172,15 @@ class ORToolsEngine(Engine):
         if self._solver is None or not isinstance(self._solver, Solver):
             raise ORToolsException("The OR-Tools solver cannot be None.")
 
-        if self._solver_params is None: # pragma: no cover
+        if self._solver_params is None:  # pragma: no cover
             raise ORToolsException("The OR-Tools params cannot be None.")
 
     def add_variable(
-            self,
-            name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         return ORToolsEngine._Variable(
             name=name,
@@ -202,7 +201,7 @@ class ORToolsEngine(Engine):
         elif opt_type == OptimizationType.MAXIMIZE:
             self._solver.Maximize(expr=expression.raw)
         else:
-            raise ORToolsException('Optimization type not supported.')
+            raise ORToolsException("Optimization type not supported.")
         return expression
 
     def solve(self) -> None:

@@ -128,24 +128,32 @@ class Term(Element, ABC):
         :return: A formatted string representing the term.
         """
         default, debug = StdOutColors.DEFAULT, StdOutColors.PURPLE
-        return "".join([
-            f"Name: {debug}{self.name}{default} | ",
-            f"Type: {debug}{self.term_type.name.capitalize()}{default} | ",
-            f"Value type: {debug}{self.value_type.name.capitalize()}{default} | ",
-            f"lb:{debug} ", '{0:.{prec}g} '.format(self.lower_bound, prec=float_precision), f"{default}| ",
-            f"ub:{debug} ", '{0:.{prec}g} '.format(self.upper_bound, prec=float_precision), f"{default}| ",
-            f"val:{debug} ", '{0:.{prec}g} '.format(self.value, prec=float_precision), f"{default}",
-        ])
+        return "".join(
+            [
+                f"Name: {debug}{self.name}{default} | ",
+                f"Type: {debug}{self.term_type.name.capitalize()}{default} | ",
+                f"Value type: {debug}{self.value_type.name.capitalize()}{default} | ",
+                f"lb:{debug} ",
+                "{0:.{prec}g} ".format(self.lower_bound, prec=float_precision),
+                f"{default}| ub:{debug} ",
+                "{0:.{prec}g} ".format(self.upper_bound, prec=float_precision),
+                f"{default}| val:{debug} ",
+                "{0:.{prec}g} ".format(self.value, prec=float_precision),
+                f"{default}",
+            ]
+        )
 
     def __str__(self) -> str:  # pragma: no cover
-        return "".join([
-            f"Name: {self.name} | ",
-            f"Type: {self.term_type.name} | ",
-            f"Value type: {self.value_type.name} | ",
-            f"lb: {self.lower_bound} | ",
-            f"ub: {self.upper_bound} | ",
-            f"val: {self.value}",
-        ])
+        return "".join(
+            [
+                f"Name: {self.name} | ",
+                f"Type: {self.term_type.name} | ",
+                f"Value type: {self.value_type.name} | ",
+                f"lb: {self.lower_bound} | ",
+                f"ub: {self.upper_bound} | ",
+                f"val: {self.value}",
+            ]
+        )
 
     def __iadd__(self, other: Any) -> Element:
         if isinstance(other, Element):

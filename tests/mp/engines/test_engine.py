@@ -7,6 +7,7 @@ from pyorlib.mp.algebra import Variable
 from pyorlib.mp.engines import Engine
 from tests.mp.fixtures import EngineFixtures
 
+
 class TestEngine:
 
     @staticmethod
@@ -19,6 +20,7 @@ class TestEngine:
         var1: Variable = engine.add_variable(name="Test variable", value_type=ValueType.CONTINUOUS)
         with pytest.raises(expected_exception):
             engine.set_objective(opt_type=None, expression=var1 <= 3)
+
 
 class TestEngineVariable:
 

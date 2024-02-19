@@ -74,11 +74,11 @@ class Engine(ABC):
 
     @abstractmethod
     def add_variable(
-            self,
-            name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         """
         Add a new variable to the engine.

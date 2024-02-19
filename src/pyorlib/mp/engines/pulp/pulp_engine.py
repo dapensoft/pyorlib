@@ -10,12 +10,20 @@ from ...exceptions import PuLPException
 from ....core.loggers import StdOutLogger
 
 try:  # pragma: no cover
-    from pulp import LpProblem, LpMaximize, LpMinimize, value, LpSolverDefault, LpVariable, LpBinary, LpInteger, \
-        LpContinuous
+    from pulp import (
+        LpProblem,
+        LpMaximize,
+        LpMinimize,
+        value,
+        LpSolverDefault,
+        LpVariable,
+        LpBinary,
+        LpInteger,
+        LpContinuous,
+    )
 except ImportError:  # pragma: no cover
     raise PuLPException(
-        "Optional dependency 'PuLP' not found."
-        "\nPlease install it using 'pip install pyorlib[pulp]'."
+        "Optional dependency 'PuLP' not found." "\nPlease install it using 'pip install pyorlib[pulp]'."
     )
 
 
@@ -62,12 +70,12 @@ class PuLPEngine(Engine):
             return self._pulp_var
 
         def __init__(
-                self,
-                name: str,
-                solver: LpProblem,
-                value_type: ValueType,
-                lower_bound: float = 0,
-                upper_bound: float = inf,
+            self,
+            name: str,
+            solver: LpProblem,
+            value_type: ValueType,
+            lower_bound: float = 0,
+            upper_bound: float = inf,
         ):
             """
             Initializes a new `PuLPVariable` object with the specified attributes and creates a corresponding PuLP
@@ -98,7 +106,7 @@ class PuLPEngine(Engine):
                 raise PuLPException("Unknown ValueType.")
 
             # Applies new validations
-            if pulp_var is None: # pragma: no cover
+            if pulp_var is None:  # pragma: no cover
                 raise PuLPException("Failed to create the PuLP variable.")
 
             # Instance attributes
@@ -106,7 +114,7 @@ class PuLPEngine(Engine):
             """ A LpVariable object representing the variable in the PuLP solver. """
 
     @property
-    def name(self) -> str: # pragma: no cover
+    def name(self) -> str:  # pragma: no cover
         return "PuLP Engine"
 
     @property
@@ -124,7 +132,7 @@ class PuLPEngine(Engine):
         return Expression(expression=self._objective) if self._objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus: # pragma: no cover
+    def solution_status(self) -> SolutionStatus:  # pragma: no cover
         if self._status == 0:
             return SolutionStatus.NOT_SOLVED
         elif self._status == 1:
@@ -135,7 +143,7 @@ class PuLPEngine(Engine):
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._status}")
-            raise PuLPException('Unhandled PuLP status code.')
+            raise PuLPException("Unhandled PuLP status code.")
 
     def __init__(self, solver: LpProblem | None = None):
         """
@@ -164,11 +172,11 @@ class PuLPEngine(Engine):
         """ Represents the state of the solution. """
 
     def add_variable(
-            self,
-            name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         return PuLPEngine._Variable(
             name=name,
@@ -188,7 +196,7 @@ class PuLPEngine(Engine):
         elif opt_type == OptimizationType.MAXIMIZE:
             self._solver.sense = LpMaximize
         else:
-            raise PuLPException('Optimization type not supported.')
+            raise PuLPException("Optimization type not supported.")
         self._solver.setObjective(expression.raw)
         self._objective = expression.raw
         return expression

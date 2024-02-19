@@ -13,8 +13,7 @@ try:  # pragma: no cover
     import gurobipy as gp
 except ImportError:  # pragma: no cover
     raise GurobiException(
-        "Optional dependency 'Gurobi' not found."
-        "\nPlease install it using 'pip install pyorlib[gurobi]'."
+        "Optional dependency 'Gurobi' not found." "\nPlease install it using 'pip install pyorlib[gurobi]'."
     )
 
 
@@ -42,19 +41,19 @@ class GurobiEngine(Engine):
 
         @property
         def lower_bound(self) -> float:
-            lb = self._gurobi_var.getAttr('lb')
+            lb = self._gurobi_var.getAttr("lb")
             return -inf if lb == gp.GRB.INFINITY else float(lb) if lb != -0.0 else 0.0
 
         @property
         def upper_bound(self) -> float:
-            ub = self._gurobi_var.getAttr('ub')
+            ub = self._gurobi_var.getAttr("ub")
             return inf if ub == gp.GRB.INFINITY else float(ub) if ub != -0.0 else 0.0
 
         @property
         def value(self) -> float:
             try:
-                value = self._gurobi_var.getAttr('x')
-                return float(value) if value != -0.0 else 0.0 # pragma: no cover
+                value = self._gurobi_var.getAttr("x")
+                return float(value) if value != -0.0 else 0.0  # pragma: no cover
             except AttributeError:
                 return -0.0
 
@@ -63,12 +62,12 @@ class GurobiEngine(Engine):
             return self._gurobi_var
 
         def __init__(
-                self,
-                name: str,
-                solver: gp.Model,
-                value_type: ValueType,
-                lower_bound: float = 0,
-                upper_bound: float = inf,
+            self,
+            name: str,
+            solver: gp.Model,
+            value_type: ValueType,
+            lower_bound: float = 0,
+            upper_bound: float = inf,
         ):
             """
             Initializes a new `GurobiVariable` object with the specified attributes and creates a
@@ -126,7 +125,7 @@ class GurobiEngine(Engine):
             solver.update()
 
     @property
-    def name(self) -> str: # pragma: no cover
+    def name(self) -> str:  # pragma: no cover
         return "Gurobi Engine"
 
     @property
@@ -145,7 +144,7 @@ class GurobiEngine(Engine):
         return Expression(expression=objective) if objective is not None else None
 
     @property
-    def solution_status(self) -> SolutionStatus: # pragma: no cover
+    def solution_status(self) -> SolutionStatus:  # pragma: no cover
         if self._solver.status == gp.GRB.LOADED:
             return SolutionStatus.NOT_SOLVED
         elif self._solver.status == gp.GRB.OPTIMAL:
@@ -154,12 +153,18 @@ class GurobiEngine(Engine):
             return SolutionStatus.FEASIBLE
         elif self._solver.status == gp.GRB.INFEASIBLE:
             return SolutionStatus.INFEASIBLE
-        elif self._solver.status in [gp.GRB.TIME_LIMIT, gp.GRB.NODE_LIMIT, gp.GRB.ITERATION_LIMIT,
-                                     gp.GRB.SOLUTION_LIMIT, gp.GRB.INTERRUPTED, gp.GRB.UNBOUNDED]:
+        elif self._solver.status in [
+            gp.GRB.TIME_LIMIT,
+            gp.GRB.NODE_LIMIT,
+            gp.GRB.ITERATION_LIMIT,
+            gp.GRB.SOLUTION_LIMIT,
+            gp.GRB.INTERRUPTED,
+            gp.GRB.UNBOUNDED,
+        ]:
             return SolutionStatus.ERROR
         else:
             StdOutLogger.error(action="Solution status: ", msg=f"{self._solver.status}")
-            raise GurobiException('Unhandled Gurobi status code.')
+            raise GurobiException("Unhandled Gurobi status code.")
 
     def __init__(self, solver: gp.Model | None = None):
         """
@@ -178,21 +183,17 @@ class GurobiEngine(Engine):
         if self._solver is None or not isinstance(self._solver, gp.Model):
             raise GurobiException("The Gurobi solver must be an instance of gp.Model")
 
-        self._solver.setParam('OutputFlag', 0)
+        self._solver.setParam("OutputFlag", 0)
 
     def add_variable(
-            self,
-            name: str,
-            value_type: ValueType,
-            lower_bound: float = 0,
-            upper_bound: float = inf,
+        self,
+        name: str,
+        value_type: ValueType,
+        lower_bound: float = 0,
+        upper_bound: float = inf,
     ) -> Variable:
         return GurobiEngine._Variable(
-            name=name,
-            solver=self._solver,
-            value_type=value_type,
-            lower_bound=lower_bound,
-            upper_bound=upper_bound
+            name=name, solver=self._solver, value_type=value_type, lower_bound=lower_bound, upper_bound=upper_bound
         )
 
     def add_constraint(self, expression: Element) -> Element:
