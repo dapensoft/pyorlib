@@ -173,7 +173,7 @@ class ORToolsEngine(Engine):
         if self._solver is None or not isinstance(self._solver, Solver):
             raise ORToolsException("The OR-Tools solver cannot be None.")
 
-        if self._solver_params is None:
+        if self._solver_params is None: # pragma: no cover
             raise ORToolsException("The OR-Tools params cannot be None.")
 
     def add_variable(
