@@ -11,9 +11,9 @@ class TestMultiValueParameter:
     def test_inheritance(self):
         assert issubclass(MultiValueParameter, Parameter)
 
-    def test_parameter_type(self):
+    def test_definition(self):
         # Validates FIXED parameters
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.INTEGER,
@@ -21,7 +21,7 @@ class TestMultiValueParameter:
                 upper_bounds=(0, 2, 10, -1, 0, 7, 70, 9),
                 values=(0, 2, 10, -1, 0, 7, 70, 9),
             )
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.INTEGER,
@@ -30,7 +30,7 @@ class TestMultiValueParameter:
             )
 
         # Validates BOUNDED parameters
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
@@ -38,13 +38,13 @@ class TestMultiValueParameter:
                 upper_bounds=(0, 2, 10, -1, 0, 7, 70, 9),
                 values=(0, 2, 10, -1, 0, 7, 70, 9),
             )
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
                 values=(0, 2, 10, -1, 0, 7, 70, 9),
             )
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
@@ -52,25 +52,52 @@ class TestMultiValueParameter:
             )
 
         # Validates length differences and emtpy tuples
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
                 lower_bounds=(0, 2, 10, -1, 0, 7, 70, 9),
                 upper_bounds=(0, 2, 10, -1, 0, 7, 70),
             )
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
                 lower_bounds=tuple(),
                 upper_bounds=tuple(),
             )
-        with raises(Exception):
+        with raises(ValueError):
+            MultiValueParameter(
+                parameter_type=ParameterType.BOUNDED,
+                value_type=ValueType.INTEGER,
+                lower_bounds=None,
+                upper_bounds=None,
+            )
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.INTEGER,
                 values=tuple(),
+            )
+        with raises(ValueError):
+            MultiValueParameter(
+                parameter_type=ParameterType.FIXED,
+                value_type=ValueType.INTEGER,
+                values=None,
+            )
+
+        # Validates None values
+        with raises(ValueError):
+            MultiValueParameter(
+                parameter_type=None,
+                value_type=ValueType.INTEGER,
+                values=(0, 2, 10, -1, 0, 7, 70, 9),
+            )
+        with raises(ValueError):
+            MultiValueParameter(
+                parameter_type=ParameterType.FIXED,
+                value_type=None,
+                values=(0, 2, 10, -1, 0, 7, 70, 9),
             )
 
     def test_creation_with_binary_value_type(self):
@@ -104,7 +131,7 @@ class TestMultiValueParameter:
         assert len(param_set2.lower_bounds) == len(param_set2.upper_bounds) == 7
 
         # Validates integer numbers
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.BINARY,
@@ -112,15 +139,16 @@ class TestMultiValueParameter:
             )
 
         # Validates continuous numbers
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
-                parameter_type=ParameterType.FIXED,
+                parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.BINARY,
-                values=(0, 1, 0, 0, 0, 1.1, 1),
+                lower_bounds=(0, 1, 0, 0, 0, 0, 1),
+                upper_bounds=(0, 1, 0, 0, 0, 1.1, 1),
             )
 
         # Validates lower and upper bounds
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.BINARY,
@@ -159,15 +187,22 @@ class TestMultiValueParameter:
         assert len(param_set2.lower_bounds) == len(param_set2.upper_bounds) == 8
 
         # Validates continuous numbers
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.INTEGER,
                 values=(0, 2, 10, -1, 0.1, 7, 70, -9.5),
             )
+        with raises(ValueError):
+            MultiValueParameter(
+                parameter_type=ParameterType.BOUNDED,
+                value_type=ValueType.INTEGER,
+                lower_bounds=(0, 2, 10, -1, 0.1, 7, 70, -9.5),
+                upper_bounds=(0, 2, 10, -1, 1, 7, 70, 10),
+            )
 
         # Validates lower and upper bounds
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.INTEGER,
@@ -206,13 +241,13 @@ class TestMultiValueParameter:
         assert len(param_set2.lower_bounds) == len(param_set2.upper_bounds) == 7
 
         # Validates infinity
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.FIXED,
                 value_type=ValueType.CONTINUOUS,
                 values=(0.1, 2.956, 10, inf, 0, -inf, 70.2),
             )
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.CONTINUOUS,
@@ -221,7 +256,7 @@ class TestMultiValueParameter:
             )
 
         # Validates lower and upper bounds
-        with raises(Exception):
+        with raises(ValueError):
             MultiValueParameter(
                 parameter_type=ParameterType.BOUNDED,
                 value_type=ValueType.CONTINUOUS,
