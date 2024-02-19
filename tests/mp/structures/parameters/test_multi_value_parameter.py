@@ -11,7 +11,7 @@ class TestMultiValueParameter:
     def test_inheritance(self):
         assert issubclass(MultiValueParameter, Parameter)
 
-    def test_definition(self):
+    def test_parameter_type(self):
         # Validates FIXED parameters
         with raises(ValueError):
             MultiValueParameter(
