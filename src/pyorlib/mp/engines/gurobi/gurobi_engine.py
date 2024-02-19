@@ -37,7 +37,7 @@ class GurobiEngine(Engine):
 
         @property
         def name(self) -> str:
-            return str(self._gurobi_var.varName)
+            return str(self._gurobi_var.VarName)
 
         @property
         def lower_bound(self) -> float:
