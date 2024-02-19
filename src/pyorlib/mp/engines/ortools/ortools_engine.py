@@ -13,7 +13,7 @@ try:  # pragma: no cover
     from ortools.linear_solver.pywraplp import Solver, MPSolverParameters, Variable as ORToolsVar
 except ImportError:  # pragma: no cover
     raise ORToolsException(
-        "Optional dependency 'OR-Tools' not found." "\nPlease install it using 'pip install pyorlib[ortools]'."
+        "Optional dependency 'OR-Tools' not found.\nPlease install it using 'pip install pyorlib[ortools]'."
     )
 
 

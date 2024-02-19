@@ -15,7 +15,7 @@ try:  # pragma: no cover
     from docplex.mp.utils import DOcplexException
 except ImportError:  # pragma: no cover
     raise CplexException(
-        "Optional dependency 'CPLEX' not found." "\nPlease install it using 'pip install pyorlib[cplex]'."
+        "Optional dependency 'CPLEX' not found.\nPlease install it using 'pip install pyorlib[cplex]'."
     )
 
 

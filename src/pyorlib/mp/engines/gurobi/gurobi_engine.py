@@ -13,7 +13,7 @@ try:  # pragma: no cover
     import gurobipy as gp
 except ImportError:  # pragma: no cover
     raise GurobiException(
-        "Optional dependency 'Gurobi' not found." "\nPlease install it using 'pip install pyorlib[gurobi]'."
+        "Optional dependency 'Gurobi' not found.\nPlease install it using 'pip install pyorlib[gurobi]'."
     )
 
 

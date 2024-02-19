@@ -22,9 +22,7 @@ try:  # pragma: no cover
         LpContinuous,
     )
 except ImportError:  # pragma: no cover
-    raise PuLPException(
-        "Optional dependency 'PuLP' not found." "\nPlease install it using 'pip install pyorlib[pulp]'."
-    )
+    raise PuLPException("Optional dependency 'PuLP' not found.\nPlease install it using 'pip install pyorlib[pulp]'.")
 
 
 class PuLPEngine(Engine):
