@@ -67,12 +67,12 @@ class ParameterField(FieldValidator[Parameter]):
         return self._required
 
     def __init__(
-            self,
-            parameter_types: Set[ParameterType],
-            value_types: Set[ValueType],
-            min: float | None = None,
-            max: float | None = None,
-            required: bool = True,
+        self,
+        parameter_types: Set[ParameterType],
+        value_types: Set[ValueType],
+        min: float | None = None,
+        max: float | None = None,
+        required: bool = True,
     ):
         """
         Initialize a new instance of ParameterField.
@@ -82,8 +82,18 @@ class ParameterField(FieldValidator[Parameter]):
         :param max: The maximum value supported by the descriptor. If there is no maximum value, it is None.
         :param required: A boolean indicating whether the parameter is required or not.
         """
-
+        # Calls the base init method
         super().__init__()
+
+        # Applies validations
+        if parameter_types is None or len(parameter_types) == 0:
+            raise ValueError("The set of parameter types cannot be empty.")
+
+        if value_types is None or len(value_types) == 0:
+            raise ValueError("The set of value types cannot be empty.")
+
+        if max is not None and min is not None and min > max:
+            raise ValueError("The minimum value for the parameter field cannot be greater than the maximum value.")
 
         self._parameter_types: Set[ParameterType] = parameter_types
         """ A set of parameter types that are supported by the descriptor. """
@@ -99,19 +109,6 @@ class ParameterField(FieldValidator[Parameter]):
 
         self._required: bool = required
         """ A boolean indicating whether the parameter is required. """
-
-        # Validations
-        if len(self.parameter_types) == 0:
-            raise ValueError("The set of parameter types cannot be empty.")
-
-        if len(self.value_types) == 0:
-            raise ValueError("The set of value types cannot be empty.")
-
-        if self.min is not None and self.min < 0:
-            raise ValueError("The minimum value for the parameter field must be greater than or equal to 0.")
-
-        if self.max is not None and self.min is not None and self.min > self.max:
-            raise ValueError("The minimum value for the parameter field cannot be greater than the maximum value.")
 
     def validate(self, value: Parameter | None) -> None:
         # Checks for None value
@@ -151,7 +148,7 @@ class ParameterField(FieldValidator[Parameter]):
                 if self._min is not None or self._max is not None:
                     self._validate_value(value.value)  # type: ignore[arg-type]
         else:
-            raise TypeError(f"{self._public_name} invalid parameter type")
+            raise TypeError(f"{self._public_name} invalid parameter type")  # pragma: no cover
 
     def _validate_bounds(self, lower_bound: float, upper_bound: float) -> None:
         """
