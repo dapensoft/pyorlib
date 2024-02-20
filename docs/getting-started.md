@@ -33,7 +33,7 @@ hide:
 
 <p style='text-align: justify;' markdown>
 	&emsp;&emsp;For more information on supported solver integrations, check the [Optional Dependencies](/pyorlib/getting-started/#optional-dependencies) 
-	section below. PyORlib aims to minimize required dependencies while providing flexibility.
+	section below. PyORlib aims to minimize required dependencies while maximizing flexibility.
 </p>
 
 ## Installation
