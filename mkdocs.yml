@@ -127,5 +127,58 @@ nav:
   - Getting Started: getting-started.md
   - API Reference:
       - api/index.md
+      - Mathematical Programming:
+          - api/mp/index.md
+          - Algebra:
+              - api/mp/algebra/index.md
+              - api/mp/algebra/element.md
+              - Expression:
+                  - api/mp/algebra/expressions/index.md
+              - Term:
+                  - api/mp/algebra/terms/index.md
+                  - api/mp/algebra/terms/constant.md
+                  - api/mp/algebra/terms/variable.md
+          - Engines:
+              - api/mp/engines/index.md
+              - api/mp/engines/engine.md
+              - CPLEX Engine:
+                  - api/mp/engines/cplex/index.md
+              - Gurobi Engine:
+                  - api/mp/engines/gurobi/index.md
+              - OR-Tools Engine:
+                  - api/mp/engines/ortools/index.md
+              - PuLP Engine:
+                  - api/mp/engines/pulp/index.md
+          - Enums:
+              - api/mp/enums/index.md
+              - api/mp/enums/optimization-type.md
+              - api/mp/enums/parameter-type.md
+              - api/mp/enums/solution-status.md
+              - api/mp/enums/term-type.md
+              - api/mp/enums/value-type.md
+          - Exceptions:
+              - api/mp/exceptions/index.md
+              - api/mp/exceptions/term-exception.md
+              - api/mp/exceptions/cplex-exception.md
+              - api/mp/exceptions/gurobi-exception.md
+              - api/mp/exceptions/ortools-exception.md
+              - api/mp/exceptions/pulp-exception.md
+              - api/mp/exceptions/model-exception.md
+          - Model:
+              - api/mp/model/index.md
+          - Structures:
+              - api/mp/structures/index.md
+              - Definitions:
+                  - api/mp/structures/definitions/index.md
+                  - api/mp/structures/definitions/dimension-definition.md
+                  - api/mp/structures/definitions/term-definition.md
+                  - api/mp/structures/definitions/parameter-definition.md
+              - Parameters:
+                  - api/mp/structures/parameters/index.md
+                  - api/mp/structures/parameters/parameter.md
+                  - api/mp/structures/parameters/single-value-parameter.md
+                  - api/mp/structures/parameters/multi-value-parameter.md
+
+
   - Contributing: contributing.md
   - Release Notes: release-notes.md

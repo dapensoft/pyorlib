@@ -1,3 +1,7 @@
+"""
+Exceptions module description...
+"""
+
 from .cplex_exception import CplexException
 from .gurobi_exception import GurobiException
 from .model_exception import ModelException
