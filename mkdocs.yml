@@ -127,57 +127,53 @@ nav:
   - Getting Started: getting-started.md
   - API Reference:
       - api/index.md
-      - Mathematical Programming:
-          - api/mp/index.md
-          - Algebra:
-              - api/mp/algebra/index.md
-              - api/mp/algebra/element.md
-              - Expression:
-                  - api/mp/algebra/expressions/index.md
-              - Term:
-                  - api/mp/algebra/terms/index.md
-                  - api/mp/algebra/terms/constant.md
-                  - api/mp/algebra/terms/variable.md
-          - Engines:
-              - api/mp/engines/index.md
-              - api/mp/engines/engine.md
-              - CPLEX Engine:
-                  - api/mp/engines/cplex/index.md
-              - Gurobi Engine:
-                  - api/mp/engines/gurobi/index.md
-              - OR-Tools Engine:
-                  - api/mp/engines/ortools/index.md
-              - PuLP Engine:
-                  - api/mp/engines/pulp/index.md
-          - Enums:
-              - api/mp/enums/index.md
-              - api/mp/enums/optimization-type.md
-              - api/mp/enums/parameter-type.md
-              - api/mp/enums/solution-status.md
-              - api/mp/enums/term-type.md
-              - api/mp/enums/value-type.md
-          - Exceptions:
-              - api/mp/exceptions/index.md
-              - api/mp/exceptions/term-exception.md
-              - api/mp/exceptions/cplex-exception.md
-              - api/mp/exceptions/gurobi-exception.md
-              - api/mp/exceptions/ortools-exception.md
-              - api/mp/exceptions/pulp-exception.md
-              - api/mp/exceptions/model-exception.md
-          - Model:
-              - api/mp/model/index.md
-          - Structures:
-              - api/mp/structures/index.md
-              - Definitions:
-                  - api/mp/structures/definitions/index.md
-                  - api/mp/structures/definitions/dimension-definition.md
-                  - api/mp/structures/definitions/term-definition.md
-                  - api/mp/structures/definitions/parameter-definition.md
-              - Parameters:
-                  - api/mp/structures/parameters/index.md
-                  - api/mp/structures/parameters/parameter.md
-                  - api/mp/structures/parameters/single-value-parameter.md
-                  - api/mp/structures/parameters/multi-value-parameter.md
+      - Model:
+          - api/model/index.md
+      - Engine:
+          - api/engines/index.md
+          - CPLEX Engine: api/engines/cplex/index.md
+          - Gurobi Engine: api/engines/gurobi/index.md
+          - OR-Tools Engine: api/engines/ortools/index.md
+          - PuLP Engine: api/engines/pulp/index.md
+      - Algebra:
+          - api/algebra/index.md
+          - Element: api/algebra/element.md
+          - Expression: api/algebra/expressions/index.md
+          - Term:
+              - api/algebra/terms/index.md
+              - Constant: api/algebra/terms/constant.md
+              - Variable: api/algebra/terms/variable.md
+      - Structures:
+          - api/structures/index.md
+          - Definitions:
+              - api/structures/definitions/index.md
+              - Dimension Definition: api/structures/definitions/dimension-definition.md
+              - Term Definition: api/structures/definitions/term-definition.md
+              - Parameter Definition: api/structures/definitions/parameter-definition.md
+          - Parameter:
+              - api/structures/parameters/index.md
+              - Single Value Parameter: api/structures/parameters/single-value-parameter.md
+              - Multi Value Parameter: api/structures/parameters/multi-value-parameter.md
+      - Validators:
+          - api/validators/index.md
+          - Value Type Validator: api/validators/value-type-validator.md
+          - Dimension Field: api/validators/fields/dimension-field.md
+          - Parameter Field: api/validators/fields/parameter-field.md
+      - Enums:
+          - api/enums/index.md
+          - Optimization Type: api/enums/optimization-type.md
+          - Parameter Type: api/enums/parameter-type.md
+          - Solution Status: api/enums/solution-status.md
+          - Term Type: api/enums/term-type.md
+          - Value Type: api/enums/value-type.md
+      - Exceptions:
+          - api/exceptions/index.md
+          - Term Exception: api/exceptions/term-exception.md
+          - CPLEX Exception: api/exceptions/cplex-exception.md
+          - Gurobi Exception: api/exceptions/gurobi-exception.md
+          - Ortools Exception: api/exceptions/ortools-exception.md
+          - Pulp Exception: api/exceptions/pulp-exception.md
+          - Model Exception: api/exceptions/model-exception.md
 
 
   - Contributing: contributing.md
