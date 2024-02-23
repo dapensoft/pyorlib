@@ -1,5 +1,6 @@
 """
-Exceptions module description...
+The Exceptions module in PyORlib provides a set of exception classes for handling specific errors and exceptions that
+may occur during the usage of the library.
 """
 
 from .cplex_exception import CplexException

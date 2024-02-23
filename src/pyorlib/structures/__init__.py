@@ -1,5 +1,6 @@
 """
-Structures module description...
+The Structures module in PyORlib provides a set of classes for managing and manipulating various structures encountered
+in optimization modeling.
 """
 
 from .definitions import DimensionDefinition, ParameterDefinition, TermDefinition

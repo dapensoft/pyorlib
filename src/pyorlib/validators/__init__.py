@@ -1,5 +1,6 @@
 """
-Validations module descriptions...
+The Validators module in PyORlib provides a set of classes and descriptors for validating various components within
+optimization modeling.
 """
 
 from .value_type_validator import ValueTypeValidator

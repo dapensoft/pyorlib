@@ -1,6 +1,6 @@
 """
-The `pyorlib.mp.algebra` submodule is part of the `pyorlib.mp` module and provides a comprehensive set of tools and
-functionality for algebraic operations and expressions within mathematical programming.
+The Algebra module in PyORlib provides a set of classes and functions for algebraic operations and mathematical
+expressions used in optimization models.
 """
 
 from .element import Element
