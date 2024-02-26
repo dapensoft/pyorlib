@@ -11,29 +11,18 @@ hide:
 </style>
 
 <p style='text-align: justify;' markdown>
-    &emsp;&emsp;Welcome to the Getting Started guide for PyORlib! This section will help you install and configure 
-	PyORlib in your optimization project. For more detailed information about the library, you can refer to the 
-	PyORlib [API reference](/pyorlib/api).
+    &emsp;&emsp;Welcome to the Getting Started section! This guide will help you install and configure PyORlib in your
+	optimization project. For more detailed information about the library, you can refer to the PyORlib 
+	[API Reference](/pyorlib/api).
 </p>
 
 ## Requirements
 
 <p style='text-align: justify;' markdown>
-	&emsp;&emsp;PyORlib **requires Python 3.10+** by default, which provides access to core functionality like 
-	[`ParameterField`](/pyorlib/api/validators/fields/parameter-field) descriptors, [`TermDefinition`](/pyorlib/api/structures/definitions/term-definition) 
-	class, and other optimization utilities.
-</p>
-
-
-<p style='text-align: justify;' markdown>
-	&emsp;&emsp;However, **to work with optimization models, engines, and solver packages, additional dependencies are 
-	needed**. PyORlib uses a modular design that allows you to select the specific solver integrations required for 
-	your use case or even implement custom integrations.
-</p>
-
-<p style='text-align: justify;' markdown>
-	&emsp;&emsp;For more information on supported solver integrations, check the [Optional Dependencies](/pyorlib/getting-started/#optional-dependencies) 
-	section below. PyORlib aims to minimize required dependencies while maximizing flexibility.
+	&emsp;&emsp;By default, PyORlib's core functionalities and optimization utilities only require Python 3.10+. 
+	However, additional optional dependencies may be needed to work with optimization models and solver 
+	integrations based on your use case. For more information on supported integrations, see the 
+	[Optional Dependencies](/pyorlib/getting-started/#optional-dependencies) section below.
 </p>
 
 ## Installation
