@@ -79,7 +79,7 @@ plugins:
             members_order: source
             separate_signature: true
             unwrap_annotated: true
-            filters: [ "!^(_.*$)", "^(__init__|__init_subclass__|__call__|__enter__|__exit__)$" ]
+            filters: [ "!^(_.*$)", "^(__init__|__init_subclass__|__call__|__enter__|__exit__|__add__|__radd__|__iadd__|__sub__|__rsub__|__isub__|__mul__|__rmul__|__imul__|__truediv__|__rtruediv__|__itruediv__|__floordiv__|__rfloordiv__|__ifloordiv__|__mod__|__rmod__|__imod__|__pow__|__rpow__|__ipow__|__neg__|__pos__|__abs__|__eq__|__ne__|__lt__|__le__|__gt__|__ge__)$" ]
             docstring_section_style: spacy
             signature_crossrefs: true
             show_symbol_type_heading: true
