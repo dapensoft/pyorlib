@@ -77,19 +77,21 @@ leverage all the features and capabilities of the library.
 
 </ul>
 
-## Simple Example
-???+ Warning
+## A Simple Example
 
-    The following example has been taken from an example posted on the official OR-Tools website. The purpose is to demonstrate how this problem can be solved using OR-Tools and PyORlib. You can find the original example at the following link: [MIP Example](https://developers.google.com/optimization/mip/mip_example)
-
-&emsp;&emsp;For this example, we are going to solve a simple problem where the objective is to find the highest integer coordinates (x, y) for Y Axis inside a defined shape. In the following image, we can appreciate the shape, which is composed of four segments, and the plausible values that we need to search for are shown as the pink dots.
-
-<p align="center">
-   <img src="./images/examples/simple-example-graph.svg" alt="Simple Example Graph" width="900px" style="margin-top: -10px;margin-bottom: -20px;">
+<p style='text-align: justify;'>
+    &emsp;&emsp;Experience the power of PyORlib through a simple example that illustrates the core concepts and basic 
+	usage of the package by formulating and solving a mixed integer programming (MIP) problem from the 
+	<a href="https://developers.google.com/optimization/mip/mip_example" target="_blank">OR-Tools documentation</a>.
+	This example will provide you with a clear and concise introduction to the package's functionalities and its 
+	application in real-world optimization challenges.
 </p>
 
-### Defining an optimization model
-&emsp;&emsp;First, we need to define an optimization model that allows us to maximize the values of y and x while satisfying the given constraints. In this particular case, the model that achieves the desired goal is represented as follows:
+<p style='text-align: justify;'>
+    &emsp;&emsp;In this example, we will find the highest integer coordinates <i>(x, y)</i> on the <i>Y-axis</i> within 
+	a defined shape. Our objective is to maximize the value of an objective function while satisfying linear 
+	constraints, as shown below with a mathematical formulation:
+</p>
 
 $$
 \begin{align}
@@ -100,201 +102,180 @@ $$
 \end{align}
 $$
 
-### Implementing the model in code
-&emsp;&emsp;Next, we need to translate the optimization model into code. For that, we are going to use the PyORlib to define a function that builds our model using a given engine which wraps an optimization suite:
+<p style='text-align: justify;'>
+    &emsp;&emsp;Since the constraints are linear, we can classify this problem as a linear optimization problem in 
+	which the solutions are required to be integers. The feasible region and integer points for this problem are 
+	shown below:
+</p>
 
-=== "Using `Model` class"
-    ``` py title="Implementing the model in code" linenums="1"
-    from math import inf
-    from typing import Tuple, Dict
-    
-    from pyorlib.core.loggers import StdOutLogger
-    from pyorlib.mp import Model, ValueType, OptimizationType
-    from pyorlib.mp.algebra import Variable, Term
-    from pyorlib.mp.engines import Engine
-    from pyorlib.mp.engines.cplex import CplexEngine
-    from pyorlib.mp.engines.gurobi import GurobiEngine
-    from pyorlib.mp.engines.ortools import ORToolsEngine
+<p align="center">
+   <img src="./images/examples/simple-example-graph.svg" alt="Simple graph illustrating the feasible region and integer points" width="800px" style="margin-top: -10px;margin-bottom: -20px;">
+</p>
 
-    def create_optimization_model(engine: Engine) -> Model:
-        # Create an optimization model
-        model = Model(name="Optimization model", engine=engine)  # (1)!
+<p style='text-align: justify;'>
+	&emsp;&emsp;In order to model and solve this problem, we'll be using the PyORlib package. In this example, we'll 
+	utilize the OR-Tools optimization package, which is one of the built-in integrations provided by PyORlib. However,
+	you can also choose to use other integration options described in the <a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a>
+	section, or even implement your own custom integration. Before proceeding, make sure you have installed the OR-Tools
+	integration. Once that is done, let's get started:
+</p>
 
-        # Create x variable
-        x: Variable = model.add_variable(name="x", value_type=ValueType.INTEGER, lower_bound=0, upper_bound=inf)
-        # Create y variable
-        y: Variable = model.add_variable(name="y", value_type=ValueType.INTEGER)  # (2)!
+```Python title="Solving a MIP Problem with PyORlib" linenums="1"
+from math import inf
 
-        # Add model constraints
-        # Constraint 1: 0 <= x <= 3.5 (3)
-        model.add_constraint(expression=0 <= x)
-        model.add_constraint(expression=x <= 3.5)  # (4)!
-        # Constraint 2: 0 <= y <= 2.5
-        model.add_constraint(expression=0 <= y)
-        model.add_constraint(expression=y <= 2.5)
-        # Constraint 3: x + 7*y = 17.5
-        model.add_constraint(expression=x + 7 * y <= 17.5)
+from pyorlib import Model
+from pyorlib.engines.ortools import ORToolsEngine
+from pyorlib.enums import ValueType, OptimizationType
 
-        # Define the objetive function
-        model.set_objective(opt_type=OptimizationType.MAXIMIZE, expression=x + 10 * y)
+# Create a Model instance using the ORTools engine
+model: Model = Model(engine=ORToolsEngine())
 
-        # Return model
-        return model
-    ```
+# Add two integer variables for coordinates x and y
+x = model.add_variable("x", ValueType.INTEGER, 0, inf)
+y = model.add_variable("y", ValueType.INTEGER, 0, inf)
 
-    1. In this case, we are using the `Model` class to define the model. This class provides some tools over the `Engine` to manage large models in a defined way.
-    2. By default, all variables, whether they are integers or continuous, are defined between `[0, +inf)`. Binary variables can only be 0 or 1.
-    3. Some optimization packages do not support expressions like `0 <= x <= 3.5`, and we recommend splitting them into two separate constraints, which does not affect the performance of the model optimization.
-    4. These constraints can be avoided since the `lower_bound` and `upper_bound` parameters at variable creation can help you define the bounds of your variables.
+# Define problem constraints
+model.add_constraint(x + 7 * y <= 17.5)
+model.add_constraint(x <= 3.5)
 
-=== "Using `Engine` class"
-    ``` py title="Implementing the model in code" linenums="1"
-    from math import inf
-    from typing import Tuple, Dict
-    
-    from pyorlib.core.loggers import StdOutLogger
-    from pyorlib.mp import Model, ValueType, OptimizationType
-    from pyorlib.mp.algebra import Variable, Term
-    from pyorlib.mp.engines import Engine
-    from pyorlib.mp.engines.cplex import CplexEngine
-    from pyorlib.mp.engines.gurobi import GurobiEngine
-    from pyorlib.mp.engines.ortools import ORToolsEngine
+# Set objective to maximize x + 10y
+model.set_objective(OptimizationType.MAXIMIZE, x + 10 * y)
 
-    def create_optimization_model(engine: Engine) -> Tuple[Engine, Dict[str, Term]]:
-        # No need to create a model (1)
+# Solve model
+model.solve()
 
-        # Create x variable
-        x: Variable = engine.add_variable(name="x", value_type=ValueType.INTEGER, lower_bound=0, upper_bound=inf)
-        # Create y variable
-        y: Variable = engine.add_variable(name="y", value_type=ValueType.INTEGER)  # (2)!
+# Print solution
+model.print_solution()
+```
 
-        # Add model constraints
-        # Constraint 1: 0 <= x <= 3.5 (3)
-        engine.add_constraint(expression=0 <= x)
-        engine.add_constraint(expression=x <= 3.5)  # (4)!
-        # Constraint 2: 0 <= y <= 2.5
-        engine.add_constraint(expression=0 <= y)
-        engine.add_constraint(expression=y <= 2.5)
-        # Constraint 3: x + 7*y = 17.5
-        engine.add_constraint(expression=x + 7 * y <= 17.5)
+<details markdown="1" class="tip">
+<summary>You can also work with other engines...</summary>
 
-        # Define the objetive function
-        engine.set_objective(opt_type=OptimizationType.MAXIMIZE, expression=x + 10 * y)
+<p style='text-align: justify;'>
+    &emsp;&emsp;With PyORlib, you have the flexibility to utilize various engines, such as the <code>GurobiEngine</code>,
+	to solve the same model without altering its definition. To learn more about supported integrations, please refer to
+	the <a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a>
+	section.
+</p>
 
-        # Return model and list of variables
-        return engine, {"x": x, "y": y} # (5)!
-    ```
+```Python title="Solving a MIP Problem with PyORlib (Gurobi engine)" linenums="1" hl_lines="8"
+from math import inf
 
-    1. In this case, we are using the `Engine` class to define the model. This class provides a simpler interface over the `Model` interface, which allows you to define your own model structure.
-    2. By default, all variables, whether they are integers or continuous, are defined between `[0, +inf)`. Binary variables can only be 0 or 1.
-    3. Some optimization packages do not support expressions like `0 <= x <= 3.5`, and we recommend splitting them into two separate constraints, which does not affect the performance of the model optimization.
-    4. These constraints can be avoided since the `lower_bound` and `upper_bound` parameters at variable creation can help you define the bounds of your variables.
-    5. We need to return the variables and a dictionary with them, in order to ask for their value latter when the model is already solve.
+from pyorlib import Model
+from pyorlib.engines.gurobi import GurobiEngine
+from pyorlib.enums import ValueType, OptimizationType
 
-### Solving the model using an optimization suite
+# Create a Model instance using the Gurobi engine
+model: Model = Model(engine=GurobiEngine())
 
-???+ Danger
+# Add two integer variables for coordinates x and y
+x = model.add_variable("x", ValueType.INTEGER, 0, inf)
+y = model.add_variable("y", ValueType.INTEGER, 0, inf)
 
-    It's important to note that each optimization package has built-in support for various solvers. Depending on the specific needs of your problem, it may be necessary to specify the desired solver explicitly and not rely on the default solver provided by the `Engine` class.
+# Define problem constraints
+model.add_constraint(x + 7 * y <= 17.5)
+model.add_constraint(x <= 3.5)
 
-&emsp;&emsp;PyORlib allows you to use different optimization suites as engines to build and solve your model without the need to rewrite the code for each one. In this case, we are going to use `OR-Tools`, `CPlex`, and `Gurobi` to solve and report the solutions. To do that, you need to create a `main.py` file and add the following lines of code:
+# Set objective to maximize x + 10y
+model.set_objective(OptimizationType.MAXIMIZE, x + 10 * y)
 
-=== "Using `Model` class"
-    ``` py title="Solving the model" linenums="24"
-    if __name__ == "__main__":
-        # Get engine classes
-        engines_cls = [ORToolsEngine, GurobiEngine, CplexEngine] # (1)!
+# Solve model
+model.solve()
 
-        # For each class, get an instance and solve the model.
-        for cls in engines_cls:
-            engine = cls() # (2)!
+# Print solution
+model.print_solution()
+```
 
-            # Create the model
-            model = create_optimization_model(engine) # (3)!
+</details>
 
-            # Solve the model
-            model.solve()
+<p style='text-align: justify;'>
+    &emsp;&emsp;As we can see from the previous example, PyORlib follows a simple and user-friendly workflow for 
+	defining, solving, and interacting with mathematical models. Let's review the key steps:
+</p>
 
-            # Get model variables
-            x: Term = model.get_term_by_name("x") # (4)!
-            y: Term = model.get_term_by_name("y")
+<ol style='text-align: justify;'>
 
-            # Get solution summary
-            print(f"Interface: {type(engine).__name__}")
-            print(f"Variables: x:{x.value}, y:{y.value}")
-            print(f"Objective function value: {engine.objective_value} with status {engine.solution_status.name}\n")
-    ```
+<li>
+<b>Import necessary modules:</b> We first imported the required modules from PyORlib, including the <code>Model</code> 
+class, <code>ORToolsEngine</code> class, and necessary enums (<code>ValueType</code> and <code>OptimizationType</code>).
+</li>
 
-    1. `engines_cls` contains a list with the classes of the engines that are going to be used.
-    2. By default, PyORlib chooses a default solver without any parameters to solve the model. However, please be aware that in some cases, you may need to pre-create the solver using your desired interface and pass it as an argument to the engine. This is also useful when some extra configuration is needed.
-    3. Use the previously defined method `create_optimization_model()` to build the model.
-    4. Retrieve the variables from the model by their names. Keep in mind that `get_term_by_name()` returns individual terms by name, and there are other methods to work with sets that have a defined shape (e.g. x_i_j) like `add_variable_to_set()`.
+<li>
+<b>Create a new model:</b> Then we created a new <code>Model</code> object and specified that we want to use the 
+OR-Tools engine for solving the optimization problem.
+</li>
 
-=== "Using `Engine` class"
-    ``` py title="Solving the model" linenums="25"
-    if __name__ == "__main__":
-        # Get engine classes
-        engines_cls = [ORToolsEngine, GurobiEngine, CplexEngine] # (1)!
+<li>
+<b>Define the variables:</b> We added 2 integer variables, <i>x</i> and <i>y</i>, to represent the coordinates on the
+<i>Y-axis</i> within the defined shape.
+</li>
 
-        # For each class, get an instance and solve the model.
-        for cls in engines_cls:
-            engine = cls() # (2)!
+<li>
+<b>Define the constraints:</b> We added linear constraints to the model to restrict the feasible region of the 
+optimization problem and ensure the coordinates <i>(x, y)</i> satisfy specific conditions.
+</li>
 
-            # Create the model
-            engine, variables = create_optimization_model(engine) # (3)!
+<li>
+<b>Define the objective function:</b> We set the objective of the model using the <code>set_objective</code> method to 
+maximize the objective function <i>x + 10 * y</i>.
+</li>
 
-            # Solve the model
-            engine.solve()
+<li>
+<b>Solve the model:</b> We invoked the solve method on the model to find the optimal values for variables <i>(x, y)</i>
+that satisfy the constraints and maximize the objective function.
+</li>
 
-            # Get model variables
-            x: Term = variables.get("x") # (4)!
-            y: Term = variables.get("y")
+<li>
+<b>Display the solution:</b> Finally, we called the print_solution method to showcase the optimal values of variables 
+<i>(x, y)</i> and the corresponding value of the objective function.
+</li>
 
-            # Get solution summary
-            print(f"Interface: {type(engine).__name__}")
-            print(f"Variables: x:{x.value}, y:{y.value}")
-            print(f"Objective function value: {engine.objective_value} with status {engine.solution_status.name}\n")
-    ```
+</ol>
 
-    1. `engines_cls` contains a list with the classes of the engines that are going to be used.
-    2. By default, PyORlib chooses a default solver without any parameters to solve the model. However, please be aware that in some cases, you may need to pre-create the solver using your desired interface and pass it as an argument to the engine. This is also useful when some extra configuration is needed.
-    3. Use the previously defined method `create_optimization_model()` to build the model.
-    4. Retrieve the variables from the dictionary that was returned with the engine.
+<p style='text-align: justify;'>
+    &emsp;&emsp;Now, let's run the previous code example to solve the defined model and compare it to the solution 
+	obtained using only the OR-Tools API, as demonstrated in the examples provided in the <a href="https://developers.google.com/optimization/mip/mip_example" target="_blank">OR-Tools documentation</a>.
+	By executing the code, you should obtain the following optimal solution:
+</p>
 
-&emsp;&emsp;Finally, the result obtained from the execution of the models (depending on the optimization package used) is that the point D=(3,2) is the highest integer y point with the highest integer x point inside the defined shape.
+```console hl_lines="1 4-5 7-8"
+------ MODEL SOLUTION ------
 
-=== "Using `Model` class"
-    ``` text title="Console output"
-        Interface: ORToolsEngine
-        Variables: x:3.0, y:2.0
-        Objective function value: 23.0 with status OPTIMAL
+Objective function:
+	Status: OPTIMAL
+	Value:  23 
+Terms:
+	Name: x | Type: Variable | Value type: Integer | lb: 0 | ub: inf | val: 3 
+	Name: y | Type: Variable | Value type: Integer | lb: 0 | ub: inf | val: 2 
 
-        Interface: GurobiEngine
-        Variables: x:3.0, y:2.0
-        Objective function value: 23.0 with status OPTIMAL
 
-        Interface: CplexEngine
-        Variables: x:3.0, y:2.0
-        Objective function value: 23.0 with status OPTIMAL
-    ```
-=== "Using `Engine` class"
-    ``` text title="Console output"
-        Interface: ORToolsEngine
-        Variables: x:3.0, y:2.0
-        Objective function value: 23.0 with status OPTIMAL
+Process finished with exit code 0
+```
 
-        Interface: GurobiEngine
-        Variables: x:3.0, y:2.0
-        Objective function value: 23.0 with status OPTIMAL
+<p style='text-align: justify;'>
+    &emsp;&emsp;Having gained a clear understanding of the workflow showcased in the Simple Example, you are now 
+	well-equipped to explore more intricate optimization scenarios and fully harness the capabilities of PyORlib in 
+	your own projects.
+</p>
 
-        Interface: CplexEngine
-        Variables: x:3.0, y:2.0
-        Objective function value: 23.0 with status OPTIMAL
-    ```
-As we can see, we obtained the desired result on each solver without the need to remake any portion of the code.
+<details markdown="1" class="example" open>
+<summary>Next steps...</summary>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;Feel free to experiment and build upon this example to explore the full potential of PyORlib in your 
+	projects. With PyORlib, you can define and implement complex mathematical models and algorithms, test multiple 
+	optimization packages to identify the ideal one that perfectly aligns with your unique requirements, define 
+	and organize the vital components of your optimization model, and much more!
+</p>
+</details>
 
 ## Continuous Evolution
-&emsp;&emsp;PyORlib continuously adapts to support developers across various technological and programming domains. Its primary goal is to remain a useful tool for learning about operations research, mathematical model optimization, and testing different optimization packages. While future development may introduce some changes to enhance and expand certain characteristics of the current functionality, we don't anticipate any significant changes that would fundamentally alter the nature of the library.
+
+&emsp;&emsp;PyORlib continuously adapts to support developers across various technological and programming domains. Its
+primary goal is to remain a useful tool for learning about operations research, mathematical model optimization, and
+testing different optimization packages. While future development may introduce some changes to enhance and expand
+certain characteristics of the current functionality, we don't anticipate any significant changes that would
+fundamentally alter the nature of the library.
 
 <details markdown="1" class="info" open>
 <summary>Driving Innovation Through Collaboration</summary>
