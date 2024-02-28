@@ -87,6 +87,8 @@ leverage all the features and capabilities of the library.
 	application in real-world optimization challenges.
 </p>
 
+### Problem Definition
+
 <p style='text-align: justify;'>
     &emsp;&emsp;In this example, we will find the highest integer coordinates <i>(x, y)</i> on the <i>Y-axis</i> within 
 	a defined shape. Our objective is to maximize the value of an objective function while satisfying linear 
@@ -111,6 +113,8 @@ $$
 <p align="center">
    <img src="./images/examples/simple-example-graph.svg" alt="Simple graph illustrating the feasible region and integer points" width="800px" style="margin-top: -10px;margin-bottom: -20px;">
 </p>
+
+### Solution Using PyORlib
 
 <p style='text-align: justify;'>
 	&emsp;&emsp;In order to model and solve this problem, we'll be using the PyORlib package. In this example, we'll 
@@ -268,6 +272,89 @@ Process finished with exit code 0
 	and organize the vital components of your optimization model, and much more!
 </p>
 </details>
+
+## Runtime Flexibility and Customization
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;At its core, PyORlib provides a modular optimization design that allows you to seamlessly switch between
+	different built-in or custom optimization engine implementations on the fly. Whether you opt for official 
+	optimization package integrations or decide to create your own custom ones, PyORlib allows you to tailor 
+	the behavior and capabilities of the optimization engine to perfectly align with your unique requirements.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;By leveraging the principles of dependency inversion and open-closed design, PyORlib decouples the 
+	model's optimization from the underlying implementation, allowing you to optimize models across different 
+	optimization engines, including custom ones, without modifying the model definition or employing complex logic.
+</p>
+
+### Seeing it in Action
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;To showcase the flexibility of PyORlib, let's revisit the <a href="#a-simple-example">Simple Example</a>
+	we discussed earlier and use it as our foundation. After copying the example, we will make some modifications to 
+	decouple the dependency from a specific optimization engine to its interface, and encapsulate the model definition
+	and resolution within a function to ensure reusability across different optimization engines, as shown below:
+</p>
+
+```Python linenums="1" hl_lines="4-5 9 11 32 35"
+from math import inf
+
+from pyorlib import Model, Engine
+from pyorlib.engines.gurobi import GurobiEngine
+from pyorlib.engines.ortools import ORToolsEngine
+from pyorlib.enums import ValueType, OptimizationType
+
+
+def mip_problem(engine: Engine):
+    # Create a Model instance
+    model: Model = Model(engine)
+
+    # Add two integer variables for coordinates x and y
+    x = model.add_variable("x", ValueType.INTEGER, 0, inf)
+    y = model.add_variable("y", ValueType.INTEGER, 0, inf)
+
+    # Define problem constraints
+    model.add_constraint(x + 7 * y <= 17.5)
+    model.add_constraint(x <= 3.5)
+
+    # Set objective to maximize x + 10y
+    model.set_objective(OptimizationType.MAXIMIZE, x + 10 * y)
+
+    # Solve model
+    model.solve()
+
+    # Print solution
+    model.print_solution()
+
+
+# Solving the MIP problem using the ORTools engine
+mip_problem(engine=ORToolsEngine())
+
+# Solving the MIP problem using the Gurobi engine
+mip_problem(engine=GurobiEngine())
+```
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;As we can see from the example, by just depending on the engine interface instead of a concrete 
+	implementation and applying dependency injection, we were able to solve the same MIP problem from the Simple 
+	Example across multiple optimization engines, including custom ones, without modifying the underlying model 
+	definition and optimization.
+</p>
+
+### Built-in & Custom Integrations
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;Out of the box, PyORlib provides integrations for popular solvers like CPLEX, Gurobi, OR-Tools and PuLP,
+	leveraging their proven algorithms to optimize models reliably. These integrations give you access to top-tier 
+	solvers without additional work. However, the options are not limited only to built-in integrations.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;PyORlib also supports custom engine implementations through its extensible and flexible architecture. 
+	You can create your own optimization engines by subclassing the base <code>Engine</code> class and implementing the 
+	necessary methods, whether using third-party or custom algorithms.
+</p>
 
 ## Continuous Evolution
 
