@@ -152,46 +152,6 @@ model.solve()
 model.print_solution()
 ```
 
-<details markdown="1" class="tip">
-<summary>You can also work with other engines...</summary>
-
-<p style='text-align: justify;'>
-    &emsp;&emsp;With PyORlib, you have the flexibility to utilize various engines, such as the <code>GurobiEngine</code>,
-	to solve the same model without altering its definition. To learn more about supported integrations, please refer to
-	the <a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a>
-	section.
-</p>
-
-```Python title="Solving a MIP Problem with PyORlib (Gurobi engine)" linenums="1" hl_lines="8"
-from math import inf
-
-from pyorlib import Model
-from pyorlib.engines.gurobi import GurobiEngine
-from pyorlib.enums import ValueType, OptimizationType
-
-# Create a Model instance using the Gurobi engine
-model: Model = Model(engine=GurobiEngine())
-
-# Add two integer variables for coordinates x and y
-x = model.add_variable("x", ValueType.INTEGER, 0, inf)
-y = model.add_variable("y", ValueType.INTEGER, 0, inf)
-
-# Define problem constraints
-model.add_constraint(x + 7 * y <= 17.5)
-model.add_constraint(x <= 3.5)
-
-# Set objective to maximize x + 10y
-model.set_objective(OptimizationType.MAXIMIZE, x + 10 * y)
-
-# Solve model
-model.solve()
-
-# Print solution
-model.print_solution()
-```
-
-</details>
-
 <p style='text-align: justify;'>
     &emsp;&emsp;As we can see from the previous example, PyORlib follows a simple and user-friendly workflow for 
 	defining, solving, and interacting with mathematical models. Let's review the key steps:
@@ -481,6 +441,68 @@ model.print_solution()
     &emsp;&emsp;As we can see from this practical example, PyORlib enables us to easily build a transportation model, 
 	define its necessary components, optimize the model, and obtain the optimal solution. The simple yet powerful 
 	syntax of PyORlib allows us to focus on the problem at hand without getting lost in implementation details.
+</p>
+
+## Organized and Readable Workflow
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;PyORlib goes beyond the optimization process and offers a powerful modeling workflow that emphasizes 
+	code organization, readability, and maintainability over time. This workflow is built upon a set of abstractions 
+	and classes from the structures module, that allows you to centralize and standardize the definition of your 
+	model's components, such as dimensions, parameters, decision variables, and constant properties.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;One significant advantage of PyORlib's workflow is the ability to easily rename and modify components 
+	throughout your codebase. Instead of manually searching and replacing strings, you can make changes in one place, 
+	ensuring consistency and reducing errors.
+</p>
+
+```Python linenums="1" hl_lines="12-13 17-24 28-32"
+from abc import ABC
+from dataclasses import dataclass
+
+from pyorlib.enums import ParameterType, ValueType
+from pyorlib.structures import DimensionDefinition, ParameterDefinition, TermDefinition
+
+
+class GenericModelDefinition(ABC):
+	
+    @dataclass(frozen=True)
+    class Dimensions(ABC):
+        n = DimensionDefinition(name="n", display_name="Total number of 'i' indices", min=0)
+        m = DimensionDefinition(name="m", display_name="Total number of 'j' indices", min=0)
+
+    @dataclass(frozen=True)
+    class Parameters(ABC):
+        c_i_j = ParameterDefinition(
+            set_name="c_i_j",
+            name=lambda i, j: f"c_{i}_{j}",
+            display_name="Cost per unit shipment between 'i' and 'j'",
+            parameter_types={ParameterType.FIXED, ParameterType.BOUNDED},
+            value_types={ValueType.CONTINUOUS},
+            min=0,
+        )
+
+    @dataclass(frozen=True)
+    class DecisionVariables(ABC):
+        x_i_j = TermDefinition(
+            set_name="x_i_j",
+            name=lambda i, j: f"x_{i}_{j}",
+            display_name="Amount of commodity to ship from 'i' to 'j'",
+        )
+
+
+# Usage within a model
+print(GenericModelDefinition.Dimensions.n.min)  # Access the minimum value for dimension 'n'
+print(GenericModelDefinition.Parameters.c_i_j.name(1, 1))  # Generate the name for parameter 'c_1_1'
+print(GenericModelDefinition.DecisionVariables.x_i_j.display_name)  # Access the display name for the decision variable 'x_i_j'
+```
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;By leveraging PyORlib's structured approach, you can improve the maintainability and scalability of 
+	your models. The clean and organized codebase makes for easy navigation, understanding, and modification, making
+	it easier to collaborate with other team members and adapt your models to changing requirements.
 </p>
 
 ## Runtime Flexibility and Customization
