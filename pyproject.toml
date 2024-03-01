@@ -17,7 +17,7 @@ authors = [
     { name = "Isaac Da Pena", email = "dapensoft@gmail.com" },
     { name = "Manuel Da Pena", email = "dapensoft@gmail.com" },
 ]
-keywords = []
+keywords = ["optimization", "optimization-modeling", "operation-research", "python"]
 classifiers = [
     "Intended Audience :: Education",
     "Intended Audience :: Developers",
