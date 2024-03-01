@@ -399,7 +399,7 @@ model.solve()
 model.print_solution()
 ```
 
-1. <h2><a href="#runtime-flexibility-and-customization">Runtime Flexibility and Customization</a></h2>
+1. <h2><a href="#runtime-flexibility-customization">Runtime Flexibility & Customization</a></h2>
    &emsp;&emsp;As previously mentioned, we have the ability to solve this model using multiple optimization engines 
    without making any changes to the underlying definition. For instance, we can employ various optimization engines, 
    such as:
@@ -674,7 +674,8 @@ mip_problem(engine=GurobiEngine())
 
 <p style='text-align: justify;'>
     &emsp;&emsp;PyORlib is an open source project that welcomes community involvement. If you wish to contribute
-	additional optimization suites, improvements, or bug fixes, please check the <a href="/pyorlib/contributing/">Contributing</a> section for guidelines on collaborating.
+	additional optimization suites, improvements, or bug fixes, please check the <a href="https://dapensoft.github.io/pyorlib/contributing/" target="_blank">Contributing</a> 
+	section for guidelines on collaborating.
 </p>
 </details>
 
