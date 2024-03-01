@@ -269,8 +269,6 @@ $$
 
 	&emsp;Satisfy demand at market $j$: $\sum_{i=1}^{n} x_{ij} \geq b_{j} \quad \forall_{j}$
 
-### Problem Data
-
 <p style='text-align: justify;'>
     &emsp;&emsp;The GAMS tutorial describes a scenario with two canning plants and three markets. It provides sample 
 	supply, demand and cost data. We will use this same data to define our model.
@@ -443,7 +441,7 @@ model.print_solution()
 	syntax of PyORlib allows us to focus on the problem at hand without getting lost in implementation details.
 </p>
 
-## Organized and Readable Workflow
+## Organized & Readable Workflow
 
 <p style='text-align: justify;'>
     &emsp;&emsp;PyORlib goes beyond the optimization process and offers a powerful modeling workflow that emphasizes 
@@ -572,7 +570,7 @@ schema = ExampleSchema(
 	This helps maintain data integrity and prevents errors downstream in the optimization process.
 </p>
 
-## Runtime Flexibility and Customization
+## Runtime Flexibility & Customization
 
 <p style='text-align: justify;'>
     &emsp;&emsp;At its core, PyORlib provides a modular optimization design that allows you to seamlessly switch between
