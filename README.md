@@ -79,7 +79,7 @@ leverage all the features and capabilities of the library.
 ## Installation
 
 <p style='text-align: justify;'>
-	&emsp;&emsp;PyORlib is available as a Python package and can be easily installed using `pip`. To install the core 
+	&emsp;&emsp;PyORlib is available as a Python package and can be easily installed using <code>pip</code>. To install the core 
 	functionalities, open your terminal and execute the following command:
 </p>
 
