@@ -657,17 +657,25 @@ mip_problem(engine=GurobiEngine())
 
 ## Continuous Evolution
 
-&emsp;&emsp;PyORlib continuously adapts to support developers across various technological and programming domains. Its
-primary goal is to remain a useful tool for learning about operations research, mathematical model optimization, and
-testing different optimization packages. While future development may introduce some changes to enhance and expand
-certain characteristics of the current functionality, we don't anticipate any significant changes that would
-fundamentally alter the nature of the library.
+<p style='text-align: justify;'>
+	&emsp;&emsp;PyORlib continuously adapts to support developers across various technological and programming domains. 
+	Its primary goal is to remain a useful tool for learning about operations research, mathematical model optimization,
+	and testing different optimization packages with ease.
+</p>
 
-<details markdown="1" class="info" open>
+<p style='text-align: justify;'>
+	&emsp;&emsp;While future development may introduce some changes to enhance and expand certain current 
+	functionalities, the highest priority remains providing a simple yet powerful platform for students, researchers,
+	and practitioners to explore optimization concepts, test algorithms, and further their own knowledge. Large-scale
+	changes that could introduce significant complexity are less likely in order to maintain accessibility as the core
+	focus.
+</p>
+
+<details markdown="1" class="tip" open>
 <summary>Driving Innovation Through Collaboration</summary>
 
 <p style='text-align: justify;'>
-    PyORlib is an open source project that welcomes community involvement. If you wish to contribute
+    &emsp;&emsp;PyORlib is an open source project that welcomes community involvement. If you wish to contribute
 	additional optimization suites, improvements, or bug fixes, please check the <a href="/pyorlib/contributing/">Contributing</a> section for guidelines on collaborating.
 </p>
 </details>
@@ -675,7 +683,7 @@ fundamentally alter the nature of the library.
 ## Get Started Today!
 
 <p style='text-align: justify;' markdown>
-    &emsp;&emsp;Are you ready to get started with mathematical modeling and optimization using PyORlib? Follow these 
+    &emsp;&emsp;Are you ready to dive into the operation research and optimization modeling world with PyORlib? Follow these 
     steps to integrate PyORlib into your project and start leveraging its powerful modeling tools. Click the button
     below to navigate to the PyORlib Getting Started page and explore detailed instructions, examples, and more:
 </p>
