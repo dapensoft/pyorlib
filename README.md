@@ -264,19 +264,19 @@ $$
 
 - **Indices:**
 
-	&emsp;$i=$ plants; $\quad j=$ markets.
+	&emsp; $i=$ plants; $\quad j=$ markets.
 
 - **Parameters (Given Data):**
 
-	&emsp;$a_{i}=$ supply of commodity of plant $i$ (in cases).
+	&emsp; $a_{i}=$ supply of commodity of plant $i$ (in cases).
 
-	&emsp;$b_{j}=$ demand for commodity at market $j$ (cases).
+	&emsp; $b_{j}=$ demand for commodity at market $j$ (cases).
 
-	&emsp;$c_{ij}=$ cost per unit shipment between plan $i$ and market $j$ ($/case).
+	&emsp; $c_{ij}=$ cost per unit shipment between plan $i$ and market $j$ ($/case).
 
 - **Decision Variables:**
 
-	&emsp;$x_{ij}=$ amount of commodity to ship from plant $i$ to market $j$ (cases).
+	&emsp; $x_{ij}=$ amount of commodity to ship from plant $i$ to market $j$ (cases).
 
 - **Constraints:**
 
