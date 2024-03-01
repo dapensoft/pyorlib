@@ -97,9 +97,19 @@ class PuLPEngine(Engine):
             if self.value_type == ValueType.BINARY:
                 pulp_var = LpVariable(name=name, cat=LpBinary, lowBound=0, upBound=1)
             elif self.value_type == ValueType.INTEGER:
-                pulp_var = LpVariable(name=name, cat=LpInteger, lowBound=lower_bound, upBound=upper_bound)
+                pulp_var = LpVariable(
+                    name=name,
+                    cat=LpInteger,
+                    lowBound=lower_bound,
+                    upBound=upper_bound if upper_bound < inf else None,
+                )
             elif self.value_type == ValueType.CONTINUOUS:
-                pulp_var = LpVariable(name=name, cat=LpContinuous, lowBound=lower_bound, upBound=upper_bound)
+                pulp_var = LpVariable(
+                    name=name,
+                    cat=LpContinuous,
+                    lowBound=lower_bound,
+                    upBound=upper_bound if upper_bound < inf else None,
+                )
             else:
                 raise PuLPException("Unknown ValueType.")
 
