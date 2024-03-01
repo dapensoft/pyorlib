@@ -16,6 +16,36 @@ hide:
 
 <br>
 
+<p align="center">
+
+<a href="https://github.com/dapensoft/pyorlib/actions?query=workflow%3ATests+event%3Apush+branch%3Amaster" target="_blank">
+    <img src="https://github.com/dapensoft/pyorlib/actions/workflows/run-tests.yml/badge.svg?branch=master" alt="Tests">
+</a>
+
+<a href="https://github.com/dapensoft/pyorlib/actions?query=workflow%3ADocs+event%3Apush+branch%3Amaster" target="_blank">
+    <img src="https://github.com/dapensoft/pyorlib/actions/workflows/deploy-docs.yml/badge.svg?branch=master" alt="Docs">
+</a>
+
+<a href='https://coveralls.io/github/dapensoft/pyorlib?branch=master'>
+	<img src='https://coveralls.io/repos/github/dapensoft/pyorlib/badge.svg?branch=master' alt='Coverage Status'/>
+</a>
+
+<a href="https://pypi.org/project/pyorlib" target="_blank">
+    <img src="https://img.shields.io/pypi/v/pyorlib?color=deeppink" alt="Package version">
+</a>
+
+<a href="https://pypi.org/project/pyorlib" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/pyorlib?color=deeppink" alt="Supported Python versions">
+</a>
+
+<a href="https://github.com/psf/black">
+	<img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
+</a>
+
+</p>
+
+<br>
+
 ---
 
 **Documentation**: <a href="https://dapensoft.github.io/pyorlib" target="_blank">https://dapensoft.github.io/pyorlib</a>
