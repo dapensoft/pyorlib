@@ -470,8 +470,8 @@ class GenericModelDefinition(ABC):
 	
     @dataclass(frozen=True)
     class Dimensions(ABC):
-        n = DimensionDefinition(name="n", display_name="Total number of 'i' indices", min=0)
-        m = DimensionDefinition(name="m", display_name="Total number of 'j' indices", min=0)
+        n = DimensionDefinition(name="n", display_name="Total number of 'i' indices", min=1)
+        m = DimensionDefinition(name="m", display_name="Total number of 'j' indices", min=1)
 
     @dataclass(frozen=True)
     class Parameters(ABC):
@@ -503,6 +503,73 @@ print(GenericModelDefinition.DecisionVariables.x_i_j.display_name)  # Access the
     &emsp;&emsp;By leveraging PyORlib's structured approach, you can improve the maintainability and scalability of 
 	your models. The clean and organized codebase makes for easy navigation, understanding, and modification, making
 	it easier to collaborate with other team members and adapt your models to changing requirements.
+</p>
+
+## Ensuring Model Integrity
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;In addition to PyORlib's workflow capabilities, this package provides a set of abstractions 
+	designed to apply validations and ensure the integrity of your model data. These validation features play a 
+	crucial role in identifying errors early on and maintaining consistent, error-free model data, resulting in
+	more robust optimization.
+</p>
+
+<ol style='text-align: justify;'>
+
+<li><b>Defining Validation Rules</b> ─ 
+PyORlib utilizes Python <code>descriptors</code> and <code>dataclasses</code> to define validation rules for model 
+schemas. Attributes like <code>DimensionField</code> and <code>ParameterField</code> allow specifying requirements 
+like minimum/maximum values.
+
+```Python linenums="1" hl_lines="9-15"
+from dataclasses import dataclass
+
+from pyorlib.enums import ParameterType, ValueType
+from pyorlib.structures import MultiValueParameter
+from pyorlib.validators import DimensionField, ParameterField
+
+
+@dataclass
+class ExampleSchema:
+    n: int = DimensionField(min=1)  # Specifies the minimum value allowed for 'n'
+    a_i: MultiValueParameter = ParameterField(
+        parameter_types={ParameterType.FIXED},  # Specifies the allowed param types for 'a_i'
+        value_types={ValueType.INTEGER},  # Specifies the allowed value types for 'a_i'
+        min=0,  # Specifies the minimum value allowed for 'a_i'
+    )
+```
+</li>
+
+<li><b>Putting it into Practice</b> ─ 
+To apply validations, instantiate the <code>ExampleSchema</code> class with the model data. If initialization succeeds
+without errors, the data passed all validations and can be used safely for optimization. However, if the data is 
+invalid, an error will be raised immediately upon initialization, before the invalid data can be optimized.
+
+```Python linenums="1"
+schema = ExampleSchema(
+	n=2,
+	a_i=MultiValueParameter(
+        value_type=ValueType.INTEGER,
+        parameter_type=ParameterType.FIXED,
+        values=(1, 2),
+    ),
+) # succeeds
+
+schema = ExampleSchema(
+	n=0,
+	a_i=MultiValueParameter(
+        value_type=ValueType.INTEGER,
+        parameter_type=ParameterType.FIXED,
+        values=(1, 2.6),
+    ),
+) # raises ValueError
+```
+</li>
+</ol>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;By validating data upon instantiation, any issues are caught immediately before the model is optimized.
+	This helps maintain data integrity and prevents errors downstream in the optimization process.
 </p>
 
 ## Runtime Flexibility and Customization
