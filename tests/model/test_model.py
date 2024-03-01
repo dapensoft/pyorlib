@@ -1,3 +1,4 @@
+from math import inf
 from typing import List
 
 from _pytest.python_api import raises
@@ -261,31 +262,32 @@ class TestModel:
 
     @staticmethod
     def optimal_resolution_assertions(engine: Engine):
+        # Create a Model instance using the PuLP engine
         model: Model = Model(engine=engine)
 
-        # Crates the variables
-        variable_name_1 = "x_1"
-        variable1 = model.add_variable(name=variable_name_1, value_type=ValueType.BINARY)
+        # Add two integer variables for coordinates x and y
+        x = model.add_variable("x", ValueType.INTEGER, 0, inf)
+        y = model.add_variable("y", ValueType.INTEGER, 0, inf)
 
-        variable_name_2 = "x_2"
-        variable2 = model.add_variable(name=variable_name_2, value_type=ValueType.BINARY)
+        # Define problem constraints
+        model.add_constraint(x + 7 * y <= 17.5)
+        model.add_constraint(x <= 3.5)
 
-        # Sets the objective expression
-        model.set_objective(opt_type=OptimizationType.MINIMIZE, expression=variable1 * 2 + variable2 * -1 + 2)
+        # Set objective to maximize x + 10y
+        model.set_objective(OptimizationType.MAXIMIZE, x + 10 * y)
 
         # Checks empty objective value
         assert model.objective_value is None
         assert model.solution_status == SolutionStatus.NOT_SOLVED
 
-        # Solves the model
+        # Solve model
         model.solve()
 
         # Validate solution
-        assert model.objective_value is not None
-        assert model.objective_value == 1
         assert model.solution_status == SolutionStatus.OPTIMAL
-        assert variable1.value == 0.0
-        assert variable2.value == 1.0
+        assert model.objective_value == 23
+        assert x.value == 3
+        assert y.value == 2
 
     @staticmethod
     def infeasible_resolution_assertions(engine: Engine):
