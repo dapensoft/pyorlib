@@ -87,7 +87,7 @@ leverage all the features and capabilities of the library.
 	application in real-world optimization challenges.
 </p>
 
-### Problem Definition
+### Problem Formulation
 
 <p style='text-align: justify;'>
     &emsp;&emsp;In this example, we will find the highest integer coordinates <i>(x, y)</i> on the <i>Y-axis</i> within 
@@ -237,26 +237,6 @@ that satisfy the constraints and maximize the objective function.
 </ol>
 
 <p style='text-align: justify;'>
-    &emsp;&emsp;Now, let's run the previous code example to solve the defined model and compare it to the solution 
-	obtained using only the OR-Tools API, as demonstrated in the examples provided in the <a href="https://developers.google.com/optimization/mip/mip_example" target="_blank">OR-Tools documentation</a>.
-	By executing the code, you should obtain the following optimal solution:
-</p>
-
-```console hl_lines="1 4-5 7-8"
------- MODEL SOLUTION ------
-
-Objective function:
-	Status: OPTIMAL
-	Value:  23 
-Terms:
-	Name: x | Type: Variable | Value type: Integer | lb: 0 | ub: inf | val: 3 
-	Name: y | Type: Variable | Value type: Integer | lb: 0 | ub: inf | val: 2 
-
-
-Process finished with exit code 0
-```
-
-<p style='text-align: justify;'>
     &emsp;&emsp;Having gained a clear understanding of the workflow showcased in the Simple Example, you are now 
 	well-equipped to explore more intricate optimization scenarios and fully harness the capabilities of PyORlib in 
 	your own projects.
@@ -272,6 +252,236 @@ Process finished with exit code 0
 	and organize the vital components of your optimization model, and much more!
 </p>
 </details>
+
+## A Practical Example
+
+<p style='text-align: justify;' markdown>
+	&emsp;&emsp;To demonstrate PyORlib in a realistic scenario, we will implement a transportation problem from the 
+	<a href="https://www.gams.com/docs/pdf/Tutorial.PDF" target="_blank">GAMS Tutorial</a> by Richard E. Rosenthal, 
+	which provides a comprehensive case study for testing PyORlib's optimization capabilities and features.
+</p>
+
+### Problem Formulation
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;The transportation problem we will address is a classic instance of linear programming's transportation
+	problem, which has historically served as a testing ground for the development of optimization technology. This 
+	transportation problem involves determining the optimal flow of a product from multiple sources (plants) to 
+	destinations (markets) to minimize costs while satisfying demands.
+</p>
+
+$$
+\begin{align}
+\text{Minimize:} \quad & \sum_{i=1}^{n} \sum_{j=1}^{m} c_{ij} x_{ij} \\
+\\
+\text{Subject to:} \quad & \sum_{j=1}^{m} x_{ij} \leq a_{i} \quad \forall_{i} \\
+& \sum_{i=1}^{n} x_{ij} \geq b_{j} \quad \forall_{j} \\
+& x_{ij} \geq 0 \quad \forall_{ij}, \thinspace integer \\
+& i=1,...,n; \quad j=1,...,m \\
+\end{align}
+$$
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;Before diving into the implementation, let's take a moment to familiarize ourselves with the key 
+	components of the model. This brief exploration will provide a better understanding of how these components 
+	work together.
+</p>
+
+- **Indices:**
+
+	&emsp;$i=$ plants; $\quad j=$ markets.
+
+- **Parameters (Given Data):**
+
+	&emsp;$a_{i}=$ supply of commodity of plant $i$ (in cases).
+
+	&emsp;$b_{j}=$ demand for commodity at market $j$ (cases).
+
+	&emsp;$c_{ij}=$ cost per unit shipment between plan $i$ and market $j$ ($/case).
+
+- **Decision Variables:**
+
+	&emsp;$x_{ij}=$ amount of commodity to ship from plant $i$ to market $j$ (cases).
+
+- **Constraints:**
+
+    &emsp;Observe supply limit at plant $i$: $\sum_{j=1}^{m} x_{ij} \leq a_{i} \quad \forall_{i}$
+
+	&emsp;Satisfy demand at market $j$: $\sum_{i=1}^{n} x_{ij} \geq b_{j} \quad \forall_{j}$
+
+### Problem Data
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;The GAMS tutorial describes a scenario with two canning plants and three markets. It provides sample 
+	supply, demand and cost data. We will use this same data to define our model.
+</p>
+
+<table align="center">
+    <thead>
+		<tr>
+            <th></th>
+            <th>New York</th>
+            <th>Chicago</th>
+            <th>Topeka</th>
+            <th>Supply</th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr>
+            <td>Seattle</td>
+            <td>2.5</td>
+            <td>1.7</td>
+            <td>1.8</td>
+            <td>350</td>
+        </tr>
+		<tr>
+            <td>San Diego</td>
+            <td>2.5</td>
+            <td>1.8</td>
+            <td>1.4</td>
+            <td>600</td>
+        </tr>
+		<tr>
+            <td>Demand</td>
+            <td>325</td>
+            <td>300</td>
+            <td>275</td>
+            <td></td>
+        </tr>
+		<tr>
+            <td style="text-align: center" colspan="5">
+				<a href="https://miro.gams.com/gallery/app_direct/transport/" target="_blank">
+					<img src="./images/examples/practical-example-graph.png" alt="A Transportation Problem">
+				</a>
+			</td>
+        </tr>
+    </tbody>
+</table>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;To model and solve the problem in Python, we will use PyORlib and its CPLEX integration. However, it’s 
+	important to note that you can choose any of the supported optimization engine integrations described in the 
+	<a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a> 
+	or even use your own custom implementations.
+</p>
+
+### Solution Using PyORlib
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;Before proceeding, ensure that PyORlib is installed, along with its integration for the CPLEX engine. 
+	Once everything is set up, let's build our transportation model:
+</p>
+
+```Python title="Solving a Transportation Problem with PyORlib" linenums="1" hl_lines="7 10 16 24 36 45 54 64"
+from math import inf
+
+from pyorlib import Model
+from pyorlib.engines.cplex import CplexEngine
+from pyorlib.enums import ValueType, OptimizationType
+
+# Create a transportation model using the CplexEngine.
+model = Model(engine=CplexEngine(), name="A Transportation Model")  # (1)!
+
+# Define the dimensions of the problem
+n = 2  # Number of plants
+m = 3  # Number of markets
+n_range = range(1, n + 1)  # Range of plant indices
+m_range = range(1, m + 1)  # Range of market indices
+
+# Define the parameters of the model
+a_i = [350, 600]  # Supply limit at each plant
+b_j = [325, 300, 275]  # Demand at each market
+c_i_j = [  # Transportation costs
+    2.5, 1.7, 1.8,
+    2.5, 1.8, 1.4,
+]
+
+# Define the decision variables
+x_i_j = {
+    (i, j): model.add_variable(
+        name=f"x_{i}_{j}",
+        value_type=ValueType.INTEGER,
+        lower_bound=0,
+        upper_bound=inf
+    )
+    for i in n_range
+    for j in m_range
+}
+
+# Add supply limit at plants constraints
+for i in n_range:
+    model.add_constraint(
+        expression=sum(
+            x_i_j[i, j]
+            for j in range(1, m + 1)
+        ) <= a_i[i - 1]
+    )
+
+# Add satisfy demand at markets constraints
+for j in m_range:
+    model.add_constraint(
+        expression=sum(
+            x_i_j[i, j]
+            for i in range(1, n + 1)
+        ) >= b_j[j - 1]
+    )
+
+# Set the objective function to minimize the total transportation cost
+model.set_objective(
+    opt_type=OptimizationType.MINIMIZE,
+    expression=sum(
+        c_i_j[(i - 1) * m + (j - 1)] * x_i_j[i, j]
+        for i in n_range
+        for j in m_range
+    )
+)
+
+# Solve the model and print the solution
+model.solve()
+model.print_solution()
+```
+
+1. <h2><a href="#runtime-flexibility-and-customization">Runtime Flexibility and Customization</a></h2>
+   &emsp;&emsp;As previously mentioned, we have the ability to solve this model using multiple optimization engines 
+   without making any changes to the underlying definition. For instance, we can employ various optimization engines, 
+   such as:
+   <br>
+   <br>
+   **Gurobi Engine:**
+   ```Python hl_lines="4"
+   from pyorlib.engines.gurobi import GurobiEngine
+   
+   model = Model(
+       engine=GurobiEngine(),
+       name="A Transportation Model",
+   )
+   ```
+   <br>
+   **OR-Tools Engine:** 
+   ```Python hl_lines="4"
+   from pyorlib.engines.ortools import ORToolsEngine
+   
+   model = Model(
+       engine=ORToolsEngine(),
+       name="A Transportation Model",
+   )
+   ```
+   <br>
+   **PuLP Engine:**
+   ```Python hl_lines="4"
+   from pyorlib.engines.pulp import PuLPEngine
+   
+   model = Model(
+      engine=PuLPEngine(), 
+      name="A Transportation Model",
+   )
+   ```
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;As we can see from this practical example, PyORlib enables us to easily build a transportation model, 
+	define its necessary components, optimize the model, and obtain the optimal solution. The simple yet powerful 
+	syntax of PyORlib allows us to focus on the problem at hand without getting lost in implementation details.
+</p>
 
 ## Runtime Flexibility and Customization
 
@@ -396,4 +606,3 @@ fundamentally alter the nature of the library.
     You can view the full text of the license in the <a href="https://github.com/dapensoft/pyorlib/blob/master/LICENSE" target="_blank"><code>LICENSE</code></a> 
     file located in the PyORlib repository.
 </p>
-
