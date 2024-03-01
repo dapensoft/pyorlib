@@ -108,6 +108,7 @@ include = [
     "/tests",
     "/.gitignore",
     "/pyproject.toml",
+    "/CITATION.cff",
     "/README.md",
     "/LICENSE",
 ]
