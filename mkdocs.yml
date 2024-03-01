@@ -60,12 +60,12 @@ extra:
 # Plugins
 plugins:
   - search
-  - git-authors:
-      exclude:
-        - api/index.md
-        - index.md
+  - git-committers:
+      repository: dapensoft/pyorlib
+      branch: master
   - git-revision-date-localized:
       type: timeago
+      enable_creation_date: true
       exclude:
         - api/index.md
         - index.md
