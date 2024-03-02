@@ -4,7 +4,6 @@ from typing import Any
 
 from ..element import Element
 from ..expressions import Expression
-from ...core.constants import StdOutColors
 from ...enums import TermType, ValueType
 from ...exceptions import TermException
 
@@ -121,27 +120,14 @@ class Term(Element, ABC):
     def _build_expression(self, expression: Any) -> Element:
         return Expression(expression=expression)
 
-    def get_pretty_string(self, float_precision: int = 6) -> str:  # pragma: no cover
+    @abstractmethod
+    def get_pretty_string(self, float_precision: int = 6) -> str:
         """
         Returns a formatted string representation of the term.
         :param float_precision: It represents the number of digits used in printing the solution and objective.
         :return: A formatted string representing the term.
         """
-        default, debug = StdOutColors.DEFAULT, StdOutColors.PURPLE
-        return "".join(
-            [
-                f"Name: {debug}{self.name}{default} | ",
-                f"Type: {debug}{self.term_type.name.capitalize()}{default} | ",
-                f"Value type: {debug}{self.value_type.name.capitalize()}{default} | ",
-                f"lb:{debug} ",
-                "{0:.{prec}g} ".format(self.lower_bound, prec=float_precision),
-                f"{default}| ub:{debug} ",
-                "{0:.{prec}g} ".format(self.upper_bound, prec=float_precision),
-                f"{default}| val:{debug} ",
-                "{0:.{prec}g} ".format(self.value, prec=float_precision),
-                f"{default}",
-            ]
-        )
+        pass
 
     def __str__(self) -> str:  # pragma: no cover
         return "".join(

@@ -36,7 +36,7 @@ class TestTerm:
                 def raw(self) -> Any:
                     pass
 
-                def validate(self) -> None:
+                def get_pretty_string(self, float_precision: int = 6) -> str:
                     pass
 
                 def __init__(self):
