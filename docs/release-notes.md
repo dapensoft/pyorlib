@@ -21,7 +21,7 @@ hide:
 - The `print_info` and `print_solution` methods in the `Model` class have been enhanced to improve visibility and
   provide deeper insights.
 - The `get_pretty_string` method in the `Term` class has been refactored as an `@abstractmethod` for subclass
-  customization and delegation based on specific term needs.
+  customization.
 - Badges on the main page of the documentation and the readme file have been updated to improve visibility and align
   with the package's color palette.
 - The `git-committers` plugin in the `mkdocs.yml` file has been updated to exclude the `index.md`, `examples/index.md`,
