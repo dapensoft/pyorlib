@@ -67,6 +67,7 @@ plugins:
       type: timeago
       enable_creation_date: true
       exclude:
+        - examples/index.md
         - api/index.md
         - index.md
   - mkdocstrings:
@@ -125,6 +126,9 @@ extra_javascript:
 nav:
   - PyORlib: index.md
   - Getting Started: getting-started.md
+  - Examples: 
+      - examples/index.md
+      - A Transportation Model: examples/a-transportation-problem.md
   - API Reference:
       - api/index.md
       - Model:

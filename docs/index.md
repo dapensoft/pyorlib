@@ -401,7 +401,7 @@ for i in n_range:
     model.add_constraint(
         expression=sum(
             x_i_j[i, j]
-            for j in range(1, m + 1)
+            for j in m_range
         ) <= a_i[i - 1]
     )
 
@@ -410,7 +410,7 @@ for j in m_range:
     model.add_constraint(
         expression=sum(
             x_i_j[i, j]
-            for i in range(1, n + 1)
+            for i in n_range
         ) >= b_j[j - 1]
     )
 

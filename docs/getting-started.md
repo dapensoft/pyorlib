@@ -13,7 +13,7 @@ hide:
 <p style='text-align: justify;' markdown>
     &emsp;&emsp;Welcome to the Getting Started section! This guide will help you install and configure PyORlib in your
 	optimization project. For more detailed information about the library, you can refer to the PyORlib 
-	[API Reference](/pyorlib/api).
+	[examples](/pyorlib/examples) or [API Reference](/pyorlib/api).
 </p>
 
 ## Requirements
