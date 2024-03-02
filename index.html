@@ -1,0 +1,3309 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A powerful Python library for operations research. Define, solve, and interact with  mathematical models in a standardized manner across different optimization packages.">
+      
+      
+        <meta name="author" content="Isaac Da Pena & Manuel Da Pena">
+      
+      
+        <link rel="canonical" href="https://dapensoft.github.io/pyorlib/">
+      
+      
+      
+        <link rel="next" href="getting-started/">
+      
+      
+      <link rel="icon" href="images/favicon/pyorlib-logo.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>PyORlib</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="css/timeago.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#key-features" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="PyORlib" class="md-header__button md-logo" aria-label="PyORlib" data-md-component="logo">
+      
+  <img src="images/logo/pyorlib-logo-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PyORlib
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PyORlib
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dapensoft/pyorlib" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dapensoft/pyorlib
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+    
+  
+  PyORlib
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="getting-started/" class="md-tabs__link">
+        
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="examples/" class="md-tabs__link">
+          
+  
+    
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="api/" class="md-tabs__link">
+          
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="contributing/" class="md-tabs__link">
+        
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="release-notes/" class="md-tabs__link">
+        
+  
+    
+  
+  Release Notes
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="PyORlib" class="md-nav__button md-logo" aria-label="PyORlib" data-md-component="logo">
+      
+  <img src="images/logo/pyorlib-logo-white.svg" alt="logo">
+
+    </a>
+    PyORlib
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dapensoft/pyorlib" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dapensoft/pyorlib
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PyORlib
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PyORlib
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Simple Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Simple Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Formulation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-using-pyorlib" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution Using PyORlib
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-practical-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Practical Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Practical Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-formulation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Formulation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-using-pyorlib_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution Using PyORlib
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organized-readable-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organized &amp; Readable Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensuring-model-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ensuring Model Integrity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-flexibility-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime Flexibility &amp; Customization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Runtime Flexibility & Customization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seeing-it-in-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seeing it in Action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#built-in-custom-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Built-in &amp; Custom Integrations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Evolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Started Today!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="examples/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/a-transportation-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Transportation Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/model/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Model
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/engines/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Engine
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Engine
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/engines/cplex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CPLEX Engine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/engines/gurobi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gurobi Engine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/engines/ortools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OR-Tools Engine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/engines/pulp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PuLP Engine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/algebra/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Algebra
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Algebra
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/algebra/element/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Element
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/algebra/expressions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/algebra/terms/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Term
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4_4" id="__nav_4_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Term
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/algebra/terms/constant/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Constant
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/algebra/terms/variable/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Variable
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/structures/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Structures
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/structures/definitions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Definitions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5_2" id="__nav_4_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Definitions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/structures/definitions/dimension-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dimension Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/structures/definitions/term-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Term Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/structures/definitions/parameter-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parameter Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/structures/parameters/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Parameter
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5_3" id="__nav_4_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Parameter
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/structures/parameters/single-value-parameter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Single Value Parameter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/structures/parameters/multi-value-parameter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi Value Parameter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/validators/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Validators
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            Validators
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/validators/value-type-validator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Value Type Validator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/validators/fields/dimension-field/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dimension Field
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/validators/fields/parameter-field/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parameter Field
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/enums/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Enums
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            Enums
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/enums/optimization-type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization Type
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/enums/parameter-type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parameter Type
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/enums/solution-status/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solution Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/enums/term-type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Term Type
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/enums/value-type/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Value Type
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="api/exceptions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            Exceptions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/exceptions/term-exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Term Exception
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/exceptions/cplex-exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CPLEX Exception
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/exceptions/gurobi-exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gurobi Exception
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/exceptions/ortools-exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ortools Exception
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/exceptions/pulp-exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pulp Exception
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/exceptions/model-exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Model Exception
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Simple Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Simple Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Formulation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-using-pyorlib" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution Using PyORlib
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-practical-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Practical Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A Practical Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-formulation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Formulation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-using-pyorlib_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution Using PyORlib
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organized-readable-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organized &amp; Readable Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensuring-model-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ensuring Model Integrity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-flexibility-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime Flexibility &amp; Customization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Runtime Flexibility & Customization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seeing-it-in-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seeing it in Action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#built-in-custom-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Built-in &amp; Custom Integrations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Evolution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get Started Today!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>PyORlib</h1>
+
+<style>
+    .md-content .md-content__inner.md-typeset h1 { height: 0; margin: 0; color: transparent; }
+    .md-content .md-content__inner.md-typeset::before { height: 0; } 
+</style>
+
+<p><br></p>
+<p align="center">
+   <img src="./images/logo/pyorlib-logo-name-slogan.svg" alt="PyORlib" width="900px">
+</p>
+
+<p><br></p>
+<p align="center">
+
+<a href="https://github.com/dapensoft/pyorlib/actions?query=workflow%3ATests+event%3Apush+branch%3Amaster" target="_blank">
+    <img src="https://github.com/dapensoft/pyorlib/actions/workflows/run-tests.yml/badge.svg?branch=master" alt="Tests">
+</a>
+
+<a href="https://github.com/dapensoft/pyorlib/actions?query=workflow%3ADocs+event%3Apush+branch%3Amaster" target="_blank">
+    <img src="https://github.com/dapensoft/pyorlib/actions/workflows/deploy-docs.yml/badge.svg?branch=master" alt="Docs">
+</a>
+
+<a href='https://coveralls.io/github/dapensoft/pyorlib?branch=master'>
+    <img src='https://coveralls.io/repos/github/dapensoft/pyorlib/badge.svg?branch=master' alt='Coverage Status'/>
+</a>
+
+<a href="https://pypi.org/project/pyorlib" target="_blank">
+    <img src="https://img.shields.io/pypi/v/pyorlib?color=deeppink" alt="Package version">
+</a>
+
+<a href="https://pypi.org/project/pyorlib" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/pyorlib?color=deeppink" alt="Supported Python versions">
+</a>
+
+<a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black">
+</a>
+
+</p>
+
+<p><br></p>
+<hr />
+<p><strong>Documentation</strong>: <a href="https://dapensoft.github.io/pyorlib" target="_blank">https://dapensoft.github.io/pyorlib</a></p>
+<p><strong>Source Code</strong>: <a href="https://github.com/dapensoft/pyorlib" target="_blank">https://github.com/dapensoft/pyorlib</a></p>
+<hr />
+<p style="text-align: justify;">
+    &emsp;&emsp;PyORlib is a powerful Python library for operations research and optimization. It provides a set of 
+    abstractions to easily define, solve, and interact with mathematical models in a standardized manner across 
+    different optimization packages. With PyORlib, you can easily implement mathematical models using a user-friendly 
+    interface, while seamlessly identifying the ideal solver or optimization package, such as CPLEX, Gurobi, 
+    OR-Tools, or PuLP, that perfectly aligns with your specific requirements.
+</p>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<p style='text-align: justify;'>
+    PyORlib offers a powerful yet easy-to-use set of tools for mathematical modeling and optimization:
+</p>
+
+<ul style='text-align: justify;'>
+
+<li><b>Intuitive API</b> ─ 
+PyORlib provides a user-friendly API that allows you to define, solve, and interact with mathematical models in a 
+standardized manner across different optimization packages.
+</li>
+
+<li><b>Seamless Solver Integration</b> ─ 
+Optimize models across different solvers, including custom ones, without modifying the model's definition. Tailor the 
+behavior and capabilities of the solvers to perfectly align with your unique requirements.
+</li>
+
+<li><b>Simplified Mathematical Modeling</b> ─ 
+Define mathematical models effortlessly using PyORlib's comprehensive set of abstractions and classes. Focus on the 
+problem at hand instead of getting lost in implementation details.
+</li>
+
+<li><b>Scalability and Maintainability</b> ─ 
+Keep your code organized, readable, and maintainable over time with the PyORlib's workflow. Structure your variables,
+parameters, constraints, and objective functions in a clean and extensible manner.
+</li>
+
+<li><b>No Overhead</b> ─ 
+PyORlib ensures full compatibility between models and different solvers by seamlessly translating models to each 
+solver's native format, acting as a standardized communication interface.
+</li>
+
+<li><b>Data Validation</b> ─ 
+PyORlib offers comprehensive format and content validations to ensure the integrity of your model data. These 
+validation features help identify errors early and maintain consistent, error-free model data for robust optimization.
+</li>
+
+<li><b>Comprehensive Documentation</b> ─ 
+PyORlib provides a comprehensive documentation suite that includes API references and usage examples, to effectively
+leverage all the features and capabilities of the library.
+</li>
+
+</ul>
+
+<h2 id="a-simple-example">A Simple Example<a class="headerlink" href="#a-simple-example" title="Permanent link">&para;</a></h2>
+<p style='text-align: justify;'>
+    &emsp;&emsp;Experience the power of PyORlib through a simple example that illustrates the core concepts and basic 
+    usage of the package by formulating and solving a mixed integer programming (MIP) problem from the 
+    <a href="https://developers.google.com/optimization/mip/mip_example" target="_blank">OR-Tools documentation</a>.
+    This example will provide you with a clear and concise introduction to the package's functionalities and its 
+    application in real-world optimization challenges.
+</p>
+
+<h3 id="problem-formulation">Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permanent link">&para;</a></h3>
+<p style='text-align: justify;'>
+    &emsp;&emsp;In this example, we will find the highest integer coordinates <i>(x, y)</i> on the <i>Y-axis</i> within 
+    a defined shape. Our objective is to maximize the value of an objective function while satisfying linear 
+    constraints, as shown below with a mathematical formulation:
+</p>
+
+<div class="arithmatex">\[
+\begin{align}
+\text{Maximize:} \quad &amp; x + 10y \\
+\text{Subject to:} \quad &amp; x + 7y = 17.5 \\
+&amp; 0 \leq x \leq 3.5 \\
+&amp; 0 \leq y \leq 2.5 \\
+\end{align}
+\]</div>
+<p style='text-align: justify;'>
+    &emsp;&emsp;Since the constraints are linear, we can classify this problem as a linear optimization problem in 
+    which the solutions are required to be integers. The feasible region and integer points for this problem are 
+    shown below:
+</p>
+
+<p align="center">
+   <img src="./images/examples/simple-example-graph.svg" alt="Simple graph illustrating the feasible region and integer points" width="800px" style="margin-top: -10px;margin-bottom: -20px;">
+</p>
+
+<h3 id="solution-using-pyorlib">Solution Using PyORlib<a class="headerlink" href="#solution-using-pyorlib" title="Permanent link">&para;</a></h3>
+<p style='text-align: justify;'>
+    &emsp;&emsp;In order to model and solve this problem, we'll be using the PyORlib package. In this example, we'll 
+    utilize the OR-Tools optimization package, which is one of the built-in integrations provided by PyORlib. However,
+    you can also choose to use other integration options described in the <a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a>
+    section, or even implement your own custom integration. Before proceeding, make sure you have installed the OR-Tools
+    integration. Once that is done, let's get started:
+</p>
+
+<div class="language-Python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Solving a MIP Problem with PyORlib</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">inf</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">from</span> <span class="nn">pyorlib</span> <span class="kn">import</span> <span class="n">Model</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kn">from</span> <span class="nn">pyorlib.engines.ortools</span> <span class="kn">import</span> <span class="n">ORToolsEngine</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="kn">from</span> <span class="nn">pyorlib.enums</span> <span class="kn">import</span> <span class="n">ValueType</span><span class="p">,</span> <span class="n">OptimizationType</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="c1"># Create a Model instance using the ORTools engine</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">model</span><span class="p">:</span> <span class="n">Model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">ORToolsEngine</span><span class="p">())</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="c1"># Add two integer variables for coordinates x and y</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="n">x</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># Define problem constraints</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">17.5</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">3.5</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="c1"># Set objective to maximize x + 10y</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="n">model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span><span class="n">OptimizationType</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="c1"># Solve model</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="c1"># Print solution</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="n">model</span><span class="o">.</span><span class="n">print_solution</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<p style='text-align: justify;'>
+    &emsp;&emsp;As we can see from the previous example, PyORlib follows a simple and user-friendly workflow for 
+    defining, solving, and interacting with mathematical models. Let's review the key steps:
+</p>
+
+<ol style='text-align: justify;'>
+
+<li>
+<b>Import necessary modules:</b> We first imported the required modules from PyORlib, including the <code>Model</code> 
+class, <code>ORToolsEngine</code> class, and necessary enums (<code>ValueType</code> and <code>OptimizationType</code>).
+</li>
+
+<li>
+<b>Create a new model:</b> Then we created a new <code>Model</code> object and specified that we want to use the 
+OR-Tools engine for solving the optimization problem.
+</li>
+
+<li>
+<b>Define the variables:</b> We added 2 integer variables, <i>x</i> and <i>y</i>, to represent the coordinates on the
+<i>Y-axis</i> within the defined shape.
+</li>
+
+<li>
+<b>Define the constraints:</b> We added linear constraints to the model to restrict the feasible region of the 
+optimization problem and ensure the coordinates <i>(x, y)</i> satisfy specific conditions.
+</li>
+
+<li>
+<b>Define the objective function:</b> We set the objective of the model using the <code>set_objective</code> method to 
+maximize the objective function <i>x + 10 * y</i>.
+</li>
+
+<li>
+<b>Solve the model:</b> We invoked the solve method on the model to find the optimal values for variables <i>(x, y)</i>
+that satisfy the constraints and maximize the objective function.
+</li>
+
+<li>
+<b>Display the solution:</b> Finally, we called the print_solution method to showcase the optimal values of variables 
+<i>(x, y)</i> and the corresponding value of the objective function.
+</li>
+
+</ol>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;Having gained a clear understanding of the workflow showcased in the Simple Example, you are now 
+    well-equipped to explore more intricate optimization scenarios and fully harness the capabilities of PyORlib in 
+    your own projects.
+</p>
+
+<details class="example" open="open">
+<summary>Next steps...</summary>
+<p style="text-align: justify;">
+    &emsp;&emsp;Feel free to experiment and build upon this example to explore the full potential of PyORlib in your 
+    projects. With PyORlib, you can define and implement complex mathematical models and algorithms, test multiple 
+    optimization packages to identify the ideal one that perfectly aligns with your unique requirements, define 
+    and organize the vital components of your optimization model, and much more!
+</p>
+</details>
+<h2 id="a-practical-example">A Practical Example<a class="headerlink" href="#a-practical-example" title="Permanent link">&para;</a></h2>
+<p style="text-align: justify;">
+    &emsp;&emsp;To demonstrate PyORlib in a realistic scenario, we will implement a transportation problem from the 
+    <a href="https://www.gams.com/docs/pdf/Tutorial.PDF" target="_blank">GAMS Tutorial</a> by Richard E. Rosenthal, 
+    which provides a comprehensive case study for testing PyORlib's optimization capabilities and features.
+</p>
+<h3 id="problem-formulation_1">Problem Formulation<a class="headerlink" href="#problem-formulation_1" title="Permanent link">&para;</a></h3>
+<p style='text-align: justify;'>
+    &emsp;&emsp;The transportation problem we will address is a classic instance of linear programming's transportation
+    problem, which has historically served as a testing ground for the development of optimization technology. This 
+    transportation problem involves determining the optimal flow of a product from multiple sources (plants) to 
+    destinations (markets) to minimize costs while satisfying demands.
+</p>
+
+<div class="arithmatex">\[
+\begin{align}
+\text{Minimize:} \quad &amp; \sum_{i=1}^{n} \sum_{j=1}^{m} c_{ij} x_{ij} \\
+\\
+\text{Subject to:} \quad &amp; \sum_{j=1}^{m} x_{ij} \leq a_{i} \quad \forall_{i} \\
+&amp; \sum_{i=1}^{n} x_{ij} \geq b_{j} \quad \forall_{j} \\
+&amp; x_{ij} \geq 0 \quad \forall_{ij}, \thinspace integer \\
+&amp; i=1,...,n; \quad j=1,...,m \\
+\end{align}
+\]</div>
+<p style='text-align: justify;'>
+    &emsp;&emsp;Before diving into the implementation, let's take a moment to familiarize ourselves with the key 
+    components of the model. This brief exploration will provide a better understanding of how these components 
+    work together.
+</p>
+
+<ul>
+<li>
+<p><strong>Indices:</strong></p>
+<p>&emsp;<span class="arithmatex">\(i=\)</span> plants; <span class="arithmatex">\(\quad j=\)</span> markets.</p>
+</li>
+<li>
+<p><strong>Parameters (Given Data):</strong></p>
+<p>&emsp;<span class="arithmatex">\(a_{i}=\)</span> supply of commodity of plant <span class="arithmatex">\(i\)</span> (in cases).</p>
+<p>&emsp;<span class="arithmatex">\(b_{j}=\)</span> demand for commodity at market <span class="arithmatex">\(j\)</span> (cases).</p>
+<p>&emsp;<span class="arithmatex">\(c_{ij}=\)</span> cost per unit shipment between plan <span class="arithmatex">\(i\)</span> and market <span class="arithmatex">\(j\)</span> ($/case).</p>
+</li>
+<li>
+<p><strong>Decision Variables:</strong></p>
+<p>&emsp;<span class="arithmatex">\(x_{ij}=\)</span> amount of commodity to ship from plant <span class="arithmatex">\(i\)</span> to market <span class="arithmatex">\(j\)</span> (cases).</p>
+</li>
+<li>
+<p><strong>Constraints:</strong></p>
+<p>&emsp;Observe supply limit at plant <span class="arithmatex">\(i\)</span>: <span class="arithmatex">\(\sum_{j=1}^{m} x_{ij} \leq a_{i} \quad \forall_{i}\)</span></p>
+<p>&emsp;Satisfy demand at market <span class="arithmatex">\(j\)</span>: <span class="arithmatex">\(\sum_{i=1}^{n} x_{ij} \geq b_{j} \quad \forall_{j}\)</span></p>
+</li>
+</ul>
+<p style='text-align: justify;'>
+    &emsp;&emsp;The GAMS tutorial describes a scenario with two canning plants and three markets. It provides sample 
+    supply, demand and cost data. We will use this same data to define our model.
+</p>
+
+<table align="center">
+    <thead>
+        <tr>
+            <th></th>
+            <th>New York</th>
+            <th>Chicago</th>
+            <th>Topeka</th>
+            <th>Supply</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Seattle</td>
+            <td>2.5</td>
+            <td>1.7</td>
+            <td>1.8</td>
+            <td>350</td>
+        </tr>
+        <tr>
+            <td>San Diego</td>
+            <td>2.5</td>
+            <td>1.8</td>
+            <td>1.4</td>
+            <td>600</td>
+        </tr>
+        <tr>
+            <td>Demand</td>
+            <td>325</td>
+            <td>300</td>
+            <td>275</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="text-align: center" colspan="5">
+                <a href="https://miro.gams.com/gallery/app_direct/transport/" target="_blank">
+                    <img src="./images/examples/practical-example-graph.png" alt="A Transportation Problem">
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;To model and solve the problem in Python, we will use PyORlib and its CPLEX integration. However, it’s 
+    important to note that you can choose any of the supported optimization engine integrations described in the 
+    <a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a> 
+    or even use your own custom implementations.
+</p>
+
+<h3 id="solution-using-pyorlib_1">Solution Using PyORlib<a class="headerlink" href="#solution-using-pyorlib_1" title="Permanent link">&para;</a></h3>
+<p style='text-align: justify;'>
+    &emsp;&emsp;Before proceeding, ensure that PyORlib is installed, along with its integration for the CPLEX engine. 
+    Once everything is set up, let's build our transportation model:
+</p>
+
+<div class="language-Python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Solving a Transportation Problem with PyORlib</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span>
+<span class="normal"><a href="#__codelineno-1-32">32</a></span>
+<span class="normal"><a href="#__codelineno-1-33">33</a></span>
+<span class="normal"><a href="#__codelineno-1-34">34</a></span>
+<span class="normal"><a href="#__codelineno-1-35">35</a></span>
+<span class="normal"><a href="#__codelineno-1-36">36</a></span>
+<span class="normal"><a href="#__codelineno-1-37">37</a></span>
+<span class="normal"><a href="#__codelineno-1-38">38</a></span>
+<span class="normal"><a href="#__codelineno-1-39">39</a></span>
+<span class="normal"><a href="#__codelineno-1-40">40</a></span>
+<span class="normal"><a href="#__codelineno-1-41">41</a></span>
+<span class="normal"><a href="#__codelineno-1-42">42</a></span>
+<span class="normal"><a href="#__codelineno-1-43">43</a></span>
+<span class="normal"><a href="#__codelineno-1-44">44</a></span>
+<span class="normal"><a href="#__codelineno-1-45">45</a></span>
+<span class="normal"><a href="#__codelineno-1-46">46</a></span>
+<span class="normal"><a href="#__codelineno-1-47">47</a></span>
+<span class="normal"><a href="#__codelineno-1-48">48</a></span>
+<span class="normal"><a href="#__codelineno-1-49">49</a></span>
+<span class="normal"><a href="#__codelineno-1-50">50</a></span>
+<span class="normal"><a href="#__codelineno-1-51">51</a></span>
+<span class="normal"><a href="#__codelineno-1-52">52</a></span>
+<span class="normal"><a href="#__codelineno-1-53">53</a></span>
+<span class="normal"><a href="#__codelineno-1-54">54</a></span>
+<span class="normal"><a href="#__codelineno-1-55">55</a></span>
+<span class="normal"><a href="#__codelineno-1-56">56</a></span>
+<span class="normal"><a href="#__codelineno-1-57">57</a></span>
+<span class="normal"><a href="#__codelineno-1-58">58</a></span>
+<span class="normal"><a href="#__codelineno-1-59">59</a></span>
+<span class="normal"><a href="#__codelineno-1-60">60</a></span>
+<span class="normal"><a href="#__codelineno-1-61">61</a></span>
+<span class="normal"><a href="#__codelineno-1-62">62</a></span>
+<span class="normal"><a href="#__codelineno-1-63">63</a></span>
+<span class="normal"><a href="#__codelineno-1-64">64</a></span>
+<span class="normal"><a href="#__codelineno-1-65">65</a></span>
+<span class="normal"><a href="#__codelineno-1-66">66</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">inf</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kn">from</span> <span class="nn">pyorlib</span> <span class="kn">import</span> <span class="n">Model</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kn">from</span> <span class="nn">pyorlib.engines.cplex</span> <span class="kn">import</span> <span class="n">CplexEngine</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kn">from</span> <span class="nn">pyorlib.enums</span> <span class="kn">import</span> <span class="n">ValueType</span><span class="p">,</span> <span class="n">OptimizationType</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="hll"><span class="c1"># Create a transportation model using the CplexEngine.</span>
+</span></span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">CplexEngine</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A Transportation Model&quot;</span><span class="p">)</span>  <span class="c1"># (1)!</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="hll"><span class="c1"># Define the dimensions of the problem</span>
+</span></span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Number of plants</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Number of markets</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="n">n_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Range of plant indices</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="n">m_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Range of market indices</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="hll"><span class="c1"># Define the parameters of the model</span>
+</span></span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="n">a_i</span> <span class="o">=</span> <span class="p">[</span><span class="mi">350</span><span class="p">,</span> <span class="mi">600</span><span class="p">]</span>  <span class="c1"># Supply limit at each plant</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="n">b_j</span> <span class="o">=</span> <span class="p">[</span><span class="mi">325</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">275</span><span class="p">]</span>  <span class="c1"># Demand at each market</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">c_i_j</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># Transportation costs</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a>    <span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a>    <span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="p">]</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="hll"><span class="c1"># Define the decision variables</span>
+</span></span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="n">x_i_j</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26"></a>    <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a>        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28"></a>        <span class="n">value_type</span><span class="o">=</span><span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29"></a>        <span class="n">lower_bound</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30"></a>        <span class="n">upper_bound</span><span class="o">=</span><span class="n">inf</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31"></a>    <span class="p">)</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_range</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">m_range</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34"></a><span class="p">}</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35"></a>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36"></a><span class="hll"><span class="c1"># Add supply limit at plants constraints</span>
+</span></span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_range</span><span class="p">:</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38"></a>    <span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39"></a>        <span class="n">expression</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40"></a>            <span class="n">x_i_j</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">m_range</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42"></a>        <span class="p">)</span> <span class="o">&lt;=</span> <span class="n">a_i</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43"></a>    <span class="p">)</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44"></a>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45"></a><span class="hll"><span class="c1"># Add satisfy demand at markets constraints</span>
+</span></span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">m_range</span><span class="p">:</span>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47"></a>    <span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48"></a>        <span class="n">expression</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49"></a>            <span class="n">x_i_j</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50"></a>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_range</span>
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51"></a>        <span class="p">)</span> <span class="o">&gt;=</span> <span class="n">b_j</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52"></a>    <span class="p">)</span>
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53"></a>
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54"></a><span class="hll"><span class="c1"># Set the objective function to minimize the total transportation cost</span>
+</span></span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="n">model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span>
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56"></a>    <span class="n">opt_type</span><span class="o">=</span><span class="n">OptimizationType</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">,</span>
+</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57"></a>    <span class="n">expression</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span>
+</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58"></a>        <span class="n">c_i_j</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x_i_j</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_range</span>
+</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">m_range</span>
+</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61"></a>    <span class="p">)</span>
+</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62"></a><span class="p">)</span>
+</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63"></a>
+</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64"></a><span class="hll"><span class="c1"># Solve the model and print the solution</span>
+</span></span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65"></a><span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66"></a><span class="n">model</span><span class="o">.</span><span class="n">print_solution</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<ol>
+<li><h2><a href="#runtime-flexibility-customization">Runtime Flexibility &amp; Customization</a></h2>
+   &emsp;&emsp;As previously mentioned, we have the ability to solve this model using multiple optimization engines 
+   without making any changes to the underlying definition. For instance, we can employ various optimization engines, 
+   such as:
+   <br>
+   <br>
+   <strong>Gurobi Engine:</strong>
+   <div class="language-Python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">pyorlib.engines.gurobi</span> <span class="kn">import</span> <span class="n">GurobiEngine</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="hll">    <span class="n">engine</span><span class="o">=</span><span class="n">GurobiEngine</span><span class="p">(),</span>
+</span></span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A Transportation Model&quot;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
+</span></code></pre></div>
+   <br>
+   <strong>OR-Tools Engine:</strong> 
+   <div class="language-Python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">pyorlib.engines.ortools</span> <span class="kn">import</span> <span class="n">ORToolsEngine</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="hll">    <span class="n">engine</span><span class="o">=</span><span class="n">ORToolsEngine</span><span class="p">(),</span>
+</span></span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A Transportation Model&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
+</span></code></pre></div>
+   <br>
+   <strong>PuLP Engine:</strong>
+   <div class="language-Python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">pyorlib.engines.pulp</span> <span class="kn">import</span> <span class="n">PuLPEngine</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="hll">   <span class="n">engine</span><span class="o">=</span><span class="n">PuLPEngine</span><span class="p">(),</span> 
+</span></span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>   <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A Transportation Model&quot;</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">)</span>
+</span></code></pre></div></li>
+</ol>
+<p style='text-align: justify;'>
+    &emsp;&emsp;As we can see from this practical example, PyORlib enables us to easily build a transportation model, 
+    define its necessary components, optimize the model, and obtain the optimal solution. The simple yet powerful 
+    syntax of PyORlib allows us to focus on the problem at hand without getting lost in implementation details.
+</p>
+
+<h2 id="organized-readable-workflow">Organized &amp; Readable Workflow<a class="headerlink" href="#organized-readable-workflow" title="Permanent link">&para;</a></h2>
+<p style='text-align: justify;'>
+    &emsp;&emsp;PyORlib goes beyond the optimization process and offers a powerful modeling workflow that emphasizes 
+    code organization, readability, and maintainability over time. This workflow is built upon a set of abstractions 
+    and classes from the structures module, that allows you to centralize and standardize the definition of your 
+    model's components, such as dimensions, parameters, decision variables, and constant properties.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;One significant advantage of PyORlib's workflow is the ability to easily rename and modify components 
+    throughout your codebase. Instead of manually searching and replacing strings, you can make changes in one place, 
+    ensuring consistency and reducing errors.
+</p>
+
+<div class="language-Python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span>
+<span class="normal"><a href="#__codelineno-5-34">34</a></span>
+<span class="normal"><a href="#__codelineno-5-35">35</a></span>
+<span class="normal"><a href="#__codelineno-5-36">36</a></span>
+<span class="normal"><a href="#__codelineno-5-37">37</a></span>
+<span class="normal"><a href="#__codelineno-5-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="kn">from</span> <span class="nn">pyorlib.enums</span> <span class="kn">import</span> <span class="n">ParameterType</span><span class="p">,</span> <span class="n">ValueType</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="kn">from</span> <span class="nn">pyorlib.structures</span> <span class="kn">import</span> <span class="n">DimensionDefinition</span><span class="p">,</span> <span class="n">ParameterDefinition</span><span class="p">,</span> <span class="n">TermDefinition</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">class</span> <span class="nc">GenericModelDefinition</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a>    <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a>    <span class="k">class</span> <span class="nc">Dimensions</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="hll">        <span class="n">n</span> <span class="o">=</span> <span class="n">DimensionDefinition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;Total number of &#39;i&#39; indices&quot;</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="hll">        <span class="n">m</span> <span class="o">=</span> <span class="n">DimensionDefinition</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;Total number of &#39;j&#39; indices&quot;</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15"></a>    <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16"></a>    <span class="k">class</span> <span class="nc">Parameters</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="hll">        <span class="n">c_i_j</span> <span class="o">=</span> <span class="n">ParameterDefinition</span><span class="p">(</span>
+</span></span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="hll">            <span class="n">set_name</span><span class="o">=</span><span class="s2">&quot;c_i_j&quot;</span><span class="p">,</span>
+</span></span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="hll">            <span class="n">name</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;c_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span></span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="hll">            <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;Cost per unit shipment between &#39;i&#39; and &#39;j&#39;&quot;</span><span class="p">,</span>
+</span></span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="hll">            <span class="n">parameter_types</span><span class="o">=</span><span class="p">{</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span> <span class="n">ParameterType</span><span class="o">.</span><span class="n">BOUNDED</span><span class="p">},</span>
+</span></span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="hll">            <span class="n">value_types</span><span class="o">=</span><span class="p">{</span><span class="n">ValueType</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">},</span>
+</span></span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="hll">            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span></span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="hll">        <span class="p">)</span>
+</span></span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25"></a>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26"></a>    <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27"></a>    <span class="k">class</span> <span class="nc">DecisionVariables</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="hll">        <span class="n">x_i_j</span> <span class="o">=</span> <span class="n">TermDefinition</span><span class="p">(</span>
+</span></span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="hll">            <span class="n">set_name</span><span class="o">=</span><span class="s2">&quot;x_i_j&quot;</span><span class="p">,</span>
+</span></span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="hll">            <span class="n">name</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span></span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="hll">            <span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;Amount of commodity to ship from &#39;i&#39; to &#39;j&#39;&quot;</span><span class="p">,</span>
+</span></span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32"></a><span class="hll">        <span class="p">)</span>
+</span></span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33"></a>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34"></a>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35"></a><span class="c1"># Usage within a model</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36"></a><span class="nb">print</span><span class="p">(</span><span class="n">GenericModelDefinition</span><span class="o">.</span><span class="n">Dimensions</span><span class="o">.</span><span class="n">n</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>  <span class="c1"># Access the minimum value for dimension &#39;n&#39;</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37"></a><span class="nb">print</span><span class="p">(</span><span class="n">GenericModelDefinition</span><span class="o">.</span><span class="n">Parameters</span><span class="o">.</span><span class="n">c_i_j</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># Generate the name for parameter &#39;c_1_1&#39;</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38"></a><span class="nb">print</span><span class="p">(</span><span class="n">GenericModelDefinition</span><span class="o">.</span><span class="n">DecisionVariables</span><span class="o">.</span><span class="n">x_i_j</span><span class="o">.</span><span class="n">display_name</span><span class="p">)</span>  <span class="c1"># Access the display name for the decision variable &#39;x_i_j&#39;</span>
+</span></code></pre></div></td></tr></table></div>
+<p style='text-align: justify;'>
+    &emsp;&emsp;By leveraging PyORlib's structured approach, you can improve the maintainability and scalability of 
+    your models. The clean and organized codebase makes for easy navigation, understanding, and modification, making
+    it easier to collaborate with other team members and adapt your models to changing requirements.
+</p>
+
+<h2 id="ensuring-model-integrity">Ensuring Model Integrity<a class="headerlink" href="#ensuring-model-integrity" title="Permanent link">&para;</a></h2>
+<p style='text-align: justify;'>
+    &emsp;&emsp;In addition to PyORlib's workflow capabilities, this package provides a set of abstractions 
+    designed to apply validations and ensure the integrity of your model data. These validation features play a 
+    crucial role in identifying errors early on and maintaining consistent, error-free model data, resulting in
+    more robust optimization.
+</p>
+
+<ol style='text-align: justify;'>
+
+<li><b>Defining Validation Rules</b> ─ 
+PyORlib utilizes Python <code>descriptors</code> and <code>dataclasses</code> to define validation rules for model 
+schemas. Attributes like <code>DimensionField</code> and <code>ParameterField</code> allow specifying requirements 
+like minimum/maximum values.
+
+<div class="language-Python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="kn">from</span> <span class="nn">pyorlib.enums</span> <span class="kn">import</span> <span class="n">ParameterType</span><span class="p">,</span> <span class="n">ValueType</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="kn">from</span> <span class="nn">pyorlib.structures</span> <span class="kn">import</span> <span class="n">MultiValueParameter</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="kn">from</span> <span class="nn">pyorlib.validators</span> <span class="kn">import</span> <span class="n">DimensionField</span><span class="p">,</span> <span class="n">ParameterField</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="nd">@dataclass</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="hll"><span class="k">class</span> <span class="nc">ExampleSchema</span><span class="p">:</span>
+</span></span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll">    <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DimensionField</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Specifies the minimum value allowed for &#39;n&#39;</span>
+</span></span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="hll">    <span class="n">a_i</span><span class="p">:</span> <span class="n">MultiValueParameter</span> <span class="o">=</span> <span class="n">ParameterField</span><span class="p">(</span>
+</span></span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="hll">        <span class="n">parameter_types</span><span class="o">=</span><span class="p">{</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">FIXED</span><span class="p">},</span>  <span class="c1"># Specifies the allowed param types for &#39;a_i&#39;</span>
+</span></span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="hll">        <span class="n">value_types</span><span class="o">=</span><span class="p">{</span><span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">},</span>  <span class="c1"># Specifies the allowed value types for &#39;a_i&#39;</span>
+</span></span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="hll">        <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># Specifies the minimum value allowed for &#39;a_i&#39;</span>
+</span></span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="hll">    <span class="p">)</span>
+</span></span></code></pre></div></td></tr></table></div>
+</li>
+
+<li><b>Putting it into Practice</b> ─ 
+To apply validations, instantiate the <code>ExampleSchema</code> class with the model data. If initialization succeeds
+without errors, the data passed all validations and can be used safely for optimization. However, if the data is 
+invalid, an error will be raised immediately upon initialization, before the invalid data can be optimized.
+
+<div class="language-Python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">schema</span> <span class="o">=</span> <span class="n">ExampleSchema</span><span class="p">(</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="n">a_i</span><span class="o">=</span><span class="n">MultiValueParameter</span><span class="p">(</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="n">value_type</span><span class="o">=</span><span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>        <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>    <span class="p">),</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="p">)</span> <span class="c1"># succeeds</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="n">schema</span> <span class="o">=</span> <span class="n">ExampleSchema</span><span class="p">(</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a>    <span class="n">a_i</span><span class="o">=</span><span class="n">MultiValueParameter</span><span class="p">(</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a>        <span class="n">value_type</span><span class="o">=</span><span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a>        <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">FIXED</span><span class="p">,</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a>        <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">),</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a>    <span class="p">),</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="p">)</span> <span class="c1"># raises ValueError</span>
+</span></code></pre></div></td></tr></table></div>
+</li>
+</ol>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;By validating data upon instantiation, any issues are caught immediately before the model is optimized.
+    This helps maintain data integrity and prevents errors downstream in the optimization process.
+</p>
+
+<h2 id="runtime-flexibility-customization">Runtime Flexibility &amp; Customization<a class="headerlink" href="#runtime-flexibility-customization" title="Permanent link">&para;</a></h2>
+<p style='text-align: justify;'>
+    &emsp;&emsp;At its core, PyORlib provides a modular optimization design that allows you to seamlessly switch between
+    different built-in or custom optimization engine implementations on the fly. Whether you opt for official 
+    optimization package integrations or decide to create your own custom ones, PyORlib allows you to tailor 
+    the behavior and capabilities of the optimization engine to perfectly align with your unique requirements.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;By leveraging the principles of dependency inversion and open-closed design, PyORlib decouples the 
+    model's optimization from the underlying implementation, allowing you to optimize models across different 
+    optimization engines, including custom ones, without modifying the model definition or employing complex logic.
+</p>
+
+<h3 id="seeing-it-in-action">Seeing it in Action<a class="headerlink" href="#seeing-it-in-action" title="Permanent link">&para;</a></h3>
+<p style='text-align: justify;'>
+    &emsp;&emsp;To showcase the flexibility of PyORlib, let's revisit the <a href="#a-simple-example">Simple Example</a>
+    we discussed earlier and use it as our foundation. After copying the example, we will make some modifications to 
+    decouple the dependency from a specific optimization engine to its interface, and encapsulate the model definition
+    and resolution within a function to ensure reusability across different optimization engines, as shown below:
+</p>
+
+<div class="language-Python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">inf</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">from</span> <span class="nn">pyorlib</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Engine</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="hll"><span class="kn">from</span> <span class="nn">pyorlib.engines.gurobi</span> <span class="kn">import</span> <span class="n">GurobiEngine</span>
+</span></span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="hll"><span class="kn">from</span> <span class="nn">pyorlib.engines.ortools</span> <span class="kn">import</span> <span class="n">ORToolsEngine</span>
+</span></span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="kn">from</span> <span class="nn">pyorlib.enums</span> <span class="kn">import</span> <span class="n">ValueType</span><span class="p">,</span> <span class="n">OptimizationType</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="hll"><span class="k">def</span> <span class="nf">mip_problem</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="n">Engine</span><span class="p">):</span>
+</span></span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a>    <span class="c1"># Create a Model instance</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="hll">    <span class="n">model</span><span class="p">:</span> <span class="n">Model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+</span></span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a>    <span class="c1"># Add two integer variables for coordinates x and y</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">add_variable</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">ValueType</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="c1"># Define problem constraints</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18"></a>    <span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">17.5</span><span class="p">)</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19"></a>    <span class="n">model</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">3.5</span><span class="p">)</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20"></a>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="c1"># Set objective to maximize x + 10y</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22"></a>    <span class="n">model</span><span class="o">.</span><span class="n">set_objective</span><span class="p">(</span><span class="n">OptimizationType</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23"></a>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24"></a>    <span class="c1"># Solve model</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25"></a>    <span class="n">model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26"></a>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27"></a>    <span class="c1"># Print solution</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28"></a>    <span class="n">model</span><span class="o">.</span><span class="n">print_solution</span><span class="p">()</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29"></a>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30"></a>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="c1"># Solving the MIP problem using the ORTools engine</span>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="hll"><span class="n">mip_problem</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">ORToolsEngine</span><span class="p">())</span>
+</span></span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33"></a>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="c1"># Solving the MIP problem using the Gurobi engine</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35"></a><span class="hll"><span class="n">mip_problem</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">GurobiEngine</span><span class="p">())</span>
+</span></span></code></pre></div></td></tr></table></div>
+<p style='text-align: justify;'>
+    &emsp;&emsp;As we can see from the example, by just depending on the engine interface instead of a concrete 
+    implementation and applying dependency injection, we were able to solve the same MIP problem from the Simple 
+    Example across multiple optimization engines, including custom ones, without modifying the underlying model 
+    definition and optimization.
+</p>
+
+<h3 id="built-in-custom-integrations">Built-in &amp; Custom Integrations<a class="headerlink" href="#built-in-custom-integrations" title="Permanent link">&para;</a></h3>
+<p style='text-align: justify;'>
+    &emsp;&emsp;Out of the box, PyORlib provides integrations for popular solvers like CPLEX, Gurobi, OR-Tools and PuLP,
+    leveraging their proven algorithms to optimize models reliably. These integrations give you access to top-tier 
+    solvers without additional work. However, the options are not limited only to built-in integrations.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;PyORlib also supports custom engine implementations through its extensible and flexible architecture. 
+    You can create your own optimization engines by subclassing the base <code>Engine</code> class and implementing the 
+    necessary methods, whether using third-party or custom algorithms.
+</p>
+
+<h2 id="continuous-evolution">Continuous Evolution<a class="headerlink" href="#continuous-evolution" title="Permanent link">&para;</a></h2>
+<p style='text-align: justify;'>
+    &emsp;&emsp;PyORlib continuously adapts to support developers across various technological and programming domains. 
+    Its primary goal is to remain a useful tool for learning about operations research, mathematical model optimization,
+    and testing different optimization packages with ease.
+</p>
+
+<p style='text-align: justify;'>
+    &emsp;&emsp;While future development may introduce some changes to enhance and expand certain current 
+    functionalities, the highest priority remains providing a simple yet powerful platform for students, researchers,
+    and practitioners to explore optimization concepts, test algorithms, and further their own knowledge. Large-scale
+    changes that could introduce significant complexity are less likely in order to maintain accessibility as the core
+    focus.
+</p>
+
+<details class="tip" open="open">
+<summary>Driving Innovation Through Collaboration</summary>
+<p style="text-align: justify;">
+    &emsp;&emsp;PyORlib is an open source project that welcomes community involvement. If you wish to contribute
+    additional optimization suites, improvements, or bug fixes, please check the <a href="https://dapensoft.github.io/pyorlib/contributing/" target="_blank">Contributing</a> 
+    section for guidelines on collaborating.
+</p>
+</details>
+<h2 id="get-started-today">Get Started Today!<a class="headerlink" href="#get-started-today" title="Permanent link">&para;</a></h2>
+<p style="text-align: justify;">
+    &emsp;&emsp;Are you ready to dive into the operation research and optimization modeling world with PyORlib? Follow these 
+    steps to integrate PyORlib into your project and start leveraging its powerful modeling tools. Click the button
+    below to navigate to the PyORlib Getting Started page and explore detailed instructions, examples, and more:
+</p>
+<hr />
+<p style="text-align: center;">
+    <a class="md-button" href="/pyorlib/getting-started/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 15.39-3.76 2.27.99-4.28-3.32-2.88 4.38-.37L12 6.09l1.71 4.04 4.38.37-3.32 2.88.99 4.28M22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24Z"/></svg></span>&emsp;Getting Started&emsp;<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 15.39-3.76 2.27.99-4.28-3.32-2.88 4.38-.37L12 6.09l1.71 4.04 4.38.37-3.32 2.88.99 4.28M22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24Z"/></svg></span></a>
+</p>
+<hr />
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p style="text-align: justify;">
+    &emsp;&emsp;PyORlib is distributed as open source software and is released under the <a href="https://choosealicense.com/licenses/mit/" target="_blank">MIT License</a>. 
+    You can view the full text of the license in the <a href="https://github.com/dapensoft/pyorlib/blob/master/LICENSE" target="_blank"><code>LICENSE</code></a> 
+    file located in the PyORlib repository.
+</p>
+
+
+
+
+
+
+
+  
+  
+
+
+  <aside class="md-source-file">
+    
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="Contributors">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/idapena" class="md-author" title="@idapena">
+          
+          <img src="https://avatars.githubusercontent.com/u/56054255?v=4&size=72" alt="idapena">
+        </a>
+      
+        <a href="https://github.com/mdapena" class="md-author" title="@mdapena">
+          
+          <img src="https://avatars.githubusercontent.com/u/65864237?v=4&size=72" alt="mdapena">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="getting-started/" class="md-footer__link md-footer__link--next" aria-label="Next: Getting Started">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Getting Started
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 <a href="https://github.com/idapena" target="_blank" rel="idapena">Isaac Da Pena</a>,
+<a href="https://github.com/mdapena" target="_blank" rel="mdapena">Manuel Da Pena</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/dapensoft" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "navigation.expand", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.tooltips", "content.code.annotate"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="js/timeago.min.js"></script>
+      
+        <script src="js/timeago_mkdocs_material.js"></script>
+      
+        <script src="javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
