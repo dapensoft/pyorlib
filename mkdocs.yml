@@ -63,6 +63,10 @@ plugins:
   - git-committers:
       repository: dapensoft/pyorlib
       branch: master
+      exclude:
+        - examples/index.md
+        - api/index.md
+        - index.md
   - git-revision-date-localized:
       type: timeago
       enable_creation_date: true
@@ -126,7 +130,7 @@ extra_javascript:
 nav:
   - PyORlib: index.md
   - Getting Started: getting-started.md
-  - Examples: 
+  - Examples:
       - examples/index.md
       - A Transportation Model: examples/a-transportation-problem.md
   - API Reference:
