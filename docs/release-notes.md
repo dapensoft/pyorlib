@@ -12,7 +12,7 @@ hide:
 
 [//]: # (--------------------------------------------------------------------------------------------------------------)
 
-## [v0.1.0](https://github.com/dapensoft/pyorlib/releases/tag/0.1.0) <small>March 1, 2024</small> { id="0.1.0" }
+## [v0.1.0](https://github.com/dapensoft/pyorlib/releases/tag/0.1.0) <small>March 2, 2024</small> { id="0.1.0" }
 
 <hr class="divider">
 
