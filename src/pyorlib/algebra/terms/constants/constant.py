@@ -75,7 +75,7 @@ class Constant(Term):
                 f"Name: {debug}{self.name}{default} | ",
                 f"Type: {debug}{self.term_type.name.capitalize()}{default} | ",
                 f"Value type: {debug}{self.value_type.name.capitalize()}{default} | ",
-                f"val:{debug} ",
+                f"Val:{debug} ",
                 "{0:.{prec}g} ".format(self.value, prec=float_precision),
                 f"{default}",
             ]
