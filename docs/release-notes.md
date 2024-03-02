@@ -12,6 +12,23 @@ hide:
 
 [//]: # (--------------------------------------------------------------------------------------------------------------)
 
+## [v0.1.1](https://github.com/dapensoft/pyorlib/releases/tag/0.1.1) <small>March 2, 2024</small> { id="0.1.1" }
+
+<hr class="divider">
+
+##### Changed
+
+- The `print_info` and `print_solution` methods in the `Model` class have been enhanced to improve visibility and
+  provide deeper insights.
+- The `get_pretty_string` method in the `Term` class has been refactored as an `@abstractmethod` for subclass
+  customization and delegation based on specific term needs.
+- Badges on the main page of the documentation and the readme file have been updated to improve visibility and align
+  with the package's color palette.
+- The `git-committers` plugin in the `mkdocs.yml` file has been updated to exclude the `index.md`, `examples/index.md`,
+  and `api/index.md` files for consistency in the current configuration with the `git-revision-date-localized` plugin.
+
+[//]: # (--------------------------------------------------------------------------------------------------------------)
+
 ## [v0.1.0](https://github.com/dapensoft/pyorlib/releases/tag/0.1.0) <small>March 2, 2024</small> { id="0.1.0" }
 
 <hr class="divider">
