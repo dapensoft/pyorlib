@@ -1,0 +1,198 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# ------------------------------------------------------------------
+# | Project                                                        |
+# ------------------------------------------------------------------
+
+[project]
+name = "pyorlib"
+dynamic = ["version"]
+description = "A powerful Python library for operations research. Define, solve, and interact with mathematical models in a standardized manner across different optimization packages."
+requires-python = ">=3.10"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Isaac Da Pena", email = "dapensoft@gmail.com" },
+    { name = "Manuel Da Pena", email = "dapensoft@gmail.com" },
+]
+keywords = ["optimization", "optimization-modeling", "operation-research", "python"]
+classifiers = [
+    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development",
+    "Typing :: Typed",
+]
+
+# ------------------------------------------------------------------
+# | Project URLs                                                   |
+# ------------------------------------------------------------------
+
+[project.urls]
+Homepage = "https://github.com/dapensoft/pyorlib"
+Documentation = "https://dapensoft.github.io/pyorlib/"
+Repository = "https://github.com/dapensoft/pyorlib"
+Changelog = "https://dapensoft.github.io/pyorlib/release-notes"
+
+[project.optional-dependencies]
+cplex = ["cplex>=20.1.0.4", "docplex>=2.24.231"]
+gurobi = ["gurobipy>=10.0.0"]
+ortools = ["ortools>=9.6.2534"]
+pulp = ["PuLP>=2.7.0"]
+
+all = [
+    "pyorlib[cplex]",
+    "pyorlib[gurobi]",
+    "pyorlib[ortools]",
+    "pyorlib[pulp]",
+]
+
+# --------------------
+# | Docs dependencies
+# ----------
+
+docs = [
+    "mkdocs-material>=9.4.0",
+    "mkdocstrings[python]>=0.24.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2.1",
+    "mkdocs-git-committers-plugin-2>=2.3.0",
+]
+
+# --------------------
+# | Tests dependencies
+# ----------
+
+tests = [
+    "pyorlib[all]",
+    "mypy>=1.7.1",
+    "black>=23.12.0",
+    "pytest>=7.4.0",
+    "coverage[toml]>=7.3.3",
+]
+
+# --------------------
+# | Dev dependencies
+# ----------
+
+dev = [
+    "pyorlib[docs]",
+    "pyorlib[tests]",
+    "hatch>=1.8.1",
+]
+
+# ------------------------------------------------------------------
+# | Project Version                                                |
+# ------------------------------------------------------------------
+
+[tool.hatch.version]
+path = "src/pyorlib/__init__.py"
+
+# ------------------------------------------------------------------
+# | Building Target                                                |
+# ------------------------------------------------------------------
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/.gitignore",
+    "/pyproject.toml",
+    "/CITATION.cff",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyorlib"]
+
+# ------------------------------------------------------------------
+# | mypy configuration                                             |
+# ------------------------------------------------------------------
+
+[tool.mypy]
+files = ["src/pyorlib"]
+namespace_packages = false
+show_error_codes = true
+warn_no_return = true
+warn_unreachable = true
+warn_unused_ignores = true
+implicit_reexport = true
+ignore_missing_imports = true
+strict = true
+
+# ------------------------------------------------------------------
+# | Hatch tests environment                                         |
+# ------------------------------------------------------------------
+
+[tool.hatch.envs.tests]
+dependencies = ["pyorlib[tests]"]
+
+[tool.hatch.envs.tests.scripts]
+test = "pytest -v {args:tests}"
+style = "black --check --diff {args:.}"
+typing = "mypy"
+cov = [
+    "coverage run -m pytest -v {args:tests}",
+    "- coverage combine",
+    "coverage report",
+    "coverage xml",
+]
+all = [
+    "style",
+    "typing",
+    "cov",
+]
+
+[[tool.hatch.envs.tests.matrix]]
+python = ["3.10", "3.11"]
+
+# ------------------------------------------------------------------
+# | Hatch docs environment                                         |
+# ------------------------------------------------------------------
+
+[tool.hatch.envs.docs]
+dependencies = ["pyorlib[docs]"]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build --clean --strict"
+serve = "mkdocs serve --dev-addr localhost:8000"
+
+# ------------------------------------------------------------------
+# | Coverage                                                       |
+# ------------------------------------------------------------------
+
+[tool.coverage.run]
+source_pkgs = ["pyorlib", "tests"]
+parallel = true
+omit = []
+
+[tool.coverage.paths]
+pyorlib = ["pyorlib"]
+tests = ["tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "no cov",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    '@(abc\.)?abstractmethod',
+]
+
+# ------------------------------------------------------------------
+# | Formatting                                                     |
+# ------------------------------------------------------------------
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]

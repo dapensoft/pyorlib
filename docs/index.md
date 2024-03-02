@@ -1,7 +1,17 @@
+---
+hide:
+  - navigation
+---
+
+<style>
+    .md-content .md-content__inner.md-typeset h1 { height: 0; margin: 0; color: transparent; }
+    .md-content .md-content__inner.md-typeset::before { height: 0; } 
+</style>
+
 <br>
 
 <p align="center">
-   <img src="https://dapensoft.github.io/pyorlib/images/logo/pyorlib-logo-name-slogan.svg" alt="PyORlib" width="750px">
+   <img src="./images/logo/pyorlib-logo-name-slogan.svg" alt="PyORlib" width="900px">
 </p>
 
 <br>
@@ -97,31 +107,6 @@ leverage all the features and capabilities of the library.
 
 </ul>
 
-## Requirements
-
-<p style='text-align: justify;'>
-	&emsp;&emsp;By default, PyORlib's core functionalities and optimization utilities only require Python 3.10+. 
-	However, additional optional dependencies may be needed to work with optimization models and solver 
-	integrations based on your use case. For more information on supported integrations, see the 
-	<a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a> section.
-</p>
-
-## Installation
-
-<p style='text-align: justify;'>
-	&emsp;&emsp;PyORlib is available as a Python package and can be easily installed using <code>pip</code>. To install the core 
-	functionalities, open your terminal and execute the following command:
-</p>
-
-```console
-pip install pyorlib
-```
-
-<p style='text-align: justify;'>
-	&emsp;&emsp;For optimization models and solver integrations, please refer to the <a href="https://dapensoft.github.io/pyorlib/getting-started/#optional-dependencies" target="_blank">Optional Dependencies</a>
-	section to learn more about the supported integrations and the dependencies you may need to install.
-</p>
-
 ## A Simple Example
 
 <p style='text-align: justify;'>
@@ -156,7 +141,7 @@ $$
 </p>
 
 <p align="center">
-   <img src="https://dapensoft.github.io/pyorlib/images/examples/simple-example-graph.svg" alt="Simple graph illustrating the feasible region and integer points" width="800px" style="margin-top: -10px;margin-bottom: -20px;">
+   <img src="./images/examples/simple-example-graph.svg" alt="Simple graph illustrating the feasible region and integer points" width="800px" style="margin-top: -10px;margin-bottom: -20px;">
 </p>
 
 ### Solution Using PyORlib
@@ -294,19 +279,19 @@ $$
 
 - **Indices:**
 
-	&emsp; $i=$ plants; $\quad j=$ markets.
+	&emsp;$i=$ plants; $\quad j=$ markets.
 
 - **Parameters (Given Data):**
 
-	&emsp; $a_{i}=$ supply of commodity of plant $i$ (in cases).
+	&emsp;$a_{i}=$ supply of commodity of plant $i$ (in cases).
 
-	&emsp; $b_{j}=$ demand for commodity at market $j$ (cases).
+	&emsp;$b_{j}=$ demand for commodity at market $j$ (cases).
 
-	&emsp; $c_{ij}=$ cost per unit shipment between plan $i$ and market $j$ ($/case).
+	&emsp;$c_{ij}=$ cost per unit shipment between plan $i$ and market $j$ ($/case).
 
 - **Decision Variables:**
 
-	&emsp; $x_{ij}=$ amount of commodity to ship from plant $i$ to market $j$ (cases).
+	&emsp;$x_{ij}=$ amount of commodity to ship from plant $i$ to market $j$ (cases).
 
 - **Constraints:**
 
@@ -354,7 +339,7 @@ $$
 		<tr>
             <td style="text-align: center" colspan="5">
 				<a href="https://miro.gams.com/gallery/app_direct/transport/" target="_blank">
-					<img src="https://dapensoft.github.io/pyorlib/images/examples/practical-example-graph.png" alt="A Transportation Problem">
+					<img src="./images/examples/practical-example-graph.png" alt="A Transportation Problem">
 				</a>
 			</td>
         </tr>
@@ -383,7 +368,7 @@ from pyorlib.engines.cplex import CplexEngine
 from pyorlib.enums import ValueType, OptimizationType
 
 # Create a transportation model using the CplexEngine.
-model = Model(engine=CplexEngine(), name="A Transportation Model")
+model = Model(engine=CplexEngine(), name="A Transportation Model")  # (1)!
 
 # Define the dimensions of the problem
 n = 2  # Number of plants
@@ -416,7 +401,7 @@ for i in n_range:
     model.add_constraint(
         expression=sum(
             x_i_j[i, j]
-            for j in range(1, m + 1)
+            for j in m_range
         ) <= a_i[i - 1]
     )
 
@@ -425,7 +410,7 @@ for j in m_range:
     model.add_constraint(
         expression=sum(
             x_i_j[i, j]
-            for i in range(1, n + 1)
+            for i in n_range
         ) >= b_j[j - 1]
     )
 
@@ -443,6 +428,42 @@ model.set_objective(
 model.solve()
 model.print_solution()
 ```
+
+1. <h2><a href="#runtime-flexibility-customization">Runtime Flexibility & Customization</a></h2>
+   &emsp;&emsp;As previously mentioned, we have the ability to solve this model using multiple optimization engines 
+   without making any changes to the underlying definition. For instance, we can employ various optimization engines, 
+   such as:
+   <br>
+   <br>
+   **Gurobi Engine:**
+   ```Python hl_lines="4"
+   from pyorlib.engines.gurobi import GurobiEngine
+   
+   model = Model(
+       engine=GurobiEngine(),
+       name="A Transportation Model",
+   )
+   ```
+   <br>
+   **OR-Tools Engine:** 
+   ```Python hl_lines="4"
+   from pyorlib.engines.ortools import ORToolsEngine
+   
+   model = Model(
+       engine=ORToolsEngine(),
+       name="A Transportation Model",
+   )
+   ```
+   <br>
+   **PuLP Engine:**
+   ```Python hl_lines="4"
+   from pyorlib.engines.pulp import PuLPEngine
+   
+   model = Model(
+      engine=PuLPEngine(), 
+      name="A Transportation Model",
+   )
+   ```
 
 <p style='text-align: justify;'>
     &emsp;&emsp;As we can see from this practical example, PyORlib enables us to easily build a transportation model, 
@@ -687,6 +708,22 @@ mip_problem(engine=GurobiEngine())
 	section for guidelines on collaborating.
 </p>
 </details>
+
+## Get Started Today!
+
+<p style='text-align: justify;' markdown>
+    &emsp;&emsp;Are you ready to dive into the operation research and optimization modeling world with PyORlib? Follow these 
+    steps to integrate PyORlib into your project and start leveraging its powerful modeling tools. Click the button
+    below to navigate to the PyORlib Getting Started page and explore detailed instructions, examples, and more:
+</p>
+
+---
+
+<p style='text-align: center;' markdown>
+    [:material-star-outline:&emsp;Getting Started&emsp;:material-star-outline:](/pyorlib/getting-started/){ .md-button }
+</p>
+
+---
 
 ## License
 

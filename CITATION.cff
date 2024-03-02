@@ -1,0 +1,30 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: PyORlib
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Isaac
+    family-names: Da Pena
+    email: dapensoft@gmail.com
+    affiliation: Dapensoft
+  - given-names: Manuel
+    family-names: Da Pena
+    email: dapensoft@gmail.com
+    affiliation: Dapensoft
+repository-code: 'https://github.com/dapensoft/pyorlib'
+url: 'https://dapensoft.github.io/pyorlib/'
+abstract: >-
+  A powerful Python library for operations research. Define,
+  solve, and interact with mathematical models in a
+  standardized manner across different optimization
+  packages. 
+keywords:
+  - optimization
+  - optimization-modeling
+  - operation-research
+license: MIT

@@ -1,0 +1,1 @@
+Please read the [Contributing](https://dapensoft.github.io/pyorlib/contributing/) guidelines in the documentation site.

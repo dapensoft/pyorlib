@@ -1,0 +1,184 @@
+# Project information
+site_name: PyORlib
+site_url: https://dapensoft.github.io/pyorlib/
+site_author: Isaac Da Pena & Manuel Da Pena
+site_description: >-
+  A powerful Python library for operations research. Define, solve, and interact with 
+  mathematical models in a standardized manner across different optimization packages.
+
+# Repository
+repo_name: dapensoft/pyorlib
+repo_url: https://github.com/dapensoft/pyorlib
+
+# Copyright
+copyright: |
+  Copyright &copy; 2024 <a href="https://github.com/idapena" target="_blank" rel="idapena">Isaac Da Pena</a>,
+  <a href="https://github.com/mdapena" target="_blank" rel="mdapena">Manuel Da Pena</a>
+
+# Configuration
+theme:
+  name: material
+  language: en
+  logo: images/logo/pyorlib-logo-white.svg
+  favicon: images/favicon/pyorlib-logo.ico
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: pink
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: pink
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.top
+    - navigation.expand
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.tooltips
+    - content.code.annotate
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/dapensoft
+
+# Plugins
+plugins:
+  - search
+  - git-committers:
+      repository: dapensoft/pyorlib
+      branch: master
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
+      exclude:
+        - examples/index.md
+        - api/index.md
+        - index.md
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: sphinx
+            show_if_no_docstring: true
+            inherited_members: true
+            members_order: source
+            separate_signature: true
+            unwrap_annotated: true
+            filters: [ "!^(_.*$)", "^(__init__|__init_subclass__|__call__|__enter__|__exit__|__add__|__radd__|__iadd__|__sub__|__rsub__|__isub__|__mul__|__rmul__|__imul__|__truediv__|__rtruediv__|__itruediv__|__floordiv__|__rfloordiv__|__ifloordiv__|__mod__|__rmod__|__imod__|__pow__|__rpow__|__ipow__|__neg__|__pos__|__abs__|__eq__|__ne__|__lt__|__le__|__gt__|__ge__)$" ]
+            docstring_section_style: spacy
+            signature_crossrefs: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_signature_annotations: true
+            show_category_heading: true
+
+# Extensions
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path:
+        - !relative $docs_dir
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - abbr
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+# Extra JavaScript for MathJax
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# Page tree
+nav:
+  - PyORlib: index.md
+  - Getting Started: getting-started.md
+  - Examples: 
+      - examples/index.md
+      - A Transportation Model: examples/a-transportation-problem.md
+  - API Reference:
+      - api/index.md
+      - Model:
+          - api/model/index.md
+      - Engine:
+          - api/engines/index.md
+          - CPLEX Engine: api/engines/cplex/index.md
+          - Gurobi Engine: api/engines/gurobi/index.md
+          - OR-Tools Engine: api/engines/ortools/index.md
+          - PuLP Engine: api/engines/pulp/index.md
+      - Algebra:
+          - api/algebra/index.md
+          - Element: api/algebra/element.md
+          - Expression: api/algebra/expressions/index.md
+          - Term:
+              - api/algebra/terms/index.md
+              - Constant: api/algebra/terms/constant.md
+              - Variable: api/algebra/terms/variable.md
+      - Structures:
+          - api/structures/index.md
+          - Definitions:
+              - api/structures/definitions/index.md
+              - Dimension Definition: api/structures/definitions/dimension-definition.md
+              - Term Definition: api/structures/definitions/term-definition.md
+              - Parameter Definition: api/structures/definitions/parameter-definition.md
+          - Parameter:
+              - api/structures/parameters/index.md
+              - Single Value Parameter: api/structures/parameters/single-value-parameter.md
+              - Multi Value Parameter: api/structures/parameters/multi-value-parameter.md
+      - Validators:
+          - api/validators/index.md
+          - Value Type Validator: api/validators/value-type-validator.md
+          - Dimension Field: api/validators/fields/dimension-field.md
+          - Parameter Field: api/validators/fields/parameter-field.md
+      - Enums:
+          - api/enums/index.md
+          - Optimization Type: api/enums/optimization-type.md
+          - Parameter Type: api/enums/parameter-type.md
+          - Solution Status: api/enums/solution-status.md
+          - Term Type: api/enums/term-type.md
+          - Value Type: api/enums/value-type.md
+      - Exceptions:
+          - api/exceptions/index.md
+          - Term Exception: api/exceptions/term-exception.md
+          - CPLEX Exception: api/exceptions/cplex-exception.md
+          - Gurobi Exception: api/exceptions/gurobi-exception.md
+          - Ortools Exception: api/exceptions/ortools-exception.md
+          - Pulp Exception: api/exceptions/pulp-exception.md
+          - Model Exception: api/exceptions/model-exception.md
+
+
+  - Contributing: contributing.md
+  - Release Notes: release-notes.md
