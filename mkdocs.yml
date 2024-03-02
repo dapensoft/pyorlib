@@ -128,6 +128,7 @@ nav:
   - Getting Started: getting-started.md
   - Examples: 
       - examples/index.md
+      - A Transportation Model: examples/a-transportation-problem.md
   - API Reference:
       - api/index.md
       - Model:
