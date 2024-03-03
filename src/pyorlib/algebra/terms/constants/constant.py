@@ -2,6 +2,7 @@ from math import inf
 from typing import Any
 
 from ..term import Term
+from ....core.constants import StdOutColors
 from ....enums import ValueType, TermType
 from ....exceptions import TermException
 from ....validators import ValueTypeValidator
@@ -66,3 +67,16 @@ class Constant(Term):
 
         self._value: float = value
         """ The internal value of the constant. """
+
+    def get_pretty_string(self, float_precision: int = 6) -> str:  # pragma: no cover
+        default, debug = StdOutColors.DEFAULT, StdOutColors.PURPLE
+        return "".join(
+            [
+                f"Name: {debug}{self.name}{default} | ",
+                f"Type: {debug}{self.term_type.name.capitalize()}{default} | ",
+                f"Value type: {debug}{self.value_type.name.capitalize()}{default} | ",
+                f"Val:{debug} ",
+                "{0:.{prec}g} ".format(self.value, prec=float_precision),
+                f"{default}",
+            ]
+        )

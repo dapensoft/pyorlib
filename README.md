@@ -21,11 +21,11 @@
 </a>
 
 <a href="https://pypi.org/project/pyorlib" target="_blank">
-    <img src="https://img.shields.io/pypi/v/pyorlib?color=deeppink" alt="Package version">
+    <img src="https://img.shields.io/pypi/v/pyorlib?color=e92063" alt="Package version">
 </a>
 
 <a href="https://pypi.org/project/pyorlib" target="_blank">
-    <img src="https://img.shields.io/pypi/pyversions/pyorlib?color=deeppink" alt="Supported Python versions">
+    <img src="https://img.shields.io/pypi/pyversions/pyorlib?color=e92063" alt="Supported Python versions">
 </a>
 
 <a href="https://github.com/psf/black">

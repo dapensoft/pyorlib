@@ -2,6 +2,7 @@ from abc import ABC
 from math import inf
 
 from ..term import Term
+from ....core.constants import StdOutColors
 from ....enums import ValueType, TermType
 from ....exceptions import TermException
 
@@ -44,3 +45,20 @@ class Variable(Term, ABC):
             raise TermException("Invalid lower bound for an integer variable term.")
         if value_type == ValueType.INTEGER and not upper_bound == inf and not float(upper_bound).is_integer():
             raise TermException("Invalid upper bound for an integer variable term.")
+
+    def get_pretty_string(self, float_precision: int = 6) -> str:  # pragma: no cover
+        default, debug = StdOutColors.DEFAULT, StdOutColors.PURPLE
+        return "".join(
+            [
+                f"Name: {debug}{self.name}{default} | ",
+                f"Type: {debug}{self.term_type.name.capitalize()}{default} | ",
+                f"Value type: {debug}{self.value_type.name.capitalize()}{default} | ",
+                f"Lb:{debug} ",
+                "{0:.{prec}g} ".format(self.lower_bound, prec=float_precision),
+                f"{default}| Ub:{debug} ",
+                "{0:.{prec}g} ".format(self.upper_bound, prec=float_precision),
+                f"{default}| Val:{debug} ",
+                "{0:.{prec}g} ".format(self.value, prec=float_precision),
+                f"{'(N/A) ' if self.value == -0.0 else ''}{default}",
+            ]
+        )

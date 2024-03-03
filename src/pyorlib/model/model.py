@@ -445,49 +445,50 @@ class Model:
         :param display_term_sets: Whether to display information about term sets. Defaults to False.
         :return: None.
         """
+        default, debug = StdOutColors.DEFAULT, StdOutColors.PURPLE
         print(f"\n------ MODEL INFORMATION ------\n")
         print("Model properties:")
-        print(f"\tName: {StdOutColors.PURPLE}{self.name}{StdOutColors.DEFAULT}")
+        print(f"\tName: {debug}{self.name}{default}")
         print("Objective function:")
         print(f"\tExpression: {self.objective_expr}")
-        print(f"\tStatus: {StdOutColors.PURPLE}{self.solution_status.name}{StdOutColors.DEFAULT}")
+        print(f"\tStatus: {debug}{self.solution_status.name}{default}")
         print(
-            f"\tValue: {StdOutColors.PURPLE}",
+            f"\tValue: {debug}",
             (
                 "{0:.{prec}g}".format(self.objective_value, prec=self.float_precision)
                 if self.objective_value is not None
                 else "--"
             ),
-            f"{StdOutColors.DEFAULT}",
+            f"{default}",
         )
 
-        print("Dimensions:")
+        print(f"Dimensions: {debug}{len(self.dimensions)}{default}")
         for name, size in self.dimensions.items():
             print(
-                f"\tName: {StdOutColors.PURPLE}{name}{StdOutColors.DEFAULT} | ",
-                f"Val: {StdOutColors.PURPLE}{size}{StdOutColors.DEFAULT}",
+                f"\tName: {debug}{name}{default} | ",
+                f"Val: {debug}{size}{default}",
             )
 
-        print("Terms:")
+        print(f"Terms: {debug}{len(self.terms)}{default}")
         for name, term in self.terms.items():
             print(f"\t{term.get_pretty_string(float_precision=self.float_precision)}")
         if display_term_sets:
-            print("Terms Sets:")
+            print(f"Terms Sets: {debug}{len(self.term_sets)}{default}")
             for name, terms in self.term_sets.items():
-                print(f"\tTerm: {StdOutColors.PURPLE}{name}{StdOutColors.DEFAULT}")
+                print(f"\tTerm: {debug}{name}{default}")
                 for index, term in terms.items():
                     print(
-                        f"\t\tIndex: {StdOutColors.PURPLE}{index}{StdOutColors.DEFAULT} | ",
+                        f"\t\tIndex: {debug}{index}{default} | ",
                         f"{term.get_pretty_string(float_precision=self.float_precision)}",
                     )
 
-        print("Constraints:")
         constraints = self.constraints
+        print(f"Constraints: {debug}{len(constraints)}{default}")
         for exp in constraints:
             try:
                 print(f"\tExpression: {exp}")
             except RecursionError:
-                print("\tExpression: Unprintable expression")
+                print("\tExpression: Print Error")
         print()
 
     def print_solution(self) -> None:  # pragma: no cover
@@ -495,17 +496,18 @@ class Model:
         Prints the solution of the optimization problem.
         :return: None.
         """
+        default, debug = StdOutColors.DEFAULT, StdOutColors.PURPLE
         print(f"\n------ MODEL SOLUTION ------\n")
         print("Objective function:")
-        print(f"\tStatus: {StdOutColors.PURPLE}{self.solution_status.name}{StdOutColors.DEFAULT}")
+        print(f"\tStatus: {debug}{self.solution_status.name}{default}")
         print(
-            f"\tValue: {StdOutColors.PURPLE}",
+            f"\tValue: {debug}",
             (
                 "{0:.{prec}g}".format(self.objective_value, prec=self.float_precision)
                 if self.objective_value is not None
                 else "--"
             ),
-            f"{StdOutColors.DEFAULT}",
+            f"{default}",
         )
 
         solution_variables: Dict[str, Term] = {
