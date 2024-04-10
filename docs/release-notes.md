@@ -12,6 +12,23 @@ hide:
 
 [//]: # (--------------------------------------------------------------------------------------------------------------)
 
+## [v0.1.2](https://github.com/dapensoft/pyorlib/releases/tag/0.1.2) <small>April 9, 2024</small> { id="0.1.2" }
+
+<hr class="divider">
+
+##### Changed
+
+- Upgraded the `Setup-Python` GitHub Action from version 4 to version 5 in all workflows.
+- Updated the `index.md` page with a welcome title.
+- Updated the `mkdocs.yml` config file with the `mkdocs social cards` plugin.
+- Updated the `pyproject.toml` config file with the necessary dependencies for the `mkdocs social cards` plugin.
+
+##### Fixed
+
+- Resolved the `mathjax.js` config file path error in the documentation.
+
+[//]: # (--------------------------------------------------------------------------------------------------------------)
+
 ## [v0.1.1](https://github.com/dapensoft/pyorlib/releases/tag/0.1.1) <small>March 2, 2024</small> { id="0.1.1" }
 
 <hr class="divider">
