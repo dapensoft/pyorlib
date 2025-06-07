@@ -1,6 +1,6 @@
 from math import isclose
 
-from _pytest.python_api import raises
+from pytest import raises
 
 from pyorlib.algebra import Element, Expression
 

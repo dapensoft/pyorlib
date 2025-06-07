@@ -1,7 +1,7 @@
 from math import isclose
 from typing import Any
 
-from _pytest.python_api import raises
+from pytest import raises
 
 from pyorlib.algebra import Element, Expression, Term, Constant
 from pyorlib.enums import ValueType

@@ -1,7 +1,7 @@
 from math import inf
 from typing import List
 
-from _pytest.python_api import raises
+from pytest import raises
 
 from pyorlib import Model, Engine
 from pyorlib.algebra import Term, Element
