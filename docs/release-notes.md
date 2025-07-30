@@ -19,6 +19,7 @@ hide:
 ##### Changed
 
 - Updated the lower bound variable definition in `pulp_engine` to set it to `None` when `-inf` is specified as the lower bound.
+- Upgraded the `download-artifact` and `cache` actions to `v4` in the `publish-to-pypi.yml` workflow.
 
 ##### Fixed
 
