@@ -12,6 +12,20 @@ hide:
 
 [//]: # (--------------------------------------------------------------------------------------------------------------)
 
+## [v0.1.3](https://github.com/dapensoft/pyorlib/releases/tag/0.1.3) <small>July 30, 2025</small> { id="0.1.3" }
+
+<hr class="divider">
+
+##### Changed
+
+- Updated the lower bound variable definition in `pulp_engine` to set it to `None` when `-inf` is specified as the lower bound.
+
+##### Fixed
+
+- Updated deprecated `_pytest.python_api.raises` imports in several tests.
+
+[//]: # (--------------------------------------------------------------------------------------------------------------)
+
 ## [v0.1.2](https://github.com/dapensoft/pyorlib/releases/tag/0.1.2) <small>April 9, 2024</small> { id="0.1.2" }
 
 <hr class="divider">
