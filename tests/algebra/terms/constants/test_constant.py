@@ -1,6 +1,6 @@
 from math import inf
 
-from _pytest.python_api import raises
+from pytest import raises
 
 from pyorlib.algebra import Term, Constant
 from pyorlib.enums import ValueType, TermType

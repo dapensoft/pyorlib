@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from _pytest.python_api import raises
+from pytest import raises
 
 from pyorlib.enums import ParameterType, ValueType
 from pyorlib.structures import SingleValueParameter, MultiValueParameter

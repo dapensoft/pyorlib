@@ -1,6 +1,6 @@
 from math import inf
 
-from _pytest.python_api import raises
+from pytest import raises
 
 from pyorlib.algebra import Term, Variable
 from pyorlib.engines import Engine
