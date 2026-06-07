@@ -3,8 +3,7 @@ site_name: PyORlib
 site_url: https://dapensoft.github.io/pyorlib/
 site_author: Isaac Da Pena & Manuel Da Pena
 site_description: >-
-  A powerful Python library for operations research. Define, solve, and interact with 
-  mathematical models in a standardized manner across different optimization packages.
+  A powerful Python library for operations research and optimization.
 
 # Repository
 repo_name: dapensoft/pyorlib
@@ -12,16 +11,24 @@ repo_url: https://github.com/dapensoft/pyorlib
 
 # Copyright
 copyright: |
-  Copyright &copy; 2024 <a href="https://github.com/idapena" target="_blank" rel="idapena">Isaac Da Pena</a>,
-  <a href="https://github.com/mdapena" target="_blank" rel="mdapena">Manuel Da Pena</a>
+  Copyright &copy; 2024-2026 <a href="https://github.com/idapena" target="_blank" rel="idapena">Isaac Da Pena</a>,
+  <a href="https://github.com/mdapena" target="_blank" rel="mdapena">Manuel Da Pena</a> –
+  <a style="font-weight: bold;" href="#__consent">Change Cookie Settings</a>
 
 # Configuration
 theme:
   name: material
   language: en
+  custom_dir: docs/.overrides
   logo: images/logo/pyorlib-logo-white.svg
   favicon: images/favicon/pyorlib-logo.ico
   palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    # Palette toggle for light mode
     - media: '(prefers-color-scheme: light)'
       scheme: default
       primary: pink
@@ -29,13 +36,14 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
+    # Palette toggle for dark mode
     - media: '(prefers-color-scheme: dark)'
       scheme: slate
       primary: pink
       accent: amber
       toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+        icon: material/brightness-auto
+        name: Switch to system preference
   features:
     - navigation.tabs
     - navigation.indexes
@@ -56,11 +64,35 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/dapensoft
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/thumb-up-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/thumb-down-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback!
+  consent:
+    title: <img src="https://www.svgrepo.com/show/401340/cookie.svg" alt="Cookie"><span>Cookie Consent</span>
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
 
 # Plugins
 plugins:
   - search
   - git-committers:
+      enabled: !ENV [CI, false]
       repository: dapensoft/pyorlib
       branch: master
       exclude:
@@ -92,7 +124,7 @@ plugins:
             show_signature_annotations: true
             show_category_heading: true
   - social:
-      enabled: !ENV [ CI, false ]
+      enabled: !ENV [CI, false]
 
 # Extensions
 markdown_extensions:
@@ -121,6 +153,14 @@ markdown_extensions:
       alternate_style: true
   - toc:
       permalink: true
+
+# Extra Stylesheets
+extra_css:
+  - stylesheets/consent.css
+  - stylesheets/header.css
+  - stylesheets/search-bar.css
+  - stylesheets/tabs.css
+  - stylesheets/task-list-indicator.css
 
 # Extra JavaScript for MathJax
 extra_javascript:
@@ -184,7 +224,5 @@ nav:
           - Ortools Exception: api/exceptions/ortools-exception.md
           - Pulp Exception: api/exceptions/pulp-exception.md
           - Model Exception: api/exceptions/model-exception.md
-
-
   - Contributing: contributing.md
   - Release Notes: release-notes.md
