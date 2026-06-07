@@ -3,7 +3,8 @@ site_name: PyORlib
 site_url: https://dapensoft.github.io/pyorlib/
 site_author: Isaac Da Pena & Manuel Da Pena
 site_description: >-
-  A powerful Python library for operations research and optimization.
+  A powerful Python library for operations research. Define, solve, and interact with 
+  mathematical models in a standardized manner across different optimization packages.
 
 # Repository
 repo_name: dapensoft/pyorlib
